@@ -1,0 +1,408 @@
+[
+  {
+    "id": 41,
+    "order_number": "ORD132AF",
+    "customer_id": 1,
+    "customer_name": "Miss Cheyanne Daniel Sr.",
+    "customer_email": "angelita.murazik@example.net",
+    "status": "cancelled",
+    "payment_method": "paypal",
+    "shipping_address": "70074 Adalberto Shoals\nSouth Georgiana, MN 80681-1315",
+    "billing_address": "268 Velva Crossing Apt. 159\nNew Velmaborough, CT 89589",
+    "total_price": 3084.3900000000003,
+    "ordered_at": "2025-04-25 11:33:58",
+    "updated_at": "2025-06-14 03:36:56",
+    "items": [
+      {
+        "product_id": 49,
+        "quantity": 1,
+        "unit_price": 229.88,
+        "subtotal": 229.88
+      },
+      {
+        "product_id": 12,
+        "quantity": 2,
+        "unit_price": 499.48,
+        "subtotal": 998.96
+      },
+      {
+        "product_id": 39,
+        "quantity": 1,
+        "unit_price": 481.76,
+        "subtotal": 481.76
+      },
+      {
+        "product_id": 43,
+        "quantity": 1,
+        "unit_price": 337.38,
+        "subtotal": 337.38
+      },
+      {
+        "product_id": 9,
+        "quantity": 2,
+        "unit_price": 50.94,
+        "subtotal": 101.88
+      },
+      {
+        "product_id": 25,
+        "quantity": 3,
+        "unit_price": 311.51,
+        "subtotal": 934.53
+      }
+    ]
+  },
+  {
+    "id": 42,
+    "order_number": "ORD023LN",
+    "customer_id": 2,
+    "customer_name": "Magdalen O'Conner",
+    "customer_email": "ofranecki@example.com",
+    "status": "refunded",
+    "payment_method": "paypal",
+    "shipping_address": "32379 Ebert Lodge Apt. 767\nHayesmouth, MO 77224",
+    "billing_address": "3016 Dickens Canyon Suite 803\nSouth Nigel, GA 43570-5721",
+    "total_price": 1088.25,
+    "ordered_at": "2025-06-15 19:13:02",
+    "updated_at": "2025-07-03 01:18:42",
+    "items": [
+      {
+        "product_id": 3,
+        "quantity": 1,
+        "unit_price": 27.43,
+        "subtotal": 27.43
+      },
+      {
+        "product_id": 19,
+        "quantity": 1,
+        "unit_price": 398.1,
+        "subtotal": 398.1
+      },
+      {
+        "product_id": 17,
+        "quantity": 2,
+        "unit_price": 195.91,
+        "subtotal": 391.82
+      },
+      {
+        "product_id": 22,
+        "quantity": 3,
+        "unit_price": 90.3,
+        "subtotal": 270.9
+      }
+    ]
+  },
+  {
+    "id": 43,
+    "order_number": "ORD124TY",
+    "customer_id": 3,
+    "customer_name": "Mr. Tyrique Grant",
+    "customer_email": "kuvalis.eleanore@example.org",
+    "status": "refunded",
+    "payment_method": "credit_card",
+    "shipping_address": "56599 Welch Hill Apt. 461\nYvonneport, NY 00236-0610",
+    "billing_address": "5758 Justus Shore Apt. 996\nSouth Israel, WY 82326",
+    "total_price": 2074.36,
+    "ordered_at": "2025-08-15 16:35:01",
+    "updated_at": "2025-08-16 03:37:02",
+    "items": [
+      {
+        "product_id": 8,
+        "quantity": 2,
+        "unit_price": 476.53,
+        "subtotal": 953.06
+      },
+      {
+        "product_id": 22,
+        "quantity": 1,
+        "unit_price": 178.03,
+        "subtotal": 178.03
+      },
+      {
+        "product_id": 6,
+        "quantity": 3,
+        "unit_price": 268.33,
+        "subtotal": 804.99
+      },
+      {
+        "product_id": 3,
+        "quantity": 1,
+        "unit_price": 138.28,
+        "subtotal": 138.28
+      }
+    ]
+  },
+  {
+    "id": 44,
+    "order_number": "ORD052IF",
+    "customer_id": 4,
+    "customer_name": "Dr. Dallas Hahn DDS",
+    "customer_email": "hudson91@example.org",
+    "status": "refunded",
+    "payment_method": "paypal",
+    "shipping_address": "890 Penelope Passage Suite 487\nBechtelarport, SD 68746",
+    "billing_address": "9573 Fahey Shoals\nEast Xavier, SD 52945-6898",
+    "total_price": 2433.64,
+    "ordered_at": "2025-03-03 11:46:22",
+    "updated_at": "2025-08-04 03:33:14",
+    "items": [
+      {
+        "product_id": 32,
+        "quantity": 1,
+        "unit_price": 356.32,
+        "subtotal": 356.32
+      },
+      {
+        "product_id": 7,
+        "quantity": 3,
+        "unit_price": 485.18,
+        "subtotal": 1455.54
+      },
+      {
+        "product_id": 29,
+        "quantity": 2,
+        "unit_price": 175.46,
+        "subtotal": 350.92
+      },
+      {
+        "product_id": 13,
+        "quantity": 1,
+        "unit_price": 244.36,
+        "subtotal": 244.36
+      },
+      {
+        "product_id": 8,
+        "quantity": 2,
+        "unit_price": 13.25,
+        "subtotal": 26.5
+      }
+    ]
+  },
+  {
+    "id": 45,
+    "order_number": "ORD224KW",
+    "customer_id": 5,
+    "customer_name": "Amy Homenick",
+    "customer_email": "umonahan@example.com",
+    "status": "shipped",
+    "payment_method": "bank_transfer",
+    "shipping_address": "6656 Berge Manors\nKeyshawnview, KS 11601",
+    "billing_address": "633 Amira Station Apt. 905\nPort Mervin, WY 70978",
+    "total_price": 618.65,
+    "ordered_at": "2025-05-06 21:33:53",
+    "updated_at": "2025-06-15 18:08:13",
+    "items": [
+      {
+        "product_id": 46,
+        "quantity": 1,
+        "unit_price": 473.36,
+        "subtotal": 473.36
+      },
+      {
+        "product_id": 25,
+        "quantity": 2,
+        "unit_price": 65.71,
+        "subtotal": 131.42
+      },
+      {
+        "product_id": 23,
+        "quantity": 1,
+        "unit_price": 13.87,
+        "subtotal": 13.87
+      }
+    ]
+  },
+  {
+    "id": 46,
+    "order_number": "ORD097DL",
+    "customer_id": 6,
+    "customer_name": "Colin Gusikowski Sr.",
+    "customer_email": "wdickens@example.com",
+    "status": "paid",
+    "payment_method": "credit_card",
+    "shipping_address": "6954 Upton Mill\nPort Ryder, KS 16269-0365",
+    "billing_address": "994 Ortiz Coves\nNew Jovan, MI 53721-2668",
+    "total_price": 1624.1100000000001,
+    "ordered_at": "2025-03-09 09:31:02",
+    "updated_at": "2025-03-18 16:32:26",
+    "items": [
+      {
+        "product_id": 44,
+        "quantity": 3,
+        "unit_price": 487.04,
+        "subtotal": 1461.1200000000001
+      },
+      {
+        "product_id": 31,
+        "quantity": 1,
+        "unit_price": 162.99,
+        "subtotal": 162.99
+      }
+    ]
+  },
+  {
+    "id": 47,
+    "order_number": "ORD146MK",
+    "customer_id": 7,
+    "customer_name": "Kayleigh Muller",
+    "customer_email": "adelbert.wintheiser@example.com",
+    "status": "refunded",
+    "payment_method": "paypal",
+    "shipping_address": "985 Kuhn Isle\nNorth Opal, MI 44878",
+    "billing_address": "3783 Terrance Station\nHoustonhaven, HI 84940-8720",
+    "total_price": 1831.7,
+    "ordered_at": "2025-03-04 13:07:25",
+    "updated_at": "2025-07-10 21:15:56",
+    "items": [
+      {
+        "product_id": 5,
+        "quantity": 3,
+        "unit_price": 341.61,
+        "subtotal": 1024.83
+      },
+      {
+        "product_id": 17,
+        "quantity": 1,
+        "unit_price": 465.95,
+        "subtotal": 465.95
+      },
+      {
+        "product_id": 16,
+        "quantity": 3,
+        "unit_price": 113.64,
+        "subtotal": 340.92
+      }
+    ]
+  },
+  {
+    "id": 48,
+    "order_number": "ORD505TI",
+    "customer_id": 8,
+    "customer_name": "Mrs. Thalia Macejkovic DDS",
+    "customer_email": "anderson.gerhard@example.net",
+    "status": "shipped",
+    "payment_method": "cod",
+    "shipping_address": "7955 Amber Gardens Suite 156\nWest Jenningsview, OK 34075",
+    "billing_address": "814 Ulices Cliff Apt. 012\nNew Lacy, MN 83032",
+    "total_price": 2787.0199999999995,
+    "ordered_at": "2025-08-05 17:30:37",
+    "updated_at": "2025-08-17 09:48:13",
+    "items": [
+      {
+        "product_id": 24,
+        "quantity": 3,
+        "unit_price": 148.7,
+        "subtotal": 446.09999999999997
+      },
+      {
+        "product_id": 17,
+        "quantity": 1,
+        "unit_price": 218.23,
+        "subtotal": 218.23
+      },
+      {
+        "product_id": 13,
+        "quantity": 2,
+        "unit_price": 487.38,
+        "subtotal": 974.76
+      },
+      {
+        "product_id": 31,
+        "quantity": 1,
+        "unit_price": 213.53,
+        "subtotal": 213.53
+      },
+      {
+        "product_id": 22,
+        "quantity": 1,
+        "unit_price": 274.74,
+        "subtotal": 274.74
+      },
+      {
+        "product_id": 15,
+        "quantity": 2,
+        "unit_price": 119.85,
+        "subtotal": 239.7
+      },
+      {
+        "product_id": 11,
+        "quantity": 2,
+        "unit_price": 209.98,
+        "subtotal": 419.96
+      }
+    ]
+  },
+  {
+    "id": 49,
+    "order_number": "ORD301QU",
+    "customer_id": 9,
+    "customer_name": "Dr. Dariana Keebler MD",
+    "customer_email": "jarrett78@example.net",
+    "status": "refunded",
+    "payment_method": "cod",
+    "shipping_address": "350 Swift Common\nLake Jarenburgh, HI 83964-8595",
+    "billing_address": "214 Rau Rest Apt. 862\nWest Johnny, DE 31626-7938",
+    "total_price": 3862.57,
+    "ordered_at": "2025-03-30 09:48:21",
+    "updated_at": "2025-07-24 02:58:00",
+    "items": [
+      {
+        "product_id": 17,
+        "quantity": 1,
+        "unit_price": 161.21,
+        "subtotal": 161.21
+      },
+      {
+        "product_id": 5,
+        "quantity": 1,
+        "unit_price": 292.97,
+        "subtotal": 292.97
+      },
+      {
+        "product_id": 17,
+        "quantity": 3,
+        "unit_price": 357.55,
+        "subtotal": 1072.65
+      },
+      {
+        "product_id": 11,
+        "quantity": 3,
+        "unit_price": 456.01,
+        "subtotal": 1368.03
+      },
+      {
+        "product_id": 46,
+        "quantity": 3,
+        "unit_price": 322.57,
+        "subtotal": 967.71
+      }
+    ]
+  },
+  {
+    "id": 50,
+    "order_number": "ORD237MG",
+    "customer_id": 10,
+    "customer_name": "Jessie Lynch V",
+    "customer_email": "genoveva.gerlach@example.org",
+    "status": "cancelled",
+    "payment_method": "credit_card",
+    "shipping_address": "8182 Bria Park\nQuitzonside, TN 90350",
+    "billing_address": "2541 Friesen Motorway Suite 498\nBreanaland, PA 39325-2433",
+    "total_price": 1510.33,
+    "ordered_at": "2025-08-19 18:53:53",
+    "updated_at": "2025-08-21 00:10:19",
+    "items": [
+      {
+        "product_id": 27,
+        "quantity": 3,
+        "unit_price": 488.86,
+        "subtotal": 1466.58
+      },
+      {
+        "product_id": 46,
+        "quantity": 1,
+        "unit_price": 43.75,
+        "subtotal": 43.75
+      }
+    ]
+  }
+]

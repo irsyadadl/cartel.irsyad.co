@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "name": "Clothing",
+    "slug": "clothing",
+    "description": "Apparel and footwear including sneakers, jeans, t-shirts, jackets, and sandals.",
+    "created_at": "2024-01-01 10:00:00",
+    "updated_at": "2025-08-20 09:00:00"
+  },
+  {
+    "id": 2,
+    "name": "Bags & Accessories",
+    "slug": "bags-accessories",
+    "description": "Backpacks, duffels, handbags, and everyday carry essentials.",
+    "created_at": "2024-01-01 10:10:00",
+    "updated_at": "2025-08-20 09:00:00"
+  }
+]

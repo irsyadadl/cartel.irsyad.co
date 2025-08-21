@@ -1,18 +1,19 @@
 "use client"
 
-import { useTheme } from "@/components/theme-provider"
 import { Toaster as ToasterPrimitive, type ToasterProps } from "sonner"
+import { twJoin } from "tailwind-merge"
 
-const Toast = ({ ...props }: ToasterProps) => {
-  const { theme = "system" } = useTheme()
+const Toast = (props: ToasterProps) => {
   return (
     <ToasterPrimitive
-      theme={theme as ToasterProps["theme"]}
+      theme="light"
       className="toaster group"
       richColors
       toastOptions={{
-        className:
-          "*:data-icon:self-start font-sans has-data-description:*:data-icon:mt-1 *:data-icon:mt-0.5 backdrop-blur-2xl",
+        className: twJoin(
+          "backdrop-blur-2xl *:data-icon:mt-0.5 *:data-icon:self-start has-data-description:*:data-icon:mt-1",
+          "**:data-action:[--normal-bg:var(--color-primary-fg)] **:data-action:[--normal-text:var(--color-primary)]",
+        ),
       }}
       style={
         {
