@@ -72,6 +72,7 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar"
 import { usePathname } from "next/navigation"
+import { CubeIcon } from "@heroicons/react/16/solid"
 
 const teams = [
   { members: 12, label: "Pixelwave", initials: "PW" },
@@ -90,6 +91,7 @@ type MenuItemProps = {
 }
 
 type MenuSectionProps = {
+  icon?: IconType
   section: string
   items: MenuItemProps[]
 }
@@ -97,6 +99,7 @@ type MenuSectionProps = {
 export const menus: MenuSectionProps[] = [
   {
     section: "Products",
+    icon: CubeIcon,
     items: [
       { label: "Catalog", href: "/dashboard/products", icon: TagIcon },
       { label: "Inventory", href: "/dashboard/inventory", icon: ArchiveBoxIcon },
@@ -106,6 +109,7 @@ export const menus: MenuSectionProps[] = [
   },
   {
     section: "Customers",
+    icon: UserGroupIcon,
     items: [
       { label: "Customer list", href: "/dashboard/customers", icon: UserGroupIcon },
       { label: "Segments", href: "/dashboard/customers/segments", icon: AdjustmentsHorizontalIcon },
@@ -115,6 +119,7 @@ export const menus: MenuSectionProps[] = [
   },
   {
     section: "Shipping",
+    icon: TruckIcon,
     items: [
       { label: "Shipments", href: "/dashboard/fulfillment/shipments", icon: TruckIcon },
       {
@@ -127,6 +132,7 @@ export const menus: MenuSectionProps[] = [
   },
   {
     section: "Marketing",
+    icon: MegaphoneIcon,
     items: [
       { label: "Campaigns", href: "/dashboard/marketing/campaigns", icon: MegaphoneIcon },
       { label: "Channels", href: "/dashboard/marketing/channels", icon: Squares2X2Icon },
@@ -135,6 +141,7 @@ export const menus: MenuSectionProps[] = [
   },
   {
     section: "Finance",
+    icon: BanknotesIcon,
     items: [
       { label: "Payouts", href: "/dashboard/finance/payouts", icon: BanknotesIcon },
       { label: "Invoices", href: "/dashboard/finance/invoices", icon: DocumentTextIcon },
@@ -144,6 +151,7 @@ export const menus: MenuSectionProps[] = [
   },
   {
     section: "Analytics",
+    icon: ChartBarIcon,
     items: [
       { label: "Reports", href: "/dashboard/analytics/reports", icon: ChartBarIcon },
       { label: "Cohorts", href: "/dashboard/analytics/cohorts", icon: ChartPieIcon },
@@ -152,6 +160,7 @@ export const menus: MenuSectionProps[] = [
   },
   {
     section: "Support",
+    icon: LifebuoyIcon,
     items: [
       { label: "Tickets", href: "/dashboard/support/tickets", icon: LifebuoyIcon },
       { label: "Help center", href: "/dashboard/support/help", icon: QuestionMarkCircleIcon },
@@ -160,6 +169,7 @@ export const menus: MenuSectionProps[] = [
   },
   {
     section: "Integrations",
+    icon: PuzzlePieceIcon,
     items: [
       { label: "Apps", href: "/dashboard/apps", icon: PuzzlePieceIcon },
       { label: "Webhooks", href: "/dashboard/integrations/webhooks", icon: LinkIcon },
@@ -299,8 +309,11 @@ export function AppSidebar() {
           >
             {menus.map((item) => (
               <SidebarDisclosure id={item.section} key={item.section}>
-                <SidebarDisclosureTrigger>{item.section}</SidebarDisclosureTrigger>
-                <SidebarDisclosurePanel>
+                <SidebarDisclosureTrigger>
+                  {item.icon && <item.icon className="size-4" />}
+                  {item.section}
+                </SidebarDisclosureTrigger>
+                <SidebarDisclosurePanel className="ml-4 border-gray-800 border-l pl-2">
                   {item.items.map((child) => (
                     <SidebarItem key={child.label} href={child.href} tooltip={child.label}>
                       <child.icon className="size-4" />
