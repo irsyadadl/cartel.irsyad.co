@@ -15,7 +15,7 @@ interface PaginateProps {
 
 const pages = Array.from({ length: 5 }, (_, i) => ({ value: i + 1 }))
 export function Paginate({ from, to, total }: PaginateProps) {
-  const currentPage = Number(from.toString()[0])
+  const currentPage = from === 1 ? 1 : Number(from.toString()[0]) + 1
   return (
     <Pagination className="flex-col items-center gap-4 md:flex-row md:justify-between">
       <p className="text-muted-fg text-sm/6 *:[strong]:font-medium *:[strong]:text-fg">
@@ -38,7 +38,7 @@ export function Paginate({ from, to, total }: PaginateProps) {
             <PaginationItem
               id={item.value.toString()}
               key={item.value}
-              isCurrent={item.value === currentPage + 1}
+              isCurrent={item.value === currentPage}
               href="#"
             >
               {item.value}
@@ -46,7 +46,7 @@ export function Paginate({ from, to, total }: PaginateProps) {
           ))}
           <PaginationItem segment="ellipsis" />
           <PaginationItem id={String(total)} href="#">
-            {total}
+            {total - to}
           </PaginationItem>
         </PaginationSection>
 

@@ -1,7 +1,7 @@
 "use client"
 
 import { BellIcon, Cog6ToothIcon } from "@heroicons/react/16/solid"
-import { MagnifyingGlassIcon } from "@heroicons/react/20/solid"
+import { MagnifyingGlassIcon } from "@heroicons/react/24/solid"
 import { Button, buttonStyles } from "@/components/ui/button"
 import { Link } from "@/components/ui/link"
 import { SearchField } from "@/components/ui/search-field"

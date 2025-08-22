@@ -1,6 +1,6 @@
 "use client"
 
-import { ChevronUpDownIcon } from "@heroicons/react/16/solid"
+import { ChevronUpDownIcon } from "@heroicons/react/24/solid"
 import type {
   ComboBoxProps as ComboboxPrimitiveProps,
   InputProps,
@@ -8,8 +8,8 @@ import type {
   PopoverProps,
 } from "react-aria-components"
 import {
-  ComboBoxContext,
   ComboBox as ComboboxPrimitive,
+  ComboBoxContext,
   ListBox,
   useSlottedContext,
 } from "react-aria-components"

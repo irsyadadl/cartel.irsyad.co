@@ -1,6 +1,6 @@
 "use client"
 
-import { CheckIcon, ChevronRightIcon } from "@heroicons/react/16/solid"
+import { CheckIcon, ChevronRightIcon } from "@heroicons/react/24/solid"
 import type {
   ButtonProps,
   MenuItemProps as MenuItemPrimitiveProps,
@@ -13,8 +13,8 @@ import {
   Collection,
   composeRenderProps,
   Header,
-  MenuItem as MenuItemPrimitive,
   Menu as MenuPrimitive,
+  MenuItem as MenuItemPrimitive,
   MenuSection as MenuSectionPrimitive,
   MenuTrigger as MenuTriggerPrimitive,
   SubmenuTrigger as SubmenuTriggerPrimitive,
@@ -26,8 +26,8 @@ import {
   DropdownDescription,
   DropdownKeyboard,
   DropdownLabel,
-  DropdownSeparator,
   dropdownSectionStyles,
+  DropdownSeparator,
 } from "./dropdown"
 import { PopoverContent, type PopoverContentProps } from "./popover"
 
@@ -84,7 +84,7 @@ const MenuContent = <T extends object>({
     <PopoverContent
       className={composeTailwindRenderProps(
         popover?.className,
-        "min-w-40 overflow-hidden bg-gray-950",
+        "min-w-48 overflow-hidden bg-gray-950",
       )}
       placement={placement}
       {...popover}

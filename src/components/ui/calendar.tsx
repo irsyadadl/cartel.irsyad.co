@@ -7,12 +7,12 @@ import type { CalendarState } from "@react-stately/calendar"
 import { use } from "react"
 import type { CalendarProps as CalendarPrimitiveProps, DateValue } from "react-aria-components"
 import {
+  Calendar as CalendarPrimitive,
   CalendarCell,
   CalendarGrid,
   CalendarGridBody,
   CalendarGridHeader as CalendarGridHeaderPrimitive,
   CalendarHeaderCell,
-  Calendar as CalendarPrimitive,
   CalendarStateContext,
   composeRenderProps,
   Heading,

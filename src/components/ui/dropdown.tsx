@@ -1,6 +1,6 @@
 "use client"
 
-import { CheckIcon } from "@heroicons/react/16/solid"
+import { CheckIcon } from "@heroicons/react/24/solid"
 import type {
   ListBoxItemProps,
   SectionProps,
@@ -104,7 +104,9 @@ const DropdownItem = ({ className, children, ...props }: DropdownItemProps) => {
     >
       {composeRenderProps(children, (children, { isSelected }) => (
         <>
-          {isSelected && <CheckIcon className="-mx-1 mr-1.5 size-4" data-slot="check-indicator" />}
+          {isSelected && (
+            <CheckIcon className="-ml-0.5 mr-1.5 size-4" data-slot="check-indicator" />
+          )}
           {typeof children === "string" ? <DropdownLabel>{children}</DropdownLabel> : children}
         </>
       ))}

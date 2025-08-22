@@ -67,7 +67,7 @@
   --color-chart-5: var(--color-blue-100);
 
 
-  --radius-lg: 0.5rem;
+  --radius-lg: 0.6rem;
   --radius-xs: calc(var(--radius-lg) * 0.5);
   --radius-sm: calc(var(--radius-lg) * 0.75);
   --radius-md: calc(var(--radius-lg) * 0.95);

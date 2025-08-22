@@ -1,4 +1,4 @@
-import { ChevronDownIcon, ChevronUpIcon, MinusIcon, PlusIcon } from "@heroicons/react/16/solid"
+import { ChevronDownIcon, ChevronUpIcon, MinusIcon, PlusIcon } from "@heroicons/react/20/solid"
 import {
   Button,
   type ButtonProps,
@@ -43,7 +43,10 @@ const NumberField = ({
   return (
     <NumberFieldPrimitive
       {...props}
-      className={composeTailwindRenderProps(className, "group flex flex-col gap-y-1.5")}
+      className={composeTailwindRenderProps(
+        className,
+        "group flex flex-col gap-y-1 *:data-[slot=label]:font-medium",
+      )}
     >
       {label && <Label>{label}</Label>}
       <FieldGroup

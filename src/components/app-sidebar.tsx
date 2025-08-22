@@ -1,6 +1,6 @@
 "use client"
 
-import { ChevronDoubleLeftIcon, ChevronDoubleRightIcon } from "@heroicons/react/20/solid"
+import { ChevronDoubleLeftIcon, ChevronDoubleRightIcon } from "@heroicons/react/24/solid"
 import {
   ArrowRightStartOnRectangleIcon,
   BellIcon,
@@ -11,7 +11,6 @@ import {
   ArchiveBoxIcon,
   ArrowUturnLeftIcon,
   BanknotesIcon,
-  BeakerIcon,
   BuildingStorefrontIcon,
   ChartBarIcon,
   ChartPieIcon,
@@ -23,23 +22,15 @@ import {
   CurrencyDollarIcon,
   DocumentTextIcon,
   GiftIcon,
-  InboxIcon,
-  KeyIcon,
-  LifebuoyIcon,
-  LinkIcon,
-  MegaphoneIcon,
   PuzzlePieceIcon,
   QuestionMarkCircleIcon,
   ReceiptPercentIcon,
   RectangleGroupIcon,
   ShoppingBagIcon,
-  SignalIcon,
-  Squares2X2Icon,
   StarIcon,
   TagIcon,
   TruckIcon,
   UserGroupIcon,
-  UsersIcon,
 } from "@heroicons/react/24/solid"
 import { twJoin } from "tailwind-merge"
 import { Avatar } from "@/components/ui/avatar"
@@ -101,79 +92,43 @@ export const menus: MenuSectionProps[] = [
     section: "Products",
     icon: CubeIcon,
     items: [
-      { label: "Catalog", href: "/dashboard/products", icon: TagIcon },
-      { label: "Inventory", href: "/dashboard/inventory", icon: ArchiveBoxIcon },
-      { label: "Collections", href: "/dashboard/collections", icon: RectangleGroupIcon },
-      { label: "Reviews", href: "/dashboard/reviews", icon: StarIcon },
+      { label: "Catalog", href: "/products", icon: TagIcon },
+      { label: "Inventory", href: "/products/inventory", icon: ArchiveBoxIcon },
+      { label: "Collections", href: "/products/collections", icon: RectangleGroupIcon },
+      { label: "Reviews", href: "/products/reviews", icon: StarIcon },
     ],
   },
   {
     section: "Customers",
     icon: UserGroupIcon,
     items: [
-      { label: "Customer list", href: "/dashboard/customers", icon: UserGroupIcon },
-      { label: "Segments", href: "/dashboard/customers/segments", icon: AdjustmentsHorizontalIcon },
-      { label: "Messages", href: "/dashboard/messages", icon: ChatBubbleBottomCenterTextIcon },
-      { label: "Loyalty", href: "/dashboard/loyalty", icon: GiftIcon },
+      { label: "Customer list", href: "/customers", icon: UserGroupIcon },
+      { label: "Segments", href: "/customers/segments", icon: AdjustmentsHorizontalIcon },
+      { label: "Messages", href: "/customers/messages", icon: ChatBubbleBottomCenterTextIcon },
+      { label: "Loyalty", href: "/customers/loyalty", icon: GiftIcon },
     ],
   },
   {
     section: "Shipping",
     icon: TruckIcon,
     items: [
-      { label: "Shipments", href: "/dashboard/fulfillment/shipments", icon: TruckIcon },
+      { label: "Shipments", href: "/shipping/fulfillment/shipments", icon: TruckIcon },
       {
         label: "Shipping zones",
-        href: "/dashboard/fulfillment/zones",
+        href: "/shipping/fulfillment/zones",
         icon: BuildingStorefrontIcon,
       },
-      { label: "Returns", href: "/dashboard/fulfillment/returns", icon: ArrowUturnLeftIcon },
-    ],
-  },
-  {
-    section: "Marketing",
-    icon: MegaphoneIcon,
-    items: [
-      { label: "Campaigns", href: "/dashboard/marketing/campaigns", icon: MegaphoneIcon },
-      { label: "Channels", href: "/dashboard/marketing/channels", icon: Squares2X2Icon },
-      { label: "Affiliates", href: "/dashboard/marketing/affiliates", icon: UsersIcon },
+      { label: "Returns", href: "/shipping/fulfillment/returns", icon: ArrowUturnLeftIcon },
     ],
   },
   {
     section: "Finance",
     icon: BanknotesIcon,
     items: [
-      { label: "Payouts", href: "/dashboard/finance/payouts", icon: BanknotesIcon },
-      { label: "Invoices", href: "/dashboard/finance/invoices", icon: DocumentTextIcon },
-      { label: "Taxes", href: "/dashboard/finance/taxes", icon: ClipboardDocumentListIcon },
-      { label: "Expenses", href: "/dashboard/finance/expenses", icon: ChartBarIcon },
-    ],
-  },
-  {
-    section: "Analytics",
-    icon: ChartBarIcon,
-    items: [
-      { label: "Reports", href: "/dashboard/analytics/reports", icon: ChartBarIcon },
-      { label: "Cohorts", href: "/dashboard/analytics/cohorts", icon: ChartPieIcon },
-      { label: "Experiments", href: "/dashboard/analytics/experiments", icon: BeakerIcon },
-    ],
-  },
-  {
-    section: "Support",
-    icon: LifebuoyIcon,
-    items: [
-      { label: "Tickets", href: "/dashboard/support/tickets", icon: LifebuoyIcon },
-      { label: "Help center", href: "/dashboard/support/help", icon: QuestionMarkCircleIcon },
-      { label: "Status", href: "/dashboard/support/status", icon: SignalIcon },
-    ],
-  },
-  {
-    section: "Integrations",
-    icon: PuzzlePieceIcon,
-    items: [
-      { label: "Apps", href: "/dashboard/apps", icon: PuzzlePieceIcon },
-      { label: "Webhooks", href: "/dashboard/integrations/webhooks", icon: LinkIcon },
-      { label: "API keys", href: "/dashboard/developers/api-keys", icon: KeyIcon },
+      { label: "Payouts", href: "/finance/payouts", icon: BanknotesIcon },
+      { label: "Invoices", href: "/finance/invoices", icon: DocumentTextIcon },
+      { label: "Taxes", href: "/finance/taxes", icon: ClipboardDocumentListIcon },
+      { label: "Expenses", href: "/finance/expenses", icon: ChartBarIcon },
     ],
   },
 ]
@@ -260,37 +215,28 @@ export function AppSidebar() {
       <SidebarContent>
         <SidebarSectionGroup>
           <SidebarSection>
-            <PrimitiveSidebarItem
-              href="/dashboard"
-              tooltip="Dashboard"
-              isCurrent={pathname === "/dashboard"}
-            >
+            <SidebarItem href="/" tooltip="Dashboard">
               <ChartPieIcon />
               <SidebarLabel>Dashboard</SidebarLabel>
-            </PrimitiveSidebarItem>
-            <SidebarItem href="/dashboard/analythics" tooltip="Analytics">
+            </SidebarItem>
+            <SidebarItem href="/analythics" tooltip="Analytics">
               <ChartBarIcon />
               <SidebarLabel>Analytics</SidebarLabel>
             </SidebarItem>
-            <SidebarItem href="/dashboard/reports" tooltip="Reports">
+            <SidebarItem href="/reports" tooltip="Reports">
               <DocumentDuplicateIcon />
               <SidebarLabel>Reports</SidebarLabel>
             </SidebarItem>
           </SidebarSection>
           <SidebarSection label="Sales">
             {[
-              { label: "Orders", href: "/dashboard/orders", icon: ShoppingBagIcon },
-              {
-                label: "Abandoned checkouts",
-                href: "/dashboard/orders/abandoned",
-                icon: InboxIcon,
-              },
-              { label: "Discounts", href: "/dashboard/discounts", icon: ReceiptPercentIcon },
-              { label: "Payments", href: "/dashboard/payments", icon: CreditCardIcon },
-              { label: "Transactions", href: "/dashboard/transactions", icon: CurrencyDollarIcon },
+              { label: "Orders", href: "/orders", icon: ShoppingBagIcon },
+              { label: "Discounts", href: "/discounts", icon: ReceiptPercentIcon },
+              { label: "Payments", href: "/payments", icon: CreditCardIcon },
+              { label: "Transactions", href: "/transactions", icon: CurrencyDollarIcon },
               {
                 label: "Subscriptions",
-                href: "/dashboard/subscriptions",
+                href: "/subscriptions",
                 icon: ClipboardDocumentListIcon,
               },
             ].map((item) => (
@@ -303,17 +249,19 @@ export function AppSidebar() {
           <SidebarDisclosureGroup
             defaultExpandedKeys={menus
               .map((menu) => menu.section)
-              .filter((section) => pathname.startsWith(`/dashboard/${section.toLowerCase()}`))}
+              .filter((section) => pathname.startsWith(`/${section.toLowerCase()}`))}
             className="gap-y-0.5"
             allowsMultipleExpanded={false}
           >
             {menus.map((item) => (
-              <SidebarDisclosure id={item.section} key={item.section}>
+              <SidebarDisclosure defaultExpanded id={item.section} key={item.section}>
                 <SidebarDisclosureTrigger>
                   {item.icon && <item.icon className="size-4" />}
-                  {item.section}
+                  <MenuLabel>{item.section}</MenuLabel>
                 </SidebarDisclosureTrigger>
-                <SidebarDisclosurePanel className="ml-4 border-gray-800 border-l pl-2">
+                <SidebarDisclosurePanel
+                  className={twJoin(!isCollapsed && "ml-4 border-gray-800 border-l pl-2")}
+                >
                   {item.items.map((child) => (
                     <SidebarItem key={child.label} href={child.href} tooltip={child.label}>
                       <child.icon className="size-4" />
@@ -375,8 +323,44 @@ export function AppSidebar() {
   )
 }
 
+const clean = (s: string) => (s.length > 1 && s.endsWith("/") ? s.slice(0, -1) : s)
+
+function getSiblingPrefixes(href: string) {
+  const base = `/${clean(href).split("/").filter(Boolean)[0]}`
+  const section = menus.find((m) => `/${m.section.toLowerCase() === base}`)
+  if (!section) return []
+  return section.items.map((it) => clean(it.href)).filter((h) => h !== clean(href))
+}
+
+function normalizePath(path: string) {
+  const parts = path.split("?")[0].split("#")[0].split("/").filter(Boolean)
+  if (parts[0] === "dashboard") parts.shift()
+  return `/${parts.join("/")}`
+}
+
+function isActive(pathname: string, href?: string) {
+  if (!href) return false
+
+  const path = clean(normalizePath(pathname))
+  const target = clean(href)
+
+  // root dashboard
+  if (target === "/") return path === "/"
+
+  // exact match
+  if (path === target) return true
+
+  if (path.startsWith(`${target}/`)) {
+    const siblings = getSiblingPrefixes(target)
+    return !siblings.some((s) => path === s || path.startsWith(`${s}/`))
+  }
+
+  return false
+}
+
 function SidebarItem(props: React.ComponentProps<typeof PrimitiveSidebarItem>) {
   const pathname = usePathname()
-  const isCurrent = props.href === pathname
+  const href = typeof props.href === "string" ? props.href : undefined
+  const isCurrent = isActive(pathname, href)
   return <PrimitiveSidebarItem isCurrent={isCurrent} {...props} />
 }

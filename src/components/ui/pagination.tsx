@@ -1,7 +1,10 @@
 "use client"
 
-import { EllipsisHorizontalIcon } from "@heroicons/react/16/solid"
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid"
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  EllipsisHorizontalIcon,
+} from "@heroicons/react/24/solid"
 import type { ListBoxItemProps, ListBoxProps, ListBoxSectionProps } from "react-aria-components"
 import { ListBox, ListBoxItem, ListBoxSection, Separator } from "react-aria-components"
 import { twMerge } from "tailwind-merge"

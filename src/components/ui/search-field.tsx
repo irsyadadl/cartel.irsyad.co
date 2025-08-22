@@ -1,7 +1,6 @@
 "use client"
 
-import { XMarkIcon } from "@heroicons/react/16/solid"
-import { MagnifyingGlassIcon } from "@heroicons/react/20/solid"
+import { MagnifyingGlassIcon, XMarkIcon } from "@heroicons/react/24/solid"
 import type { SearchFieldProps as SearchFieldPrimitiveProps } from "react-aria-components"
 import { Button, SearchField as SearchFieldPrimitive } from "react-aria-components"
 import { composeTailwindRenderProps } from "@/lib/primitive"

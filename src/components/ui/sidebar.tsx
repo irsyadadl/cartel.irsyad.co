@@ -12,6 +12,7 @@ import type {
   SeparatorProps as SidebarSeparatorProps,
 } from "react-aria-components"
 import {
+  Button as Trigger,
   composeRenderProps,
   Disclosure,
   DisclosureGroup,
@@ -21,7 +22,6 @@ import {
   Heading,
   Separator,
   Text,
-  Button as Trigger,
 } from "react-aria-components"
 import { twJoin, twMerge } from "tailwind-merge"
 import { SheetContent } from "@/components/ui/sheet"
@@ -478,6 +478,7 @@ const SidebarDisclosure = ({ className, ref, ...props }: SidebarDisclosureProps)
 interface SidebarDisclosureTriggerProps extends ButtonProps {
   ref?: React.Ref<HTMLButtonElement>
 }
+
 const SidebarDisclosureTrigger = ({ className, ref, ...props }: SidebarDisclosureTriggerProps) => {
   const { state, isMobile } = useSidebar()
   const collapsed = state === "collapsed" && !isMobile
@@ -497,7 +498,7 @@ const SidebarDisclosureTrigger = ({ className, ref, ...props }: SidebarDisclosur
               "**:last:data-[slot=icon]:size-5 sm:**:last:data-[slot=icon]:size-4",
               "**:data-[slot=avatar]:-m-0.5 **:data-[slot=avatar]:size-6 sm:**:data-[slot=avatar]:size-5",
               collapsed
-                ? "size-9 justify-center"
+                ? "size-9 justify-center *:[[slot=label]]:hidden"
                 : "col-span-full gap-3 p-2 **:data-[slot=chevron]:text-gray-400 **:last:data-[slot=icon]:ml-auto sm:gap-2.5 sm:py-2 sm:text-sm/5",
               isFocusVisible && "inset-ring inset-ring-ring/70",
               (isPressed || isHovered) &&

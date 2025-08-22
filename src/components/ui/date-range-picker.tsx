@@ -49,7 +49,7 @@ const DateRangePicker = <T extends DateValue>({
           –
         </span>
         <DateInput className="pr-10 sm:pr-8" slot="end" />
-        <DatePickerIcon />
+        <DatePickerIcon type="range" />
       </FieldGroup>
       {description && <Description>{description}</Description>}
       <FieldError>{errorMessage}</FieldError>

@@ -1,14 +1,14 @@
 "use client"
 
-import { ChevronDownIcon } from "@heroicons/react/16/solid"
+import { ChevronDownIcon } from "@heroicons/react/24/solid"
 import { createContext, use } from "react"
 import type {
   CellProps,
   ColumnProps,
   ColumnResizerProps,
-  TableHeaderProps as HeaderProps,
   RowProps,
   TableBodyProps,
+  TableHeaderProps as HeaderProps,
   TableProps as TablePrimitiveProps,
 } from "react-aria-components"
 import {
@@ -20,9 +20,9 @@ import {
   composeRenderProps,
   ResizableTableContainer,
   Row,
+  Table as TablePrimitive,
   TableBody as TableBodyPrimitive,
   TableHeader as TableHeaderPrimitive,
-  Table as TablePrimitive,
   useTableOptions,
 } from "react-aria-components"
 import { twJoin, twMerge } from "tailwind-merge"

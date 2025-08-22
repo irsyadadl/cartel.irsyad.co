@@ -6,8 +6,8 @@ import type {
 } from "react-aria-components"
 import {
   composeRenderProps,
-  RadioGroup as RadioGroupPrimitive,
   Radio as RadioPrimitive,
+  RadioGroup as RadioGroupPrimitive,
 } from "react-aria-components"
 import { twMerge } from "tailwind-merge"
 import { composeTailwindRenderProps } from "@/lib/primitive"

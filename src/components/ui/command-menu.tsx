@@ -1,6 +1,6 @@
 "use client"
 
-import { MagnifyingGlassIcon } from "@heroicons/react/20/solid"
+import { MagnifyingGlassIcon } from "@heroicons/react/24/solid"
 import { createContext, use, useEffect } from "react"
 import type {
   AutocompleteProps,

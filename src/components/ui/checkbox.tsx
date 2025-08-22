@@ -1,13 +1,13 @@
 "use client"
 
-import { CheckIcon, MinusIcon } from "@heroicons/react/16/solid"
+import { CheckIcon, MinusIcon } from "@heroicons/react/24/solid"
 import type {
   CheckboxGroupProps as CheckboxGroupPrimitiveProps,
   CheckboxProps as CheckboxPrimitiveProps,
 } from "react-aria-components"
 import {
-  CheckboxGroup as CheckboxGroupPrimitive,
   Checkbox as CheckboxPrimitive,
+  CheckboxGroup as CheckboxGroupPrimitive,
   composeRenderProps,
 } from "react-aria-components"
 import { twMerge } from "tailwind-merge"
@@ -87,7 +87,7 @@ const Checkbox = ({ className, children, description, label, ...props }: Checkbo
                   "sm:size-4 sm:*:data-[slot=check-indicator]:size-3.5",
                   "size-4.5 *:data-[slot=check-indicator]:size-4",
                   (isSelected || isIndeterminate) && [
-                    "bg-primary text-primary-fg dark:inset-ring-primary",
+                    "inset-ring-primary bg-primary text-primary-fg",
                     "group-invalid:inset-ring-danger/70 group-invalid:bg-danger group-invalid:text-danger-fg dark:group-invalid:inset-ring-danger/70",
                   ],
                   isFocusVisible && [

@@ -5,9 +5,9 @@ import {
   type DialogProps,
   DialogTrigger as DialogTriggerPrimitive,
   type DialogTriggerProps,
+  Modal as ModalPrimitive,
   ModalOverlay,
   type ModalOverlayProps,
-  Modal as ModalPrimitive,
 } from "react-aria-components"
 import { twJoin, twMerge } from "tailwind-merge"
 import {
@@ -56,7 +56,7 @@ const ModalContent = ({
   isBlurred = false,
   children,
   overlay,
-  size = "lg",
+  size = "xl",
   role = "dialog",
   closeButton = true,
   ...props

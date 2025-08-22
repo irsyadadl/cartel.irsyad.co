@@ -4,9 +4,9 @@ import { XMarkIcon } from "@heroicons/react/24/solid"
 import { useEffect, useRef } from "react"
 import type { HeadingProps, TextProps } from "react-aria-components"
 import {
-  Heading,
   Button as PrimitiveButton,
   Dialog as PrimitiveDialog,
+  Heading,
   Text,
 } from "react-aria-components"
 import { twMerge } from "tailwind-merge"

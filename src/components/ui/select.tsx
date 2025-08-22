@@ -1,6 +1,6 @@
 "use client"
 
-import { ChevronUpDownIcon } from "@heroicons/react/16/solid"
+import { ChevronUpDownIcon } from "@heroicons/react/20/solid"
 import type {
   ListBoxProps,
   PopoverProps,

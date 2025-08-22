@@ -1,15 +1,15 @@
 "use client"
 
-import { Bars2Icon, CheckIcon } from "@heroicons/react/16/solid"
+import { Bars2Icon, CheckIcon } from "@heroicons/react/24/solid"
 import type { ListBoxItemProps, ListBoxProps, ListBoxSectionProps } from "react-aria-components"
 import {
   composeRenderProps,
-  ListBoxItem as ListBoxItemPrimitive,
   ListBox as ListBoxPrimitive,
+  ListBoxItem as ListBoxItemPrimitive,
 } from "react-aria-components"
 import { twJoin, twMerge } from "tailwind-merge"
 import { composeTailwindRenderProps } from "@/lib/primitive"
-import { DropdownDescription, DropdownLabel, DropdownSection, dropdownItemStyles } from "./dropdown"
+import { DropdownDescription, dropdownItemStyles, DropdownLabel, DropdownSection } from "./dropdown"
 
 const ListBox = <T extends object>({ className, ...props }: ListBoxProps<T>) => (
   <ListBoxPrimitive

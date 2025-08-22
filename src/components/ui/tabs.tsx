@@ -8,9 +8,9 @@ import type {
 } from "react-aria-components"
 import {
   composeRenderProps,
+  Tab as TabPrimitive,
   TabList as TabListPrimitive,
   TabPanel as TabPanelPrimitive,
-  Tab as TabPrimitive,
   Tabs as TabsPrimitive,
 } from "react-aria-components"
 import { twMerge } from "tailwind-merge"

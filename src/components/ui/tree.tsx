@@ -1,6 +1,6 @@
 "use client"
 
-import { ChevronRightIcon } from "@heroicons/react/16/solid"
+import { ChevronRightIcon } from "@heroicons/react/24/solid"
 import type {
   TreeItemContentProps,
   TreeItemContentRenderProps,
@@ -9,9 +9,9 @@ import type {
 } from "react-aria-components"
 import {
   Button,
-  TreeItemContent,
-  TreeItem as TreeItemPrimitive,
   Tree as TreePrimitive,
+  TreeItem as TreeItemPrimitive,
+  TreeItemContent,
 } from "react-aria-components"
 import { twJoin, twMerge } from "tailwind-merge"
 import { composeTailwindRenderProps } from "@/lib/primitive"

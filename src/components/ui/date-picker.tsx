@@ -1,6 +1,6 @@
 "use client"
 
-import { CalendarDaysIcon } from "@heroicons/react/16/solid"
+import { CalendarDateRangeIcon, CalendarDaysIcon } from "@heroicons/react/24/solid"
 import type { DateDuration } from "@internationalized/date"
 import {
   DatePicker as DatePickerPrimitive,
@@ -60,14 +60,14 @@ export function DatePickerOverlay({
   )
 }
 
-export function DatePickerIcon() {
+export function DatePickerIcon({ type = "single" }: { type?: "range" | "single" }) {
   return (
     <Button
       size="sq-sm"
       intent="plain"
       className="size-7 shrink-0 rounded pressed:bg-transparent outline-hidden outline-offset-0 hover:bg-transparent focus-visible:text-fg focus-visible:ring-0 group-open:text-fg **:data-[slot=icon]:text-muted-fg group-open:*:data-[slot=icon]:text-fg"
     >
-      <CalendarDaysIcon />
+      {type === "single" ? <CalendarDaysIcon /> : <CalendarDateRangeIcon />}
     </Button>
   )
 }

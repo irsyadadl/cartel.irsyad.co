@@ -1,6 +1,6 @@
 "use client"
 
-import { Bars2Icon } from "@heroicons/react/16/solid"
+import { Bars2Icon } from "@heroicons/react/24/solid"
 import { createContext, use, useCallback, useMemo, useState } from "react"
 import type { LinkProps } from "react-aria-components"
 import { Link } from "react-aria-components"

@@ -5,8 +5,8 @@ import { Fragment, use, useCallback, useEffect, useState } from "react"
 import type { SliderProps as SliderPrimitiveProps, SliderThumbProps } from "react-aria-components"
 import {
   composeRenderProps,
-  SliderOutput,
   Slider as SliderPrimitive,
+  SliderOutput,
   SliderStateContext,
   SliderThumb as SliderThumbPrimitive,
   SliderTrack as SliderTrackPrimitive,

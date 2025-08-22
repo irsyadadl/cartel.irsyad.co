@@ -1,6 +1,6 @@
 "use client"
 
-import { EyeIcon, EyeSlashIcon } from "@heroicons/react/16/solid"
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid"
 import { useState } from "react"
 import type { InputProps, TextFieldProps as TextFieldPrimitiveProps } from "react-aria-components"
 import { TextField as TextFieldPrimitive } from "react-aria-components"
@@ -43,7 +43,10 @@ const TextField = ({
     <TextFieldPrimitive
       type={inputType}
       {...props}
-      className={composeTailwindRenderProps(className, "group flex flex-col gap-y-1")}
+      className={composeTailwindRenderProps(
+        className,
+        "group flex flex-col gap-y-1 *:data-[slot=label]:font-medium",
+      )}
     >
       {!props.children ? (
         <>

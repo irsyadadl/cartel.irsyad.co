@@ -11,10 +11,10 @@ import {
   Button,
   composeRenderProps,
   Disclosure,
-  DisclosureStateContext,
-  Heading,
   DisclosureGroup as PrimitiveDisclosureGroup,
   DisclosurePanel as PrimitiveDisclosurePanel,
+  DisclosureStateContext,
+  Heading,
 } from "react-aria-components"
 import { twJoin, twMerge } from "tailwind-merge"
 import { composeTailwindRenderProps } from "@/lib/primitive"
