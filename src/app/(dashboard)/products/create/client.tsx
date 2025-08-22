@@ -99,7 +99,7 @@ export function Client() {
     if (!file) return
 
     const extension = file.name.split(".").pop() ?? ""
-    const size = (file.size / 1024).toFixed(2) + " KB"
+    const size = `${(file.size / 1024).toFixed(2)} KB`
 
     setFileInfo({
       name: file.name,

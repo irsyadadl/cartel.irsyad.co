@@ -11,7 +11,7 @@ export default function Layout({
       <AppSidebar />
       <SidebarInset className="[--inset-x:4.2%] [--inset-y:calc(var(--inset-x)*1.5)] [--layout-gutter:--spacing(4)] lg:rounded-l-lg sm:[--layout-gutter:--spacing(12)]">
         <AppSidebarNav />
-        <div className="flex h-full flex-col gap-y-6 rounded-t-lg bg-white p-(--layout-gutter) text-gray-950">
+        <div className="flex h-full flex-col gap-y-6 rounded-t-lg bg-(--container-bg,white) p-(--layout-gutter) text-gray-950">
           {modal}
           {children}
         </div>

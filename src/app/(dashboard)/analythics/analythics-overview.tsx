@@ -197,20 +197,20 @@ const data = {
 
 export function AnalyticsOverview() {
   return (
-    <div className="grid gap-12">
-      <div className="space-y-6">
+    <div className="grid gap-8 [--space:--spacing(4)] lg:gap-12">
+      <div className="space-y-(--space)">
         <CardHeader
           title="Sales performance"
           description="Track revenue, orders, average order value, and conversion rate to measure overall growth."
         />
-        <section className="grid grid-cols-1 gap-6 xl:grid-cols-3">
+        <section className="grid grid-cols-1 gap-(--space) xl:grid-cols-3">
           <Card className="col-span-full">
             <CardHeader title="Revenue by month" description="Net revenue in the last 12 months" />
             <CardContent>
               <LineChart
                 data={data.sales.revenue}
                 dataKey="month"
-                className="h-48 min-h-[192px] lg:h-64 lg:min-h-[256px]"
+                className="h-48 min-h-[192px] lg:h-(--space)4 lg:min-h-[256px]"
                 legend={false}
                 yAxisProps={{ tickFormatter: (v: number) => `$${formatKilo(v)}` }}
                 config={{ value: { label: "Revenue", color: "var(--color-blue-500)" } }}
@@ -259,13 +259,13 @@ export function AnalyticsOverview() {
         </section>
       </div>
 
-      <div className="space-y-6">
+      <div className="space-y-(--space)">
         <CardHeader
           title="Customer behavior"
           description="Understand how visitors interact with your store, from traffic sources to funnels and abandoned carts."
         />
 
-        <section className="grid grid-cols-1 gap-6 xl:grid-cols-3">
+        <section className="grid grid-cols-1 gap-(--space) xl:grid-cols-3">
           <Card>
             <CardHeader title="Traffic sources" description="Sessions by source" />
             <CardContent>
@@ -307,13 +307,13 @@ export function AnalyticsOverview() {
           </Card>
         </section>
       </div>
-      <div className="space-y-6">
+      <div className="space-y-(--space)">
         <CardHeader
           title="Product analytics"
           description="Analyze product performance by top-selling items, views vs purchases, and customer search queries."
         />
 
-        <section className="grid grid-cols-1 gap-6 xl:grid-cols-3">
+        <section className="grid grid-cols-1 gap-(--space) xl:grid-cols-3">
           <Card>
             <CardHeader title="Top selling products" description="Revenue by product" />
             <CardContent>
@@ -362,12 +362,9 @@ export function AnalyticsOverview() {
           </Card>
         </section>
       </div>
-      <div className="space-y-6">
-        <CardHeader
-          title="Engagement & retention"
-          description="Measure customer lifetime value, repeat purchases, and retention cohorts to strengthen loyalty."
-        />
-        <section className="grid grid-cols-1 gap-6 xl:grid-cols-3">
+      <div className="space-y-(--space)">
+        <CardHeader title="Engagement" description="Track repeat purchases and retention cohorts" />
+        <section className="grid grid-cols-1 gap-(--space) xl:grid-cols-3">
           <Card>
             <CardHeader
               title="Repeat purchase rate"
@@ -391,9 +388,7 @@ export function AnalyticsOverview() {
                 data={data.engagement.retention}
                 dataKey="cohort"
                 className="h-56 min-h-[224px]"
-                barProps={{
-                  type: "grouped",
-                }}
+                barProps={{ type: "grouped" }}
                 legend
                 yAxisProps={{ tickFormatter: (v: number) => `${v}%` }}
                 config={{
@@ -418,17 +413,17 @@ export function AnalyticsOverview() {
             </CardContent>
           </Card>
         </section>
+      </div>
 
-        <section className="grid grid-cols-1 gap-6 xl:grid-cols-3">
+      <div className="space-y-(--space)">
+        <CardHeader title="Marketing" description="Analyze attribution, discount usage, and ROI" />
+        <section className="grid grid-cols-1 gap-(--space) xl:grid-cols-3">
           <Card>
             <CardHeader title="Campaign attribution" description="Share of revenue by channel" />
             <CardContent>
               <BarChart
                 data={data.marketing.attribution}
                 dataKey="channel"
-                barProps={{
-                  barSize: 20,
-                }}
                 className="h-56 min-h-[224px]"
                 legend={false}
                 yAxisProps={{ tickFormatter: (v: number) => `${v}%` }}
@@ -436,16 +431,14 @@ export function AnalyticsOverview() {
               />
             </CardContent>
           </Card>
-          <Card className="col-span-2">
+          <Card className="lg:col-span-2">
             <CardHeader title="Discount usage" description="Codes used and attributed revenue" />
             <CardContent>
               <BarChart
                 data={data.marketing.discounts}
                 dataKey="month"
                 className="h-56 min-h-[224px]"
-                barProps={{
-                  type: "stacked",
-                }}
+                barProps={{ type: "stacked" }}
                 legend
                 yAxisProps={{ tickFormatter: (v: number) => formatKilo(v) }}
                 config={{
@@ -455,20 +448,20 @@ export function AnalyticsOverview() {
               />
             </CardContent>
           </Card>
+          <Card className="lg:col-span-full">
+            <CardHeader title="Marketing ROI" description="Return on ad spend by month" />
+            <CardContent>
+              <LineChart
+                data={data.marketing.roi}
+                dataKey="month"
+                className="h-56 min-h-[224px]"
+                legend={false}
+                yAxisProps={{ tickFormatter: (v: number) => `${v}%` }}
+                config={{ value: { label: "ROI", color: "var(--color-amber-500)" } }}
+              />
+            </CardContent>
+          </Card>
         </section>
-        <Card>
-          <CardHeader title="Marketing ROI" description="Return on ad spend by month" />
-          <CardContent>
-            <LineChart
-              data={data.marketing.roi}
-              dataKey="month"
-              className="h-56 min-h-[224px]"
-              legend={false}
-              yAxisProps={{ tickFormatter: (v: number) => `${v}%` }}
-              config={{ value: { label: "ROI", color: "var(--color-amber-500)" } }}
-            />
-          </CardContent>
-        </Card>
       </div>
     </div>
   )
