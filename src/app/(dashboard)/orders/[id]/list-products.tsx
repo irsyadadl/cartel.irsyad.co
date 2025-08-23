@@ -20,7 +20,6 @@ export function ListProducts() {
         <TableColumn>Name</TableColumn>
         <TableColumn>Color</TableColumn>
         <TableColumn>Material</TableColumn>
-        <TableColumn>Size</TableColumn>
         <TableColumn>Price</TableColumn>
         <TableColumn>Status</TableColumn>
       </TableHeader>
@@ -34,7 +33,6 @@ export function ListProducts() {
             <TableCell>{item.name}</TableCell>
             <TableCell>{item.color}</TableCell>
             <TableCell>{item.material}</TableCell>
-            <TableCell>{item.size}</TableCell>
             <TableCell>
               {formatNumber(item.price, { currency: "USD", style: "currency" })}
             </TableCell>

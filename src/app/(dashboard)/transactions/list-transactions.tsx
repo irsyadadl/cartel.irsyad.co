@@ -140,13 +140,7 @@ export function ListTransactions() {
                 <Badge intent="secondary">{item.method}</Badge>
               </TableCell>
               <TableCell>
-                {item.card
-                  ? `${item.card.brand.toUpperCase()} **** **** **** ${item.card.last4}`
-                  : item.bank_transfer
-                    ? `Bank Transfer - ${item.bank_transfer.bank}`
-                    : item.wallet
-                      ? `${item.wallet.wallet.replace("_", " ").toUpperCase()}`
-                      : "N/A"}
+                {`${item.card.brand.toUpperCase()} **** **** **** ${item.card.last4}`}
               </TableCell>
               <TableCell className="text-end">
                 {formatNumber(item.amount.gross, {
