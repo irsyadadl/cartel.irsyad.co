@@ -1,11 +1,5 @@
 "use client"
 
-import { ChevronDoubleLeftIcon, ChevronDoubleRightIcon } from "@heroicons/react/24/solid"
-import {
-  ArrowRightStartOnRectangleIcon,
-  BellIcon,
-  DocumentDuplicateIcon,
-} from "@heroicons/react/24/outline"
 import {
   AdjustmentsHorizontalIcon,
   ArchiveBoxIcon,
@@ -15,15 +9,13 @@ import {
   ChartBarIcon,
   ChartPieIcon,
   ChatBubbleBottomCenterTextIcon,
-  ChevronUpDownIcon,
+  ChevronDoubleLeftIcon,
+  ChevronDoubleRightIcon,
   ClipboardDocumentListIcon,
   Cog6ToothIcon,
-  CreditCardIcon,
   CurrencyDollarIcon,
   DocumentTextIcon,
   GiftIcon,
-  PuzzlePieceIcon,
-  QuestionMarkCircleIcon,
   ReceiptPercentIcon,
   RectangleGroupIcon,
   ShoppingBagIcon,
@@ -32,9 +24,14 @@ import {
   TruckIcon,
   UserGroupIcon,
 } from "@heroicons/react/24/solid"
+import {
+  ArrowRightStartOnRectangleIcon,
+  BellIcon,
+  DocumentDuplicateIcon,
+} from "@heroicons/react/24/outline"
 import { twJoin } from "tailwind-merge"
 import { Avatar } from "@/components/ui/avatar"
-import { Button } from "@/components/ui/button"
+import { buttonStyles } from "@/components/ui/button"
 import {
   Menu,
   MenuContent,
@@ -66,14 +63,7 @@ import { usePathname } from "next/navigation"
 import { CubeIcon } from "@heroicons/react/16/solid"
 import { useEffect } from "react"
 import { Logo } from "@/components/logo"
-
-const teams = [
-  { members: 12, label: "Pixelwave", initials: "PW" },
-  { members: 8, label: "Cloudnest", initials: "CN" },
-  { members: 18, label: "Neurocore", initials: "NC" },
-  { members: 6, label: "Orbitly", initials: "OB" },
-  { members: 22, label: "Synkrino", initials: "SK" },
-]
+import { Link } from "@/components/ui/link"
 
 type IconType = (props: React.SVGProps<SVGSVGElement>) => React.ReactNode
 
@@ -135,39 +125,6 @@ export const menus: MenuSectionProps[] = [
   },
 ]
 
-const userMenuItems = [
-  {
-    label: "Notifications",
-    href: "#",
-    icon: BellIcon,
-  },
-  {
-    label: "Preferences",
-    href: "#",
-    icon: Cog6ToothIcon,
-  },
-  {
-    label: "Help Center",
-    href: "#",
-    icon: QuestionMarkCircleIcon,
-  },
-  {
-    label: "Users & Permissions",
-    href: "#",
-    icon: UserGroupIcon,
-  },
-  {
-    label: "Billing",
-    href: "#",
-    icon: CreditCardIcon,
-  },
-  {
-    label: "Integrations",
-    href: "#",
-    icon: PuzzlePieceIcon,
-  },
-]
-
 export function AppSidebar() {
   const pathname = usePathname()
   const { state, isMobile, isOpenOnMobile, setIsOpenOnMobile } = useSidebar()
@@ -180,40 +137,18 @@ export function AppSidebar() {
   return (
     <Sidebar closeButton={false} collapsible="dock">
       <SidebarHeader className="border-fg/5 border-b group-data-[state=collapsed]:border-b-0">
-        <Menu>
-          <Button
-            size={isCollapsed ? "sq-sm" : "md"}
-            className={
-              isCollapsed
-                ? "size-8"
-                : "group justify-between gap-x-3 px-0 [--btn-overlay:transparent] sm:px-0 sm:py-0"
-            }
-            intent="plain"
-          >
-            <Logo />
-            {!isCollapsed && <SidebarLabel className="mr-auto">Cartel</SidebarLabel>}
-
-            {!isCollapsed && (
-              <ChevronUpDownIcon data-slot="chevron" className="size-4 text-gray-300" />
-            )}
-          </Button>
-          <MenuContent
-            popover={{ className: "min-w-(--trigger-width)] bg-gray-900 border-gray-800" }}
-          >
-            <MenuSection items={teams}>
-              {(item) => (
-                <MenuItem id={item.label} className="flex items-center gap-x-2">
-                  <Avatar
-                    className="bg-blue-600/15 text-blue-400"
-                    initials={item.initials}
-                    size="sm"
-                  />
-                  <span>{item.label}</span>
-                </MenuItem>
-              )}
-            </MenuSection>
-          </MenuContent>
-        </Menu>
+        <Link
+          className={buttonStyles({
+            intent: "plain",
+            className: isCollapsed
+              ? "size-8"
+              : "group justify-between gap-x-3 px-0 [--btn-overlay:transparent] sm:px-0 sm:py-0",
+          })}
+          href="/"
+        >
+          <Logo />
+          {!isCollapsed && <SidebarLabel className="mr-auto">Cartel</SidebarLabel>}
+        </Link>
       </SidebarHeader>
       <SidebarContent>
         <SidebarSectionGroup>
@@ -283,28 +218,41 @@ export function AppSidebar() {
             />
           </MenuTrigger>
 
-          <MenuContent className="min-w-61.5" placement="bottom right">
+          <MenuContent
+            className="min-w-61.5"
+            popover={{
+              className: "border-gray-700 bg-gray-900",
+            }}
+            placement="bottom right"
+          >
             <MenuSection>
-              <MenuHeader separator>
-                <span className="block">Katy Perry</span>
-                <span className="font-normal text-muted-fg">@perry</span>
+              <MenuHeader>
+                <span className="block text-white">Katy Perry</span>
+                <span className="font-normal text-gray-400">@perry</span>
               </MenuHeader>
             </MenuSection>
+            <MenuSeparator />
 
-            {userMenuItems.map((item) => (
-              <MenuItem key={item.label} href={item.href} className="flex items-center gap-x-2">
-                <item.icon className="size-4" />
-                <MenuLabel>{item.label}</MenuLabel>
-              </MenuItem>
-            ))}
+            <MenuItem href="#">
+              <BellIcon />
+              <MenuLabel>Notifications</MenuLabel>
+            </MenuItem>
+            <MenuItem href="#">
+              <Cog6ToothIcon />
+              <MenuLabel>Preferences</MenuLabel>
+            </MenuItem>
+            <MenuItem href="#">
+              <UserGroupIcon />
+              <MenuLabel>Users & Permissions</MenuLabel>
+            </MenuItem>
             <MenuSeparator />
             <MenuItem href="#logout">
               <ArrowRightStartOnRectangleIcon />
-              Log out
+              <MenuLabel>Log out</MenuLabel>
             </MenuItem>
           </MenuContent>
         </Menu>
-        <SidebarTrigger className="text-white hover:bg-gray-700" isCircle>
+        <SidebarTrigger className="pressed:bg-gray-700 text-white hover:bg-gray-700" isCircle>
           <ChevronDoubleLeftIcon
             data-slot="chevron"
             className="block size-4 group-data-[state=collapsed]:hidden"
