@@ -33,6 +33,7 @@
         "noForEach": "off"
       },
       "a11y": {
+        "useFocusableInteractive": "off",
         "noRedundantRoles": "off",
         "noSvgWithoutTitle": "off",
         "useValidAnchor": "off",

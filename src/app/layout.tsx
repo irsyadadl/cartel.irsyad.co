@@ -37,6 +37,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning className={`${inter.variable} ${geistMono.variable}`}>
+      <head>
+        <meta name="apple-mobile-web-app-title" content="Cartel" />
+      </head>
       <body>
         <Providers>
           <Toast />

@@ -82,8 +82,8 @@ export function ListOrders() {
           </SelectContent>
         </Select>
       </div>
-      <div className="grid divide-x *:pl-6 *:first:pl-0 sm:grid-cols-2 xl:grid-cols-4">
-        <div>
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="rounded-lg border p-4 lg:rounded-none lg:border-transparent lg:p-0">
           <CardHeader className="pb-4">
             <CardDescription>Total revenue</CardDescription>
             <CardTitle className="text-3xl/8 sm:text-2xl/8">$84,210</CardTitle>
@@ -94,7 +94,7 @@ export function ListOrders() {
           </div>
         </div>
 
-        <div>
+        <div className="rounded-lg border p-4 lg:rounded-none lg:border-y-0 lg:border-r-0 lg:border-l lg:py-0 lg:pt-0 lg:pr-0 lg:pl-6">
           <CardHeader className="pb-4">
             <CardDescription>Orders</CardDescription>
             <CardTitle className="text-3xl/8 sm:text-2xl/8">1,942</CardTitle>
@@ -105,7 +105,7 @@ export function ListOrders() {
           </div>
         </div>
 
-        <div>
+        <div className="rounded-lg border p-4 lg:rounded-none lg:border-y-0 lg:border-r-0 lg:border-l lg:py-0 lg:pt-0 lg:pr-0 lg:pl-6">
           <CardHeader className="pb-4">
             <CardDescription>Average order value</CardDescription>
             <CardTitle className="text-3xl/8 sm:text-2xl/8">$43.35</CardTitle>
@@ -116,7 +116,7 @@ export function ListOrders() {
           </div>
         </div>
 
-        <div>
+        <div className="rounded-lg border p-4 lg:rounded-none lg:border-y-0 lg:border-r-0 lg:border-l lg:py-0 lg:pt-0 lg:pr-0 lg:pl-6">
           <CardHeader className="pb-4">
             <CardDescription>Refunds</CardDescription>
             <CardTitle className="text-3xl/8 sm:text-2xl/8">$1,120</CardTitle>

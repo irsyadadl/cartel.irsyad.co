@@ -16,7 +16,6 @@ import { useState } from "react"
 import { FileTrigger, Button as PrimitiveButton } from "react-aria-components"
 import { PaperClipIcon } from "@heroicons/react/16/solid"
 import { twJoin } from "tailwind-merge"
-import { Separator } from "@/components/ui/separator"
 const statuses = [
   { id: "active", name: "Active", description: "Currently enabled and available for use" },
   { id: "inactive", name: "Inactive", description: "Temporarily disabled but can be reactivated" },
@@ -112,8 +111,6 @@ export function Client() {
   }
   return (
     <>
-      <Separator />
-
       <Form className="space-y-12">
         <div className="grid grid-cols-1 gap-6 md:grid-cols-[26rem_1fr]">
           <div>

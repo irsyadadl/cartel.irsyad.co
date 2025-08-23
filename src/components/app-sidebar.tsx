@@ -64,6 +64,8 @@ import {
 } from "@/components/ui/sidebar"
 import { usePathname } from "next/navigation"
 import { CubeIcon } from "@heroicons/react/16/solid"
+import { useEffect } from "react"
+import { Logo } from "@/components/logo"
 
 const teams = [
   { members: 12, label: "Pixelwave", initials: "PW" },
@@ -167,9 +169,14 @@ const userMenuItems = [
 ]
 
 export function AppSidebar() {
-  const { state } = useSidebar()
   const pathname = usePathname()
+  const { state, isMobile, isOpenOnMobile, setIsOpenOnMobile } = useSidebar()
   const isCollapsed = state === "collapsed"
+
+  useEffect(() => {
+    if (isMobile && isOpenOnMobile) setIsOpenOnMobile(false)
+  }, [pathname, isMobile, isOpenOnMobile, setIsOpenOnMobile])
+
   return (
     <Sidebar closeButton={false} collapsible="dock">
       <SidebarHeader className="border-fg/5 border-b group-data-[state=collapsed]:border-b-0">
@@ -179,16 +186,12 @@ export function AppSidebar() {
             className={
               isCollapsed
                 ? "size-8"
-                : "group justify-between gap-x-2 px-0 [--btn-overlay:transparent] sm:px-0 sm:py-0"
+                : "group justify-between gap-x-3 px-0 [--btn-overlay:transparent] sm:px-0 sm:py-0"
             }
             intent="plain"
           >
-            <Avatar
-              className="outline-hidden"
-              src="https://irsyad.co/logo?color=51A2FF"
-              size="sm"
-            />
-            {!isCollapsed && <SidebarLabel className="mr-auto">{teams[0].label}</SidebarLabel>}
+            <Logo />
+            {!isCollapsed && <SidebarLabel className="mr-auto">Cartel</SidebarLabel>}
 
             {!isCollapsed && (
               <ChevronUpDownIcon data-slot="chevron" className="size-4 text-gray-300" />

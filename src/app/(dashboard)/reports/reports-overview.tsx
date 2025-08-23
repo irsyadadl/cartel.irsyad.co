@@ -9,7 +9,7 @@ import {
 import { useMemo, useState } from "react"
 import { type DateValue, getLocalTimeZone, today } from "@internationalized/date"
 import { twMerge } from "tailwind-merge"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { AreaChart } from "@/components/ui/area-chart"
 import { BarChart } from "@/components/ui/bar-chart"
 import { LineChart } from "@/components/ui/line-chart"
@@ -63,7 +63,7 @@ function Stat({
             </div>
             <Tooltip>
               <Pressable>
-                <span className="absolute top-4 right-4">
+                <span role="button" className="absolute top-4 right-4">
                   <InformationCircleIcon className="size-4 text-muted-fg" />
                 </span>
               </Pressable>
@@ -252,108 +252,99 @@ export function ReportsOverview() {
       </SectionHeader>
 
       <>
-        <div>
-          <CardHeader>
-            <CardTitle>Reports</CardTitle>
-            <CardDescription>
-              Key metrics and trends for sales, inventory, fulfillment, and customers.
-            </CardDescription>
-          </CardHeader>
+        <section className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-4">
+          <StatsShell>
+            <Stat
+              icon={BanknotesIcon}
+              label="Gross sales"
+              value={`$${formatKilo(totals.gross)}`}
+              helper="Total for range"
+              color="text-emerald-500"
+            >
+              <AreaChart
+                data={filtered.sales.gross}
+                dataKey="month"
+                legend={false}
+                tooltip={false}
+                hideGridLines
+                hideXAxis
+                hideYAxis
+                className="h-12"
+                config={{ value: { label: "Gross", color: "var(--color-emerald-500)" } }}
+                valueFormatter={(v) => `$${formatKilo(v)}`}
+              />
+            </Stat>
+          </StatsShell>
 
-          <section className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-4">
-            <StatsShell>
-              <Stat
-                icon={BanknotesIcon}
-                label="Gross sales"
-                value={`$${formatKilo(totals.gross)}`}
-                helper="Total for range"
-                color="text-emerald-500"
-              >
-                <AreaChart
-                  data={filtered.sales.gross}
-                  dataKey="month"
-                  legend={false}
-                  tooltip={false}
-                  hideGridLines
-                  hideXAxis
-                  hideYAxis
-                  className="h-12"
-                  config={{ value: { label: "Gross", color: "var(--color-emerald-500)" } }}
-                  valueFormatter={(v) => `$${formatKilo(v)}`}
-                />
-              </Stat>
-            </StatsShell>
+          <StatsShell>
+            <Stat
+              icon={BanknotesIcon}
+              label="Net revenue"
+              value={`$${formatKilo(totals.net)}`}
+              helper="After refunds and fees"
+              color="text-blue-500"
+            >
+              <AreaChart
+                data={filtered.sales.net}
+                dataKey="month"
+                legend={false}
+                tooltip={false}
+                hideGridLines
+                hideXAxis
+                hideYAxis
+                className="h-12"
+                config={{ value: { label: "Net", color: "var(--color-blue-500)" } }}
+                valueFormatter={(v) => `$${formatKilo(v)}`}
+              />
+            </Stat>
+          </StatsShell>
 
-            <StatsShell>
-              <Stat
-                icon={BanknotesIcon}
-                label="Net revenue"
-                value={`$${formatKilo(totals.net)}`}
-                helper="After refunds and fees"
-                color="text-blue-500"
-              >
-                <AreaChart
-                  data={filtered.sales.net}
-                  dataKey="month"
-                  legend={false}
-                  tooltip={false}
-                  hideGridLines
-                  hideXAxis
-                  hideYAxis
-                  className="h-12"
-                  config={{ value: { label: "Net", color: "var(--color-blue-500)" } }}
-                  valueFormatter={(v) => `$${formatKilo(v)}`}
-                />
-              </Stat>
-            </StatsShell>
+          <StatsShell>
+            <Stat
+              icon={ShoppingBagIcon}
+              label="Orders"
+              value={formatKilo(totals.orders)}
+              helper="Count for range"
+              color="text-sky-500"
+            >
+              <AreaChart
+                data={filtered.sales.orders}
+                dataKey="month"
+                legend={false}
+                tooltip={false}
+                hideGridLines
+                hideXAxis
+                hideYAxis
+                className="h-12"
+                config={{ value: { label: "Orders", color: "var(--color-sky-500)" } }}
+                valueFormatter={(v) => formatKilo(v)}
+              />
+            </Stat>
+          </StatsShell>
 
-            <StatsShell>
-              <Stat
-                icon={ShoppingBagIcon}
-                label="Orders"
-                value={formatKilo(totals.orders)}
-                helper="Count for range"
-                color="text-sky-500"
-              >
-                <AreaChart
-                  data={filtered.sales.orders}
-                  dataKey="month"
-                  legend={false}
-                  tooltip={false}
-                  hideGridLines
-                  hideXAxis
-                  hideYAxis
-                  className="h-12"
-                  config={{ value: { label: "Orders", color: "var(--color-sky-500)" } }}
-                  valueFormatter={(v) => formatKilo(v)}
-                />
-              </Stat>
-            </StatsShell>
-
-            <StatsShell>
-              <Stat
-                icon={ReceiptRefundIcon}
-                label="Refunds"
-                value={`$${formatKilo(totals.refunds)}`}
-                helper="Processed amount"
-                color="text-rose-500"
-              >
-                <AreaChart
-                  data={filtered.sales.refunds}
-                  dataKey="month"
-                  legend={false}
-                  tooltip={false}
-                  hideGridLines
-                  hideXAxis
-                  hideYAxis
-                  className="h-12"
-                  config={{ value: { label: "Refunds", color: "var(--color-rose-500)" } }}
-                  valueFormatter={(v) => `$${formatKilo(v)}`}
-                />
-              </Stat>
-            </StatsShell>
-          </section>
-        </div>
+          <StatsShell>
+            <Stat
+              icon={ReceiptRefundIcon}
+              label="Refunds"
+              value={`$${formatKilo(totals.refunds)}`}
+              helper="Processed amount"
+              color="text-rose-500"
+            >
+              <AreaChart
+                data={filtered.sales.refunds}
+                dataKey="month"
+                legend={false}
+                tooltip={false}
+                hideGridLines
+                hideXAxis
+                hideYAxis
+                className="h-12"
+                config={{ value: { label: "Refunds", color: "var(--color-rose-500)" } }}
+                valueFormatter={(v) => `$${formatKilo(v)}`}
+              />
+            </Stat>
+          </StatsShell>
+        </section>
 
         <div className="space-y-4">
           <CardHeader

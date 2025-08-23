@@ -69,7 +69,11 @@ export function ListTransactions() {
           </Button>
         </SectionContent>
         <SectionAction>
-          <Select defaultSelectedKey="all" placeholder="All providers">
+          <Select
+            defaultSelectedKey="all"
+            placeholder="All providers"
+            aria-label="Select providers"
+          >
             <SelectTrigger />
             <SelectContent>
               <SelectItem id="all">All providers</SelectItem>
@@ -80,7 +84,7 @@ export function ListTransactions() {
               <SelectItem id="braintree">Braintree</SelectItem>
             </SelectContent>
           </Select>
-          <Select defaultSelectedKey="all" placeholder="All statuses">
+          <Select defaultSelectedKey="all" placeholder="All statuses" aria-label="Select statuses">
             <SelectTrigger />
             <SelectContent>
               <SelectItem id="all">All statuses</SelectItem>
@@ -93,7 +97,7 @@ export function ListTransactions() {
               <SelectItem id="voided">Voided</SelectItem>
             </SelectContent>
           </Select>
-          <Select defaultSelectedKey="all" placeholder="All methods">
+          <Select defaultSelectedKey="all" placeholder="All methods" aria-label="Select methods">
             <SelectTrigger />
             <SelectContent>
               <SelectItem id="all">All methods</SelectItem>
@@ -111,7 +115,7 @@ export function ListTransactions() {
         </SectionAction>
       </SectionHeader>
 
-      <Table>
+      <Table aria-label="List of transactions">
         <TableHeader>
           <TableColumn isRowHeader>Order number</TableColumn>
           <TableColumn>Customer</TableColumn>

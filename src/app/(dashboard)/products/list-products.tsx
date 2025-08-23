@@ -123,7 +123,7 @@ export function ListProducts() {
             </Menu>
           )}
 
-          <Link href="/discounts/create" className={buttonStyles()}>
+          <Link href="/products/create" className={buttonStyles()}>
             <PlusIcon />
             New
           </Link>

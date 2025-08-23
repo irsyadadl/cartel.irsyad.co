@@ -217,6 +217,7 @@ export function AnalyticsOverview() {
         </SectionContent>
         <SectionAction>
           <DateRangePicker
+            aria-label="Select date range"
             contentPlacement="bottom end"
             defaultValue={{
               start: today(getLocalTimeZone()).subtract({
