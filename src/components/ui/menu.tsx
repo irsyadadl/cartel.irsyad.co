@@ -84,7 +84,7 @@ const MenuContent = <T extends object>({
     <PopoverContent
       className={composeTailwindRenderProps(
         popover?.className,
-        "min-w-48 overflow-hidden bg-gray-950",
+        "min-w-32 overflow-hidden bg-gray-950",
       )}
       placement={placement}
       {...popover}

@@ -107,7 +107,7 @@ const twelveMonths = {
   ],
 }
 
-export function TotalRevenue() {
+export function Overview() {
   return (
     <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
       <Card>
@@ -144,7 +144,7 @@ export function TotalRevenue() {
             dataKey="month"
             className="h-48 min-h-[192px]"
             yAxisProps={{
-              tickFormatter: (v: number) => `$${formatKilo(v)}`,
+              tickFormatter: (v: number) => formatKilo(v),
             }}
             legend={false}
             config={{

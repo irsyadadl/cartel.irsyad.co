@@ -232,13 +232,7 @@ export function AppSidebar() {
             {[
               { label: "Orders", href: "/orders", icon: ShoppingBagIcon },
               { label: "Discounts", href: "/discounts", icon: ReceiptPercentIcon },
-              { label: "Payments", href: "/payments", icon: CreditCardIcon },
               { label: "Transactions", href: "/transactions", icon: CurrencyDollarIcon },
-              {
-                label: "Subscriptions",
-                href: "/subscriptions",
-                icon: ClipboardDocumentListIcon,
-              },
             ].map((item) => (
               <SidebarItem key={item.label} href={item.href} tooltip={item.label}>
                 <item.icon className="size-4" />

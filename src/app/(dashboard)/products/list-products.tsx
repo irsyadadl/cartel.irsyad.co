@@ -88,7 +88,7 @@ export function ListProducts() {
                 {selectedKeys === "all" ? "All 10 products" : [...selectedKeys].length})
                 <ChevronDownIcon />
               </Button>
-              <MenuContent placement="bottom start">
+              <MenuContent className="min-w-48" placement="bottom start">
                 <MenuItem>
                   <CheckCircleIcon fill="#51A2FF" />
                   <MenuLabel>Publish</MenuLabel>

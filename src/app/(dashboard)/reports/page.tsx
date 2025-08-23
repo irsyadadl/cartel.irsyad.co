@@ -1,4 +1,3 @@
-import { Heading } from "@/components/ui/heading"
 import { ReportsOverview } from "./reports-overview"
 
 export const metadata = {
@@ -8,7 +7,6 @@ export const metadata = {
 export default function Page() {
   return (
     <>
-      <Heading>Reports</Heading>
       <ReportsOverview />
     </>
   )

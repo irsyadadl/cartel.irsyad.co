@@ -77,7 +77,7 @@ export function ListDiscounts() {
                 Bulk actions ({selectedKeys === "all" ? "All 10 items" : [...selectedKeys].length})
                 <ChevronDownIcon />
               </Button>
-              <MenuContent placement="bottom start">
+              <MenuContent placement="bottom start" className="min-w-48">
                 <MenuItem>
                   <CheckCircleIcon />
                   <MenuLabel>Activate</MenuLabel>

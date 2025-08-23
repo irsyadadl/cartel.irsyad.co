@@ -36,3 +36,11 @@ export function formatKilo(value: number, locale = "en-US"): string {
     compactDisplay: "short",
   })
 }
+
+export function formatMoney(value: number, currency = "USD",locale = "en-US"): string {
+  return formatNumber(value, {
+    locale,
+    style: "currency",
+    currency,
+  })
+}

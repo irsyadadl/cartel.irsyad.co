@@ -2,12 +2,12 @@
 
 import {
   BanknotesIcon,
-  ShoppingBagIcon,
-  ReceiptRefundIcon,
   InformationCircleIcon,
+  ReceiptRefundIcon,
+  ShoppingBagIcon,
 } from "@heroicons/react/24/solid"
 import { useMemo, useState } from "react"
-import { getLocalTimeZone, today, type DateValue } from "@internationalized/date"
+import { type DateValue, getLocalTimeZone, today } from "@internationalized/date"
 import { twMerge } from "tailwind-merge"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { AreaChart } from "@/components/ui/area-chart"
@@ -24,7 +24,13 @@ import { ChevronDownIcon } from "@heroicons/react/20/solid"
 import { DetailLine, DetailLineItem } from "@/components/ui/details-line"
 import { Tooltip, TooltipContent } from "@/components/ui/tooltip"
 import { Pressable } from "react-aria-components"
-import { SectionAction, SectionContent, SectionHeader } from "@/components/section-header"
+import {
+  SectionAction,
+  SectionContent,
+  SectionDescription,
+  SectionHeader,
+} from "@/components/section-header"
+import { Heading } from "@/components/ui/heading"
 
 function StatsShell(props: React.ComponentProps<"div">) {
   return <div className={twMerge("rounded-lg border bg-white", props.className)} {...props} />
@@ -46,28 +52,30 @@ function Stat({
   color?: string
 }) {
   return (
-    <div className="flex flex-col gap-2">
-      <div className="relative p-4">
-        <div className="font-semibold text-2xl tabular-nums">{value}</div>
-        <div className="mt-1 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Icon className={twMerge("size-5", color)} />
-            <span className="text-muted-fg text-sm">{label}</span>
+    <>
+      <div className="flex flex-col gap-2">
+        <div className="relative p-4">
+          <div className="font-semibold text-2xl tabular-nums">{value}</div>
+          <div className="mt-1 flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Icon className={twMerge("size-5", color)} />
+              <span className="text-muted-fg text-sm">{label}</span>
+            </div>
+            <Tooltip>
+              <Pressable>
+                <span className="absolute top-4 right-4">
+                  <InformationCircleIcon className="size-4 text-muted-fg" />
+                </span>
+              </Pressable>
+              <TooltipContent>
+                {helper ? <span className="text-muted-fg text-xs">{helper}</span> : null}
+              </TooltipContent>
+            </Tooltip>
           </div>
-          <Tooltip>
-            <Pressable>
-              <span className="absolute top-4 right-4">
-                <InformationCircleIcon className="size-4 text-muted-fg" />
-              </span>
-            </Pressable>
-            <TooltipContent>
-              {helper ? <span className="text-muted-fg text-xs">{helper}</span> : null}
-            </TooltipContent>
-          </Tooltip>
         </div>
+        {children}
       </div>
-      {children}
-    </div>
+    </>
   )
 }
 
@@ -208,316 +216,325 @@ export function ReportsOverview() {
   }, [filtered])
 
   return (
-    <div className="grid gap-8 [--space:--spacing(4)] lg:gap-12">
-      <div>
-        <SectionHeader>
-          <SectionContent>
+    <>
+      <SectionHeader>
+        <SectionContent>
+          <Heading>Reports</Heading>
+          <SectionDescription>
+            Track sales, inventory, fulfillment, and customer reports over time.
+          </SectionDescription>
+        </SectionContent>
+        <SectionAction className="flex-col items-end gap-3 sm:flex-row">
+          <DateRangePicker
+            aria-label="Date range"
+            value={range}
+            onChange={(v) => v && setRange(v)}
+            visibleDuration={{ months: 2 }}
+          />
+          <Menu>
+            <Button intent="outline">
+              <ArrowUpTrayIcon />
+              Export...
+              <ChevronDownIcon />
+            </Button>
+            <MenuContent placement="bottom end">
+              <MenuItem>
+                <CsvIcon />
+                <MenuLabel>Export as CSV</MenuLabel>
+              </MenuItem>
+              <MenuItem>
+                <ExcelIcon />
+                <MenuLabel>Export as Excel</MenuLabel>
+              </MenuItem>
+            </MenuContent>
+          </Menu>
+        </SectionAction>
+      </SectionHeader>
+
+      <>
+        <div>
+          <CardHeader>
             <CardTitle>Reports</CardTitle>
             <CardDescription>
-              Export-ready summaries for finance, inventory, fulfillment, and customers
+              Key metrics and trends for sales, inventory, fulfillment, and customers.
             </CardDescription>
-          </SectionContent>
-          <SectionAction className="flex-col items-end gap-3 sm:flex-row">
-            <DateRangePicker
-              aria-label="Date range"
-              value={range}
-              onChange={(v) => v && setRange(v)}
-              visibleDuration={{ months: 2 }}
-            />
-            <Menu>
-              <Button intent="outline">
-                <ArrowUpTrayIcon />
-                Export...
-                <ChevronDownIcon />
-              </Button>
-              <MenuContent placement="bottom end">
-                <MenuItem>
-                  <CsvIcon />
-                  <MenuLabel>Export as CSV</MenuLabel>
-                </MenuItem>
-                <MenuItem>
-                  <ExcelIcon />
-                  <MenuLabel>Export as Excel</MenuLabel>
-                </MenuItem>
-              </MenuContent>
-            </Menu>
-          </SectionAction>
-        </SectionHeader>
+          </CardHeader>
 
-        <section className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-4">
-          <StatsShell>
-            <Stat
-              icon={BanknotesIcon}
-              label="Gross sales"
-              value={`$${formatKilo(totals.gross)}`}
-              helper="Total for range"
-              color="text-emerald-500"
-            >
-              <AreaChart
-                data={filtered.sales.gross}
-                dataKey="month"
-                legend={false}
-                tooltip={false}
-                hideGridLines
-                hideXAxis
-                hideYAxis
-                className="h-12"
-                config={{ value: { label: "Gross", color: "var(--color-emerald-500)" } }}
-                valueFormatter={(v) => `$${formatKilo(v)}`}
-              />
-            </Stat>
-          </StatsShell>
+          <section className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-4">
+            <StatsShell>
+              <Stat
+                icon={BanknotesIcon}
+                label="Gross sales"
+                value={`$${formatKilo(totals.gross)}`}
+                helper="Total for range"
+                color="text-emerald-500"
+              >
+                <AreaChart
+                  data={filtered.sales.gross}
+                  dataKey="month"
+                  legend={false}
+                  tooltip={false}
+                  hideGridLines
+                  hideXAxis
+                  hideYAxis
+                  className="h-12"
+                  config={{ value: { label: "Gross", color: "var(--color-emerald-500)" } }}
+                  valueFormatter={(v) => `$${formatKilo(v)}`}
+                />
+              </Stat>
+            </StatsShell>
 
-          <StatsShell>
-            <Stat
-              icon={BanknotesIcon}
-              label="Net revenue"
-              value={`$${formatKilo(totals.net)}`}
-              helper="After refunds and fees"
-              color="text-blue-500"
-            >
-              <AreaChart
-                data={filtered.sales.net}
-                dataKey="month"
-                legend={false}
-                tooltip={false}
-                hideGridLines
-                hideXAxis
-                hideYAxis
-                className="h-12"
-                config={{ value: { label: "Net", color: "var(--color-blue-500)" } }}
-                valueFormatter={(v) => `$${formatKilo(v)}`}
-              />
-            </Stat>
-          </StatsShell>
+            <StatsShell>
+              <Stat
+                icon={BanknotesIcon}
+                label="Net revenue"
+                value={`$${formatKilo(totals.net)}`}
+                helper="After refunds and fees"
+                color="text-blue-500"
+              >
+                <AreaChart
+                  data={filtered.sales.net}
+                  dataKey="month"
+                  legend={false}
+                  tooltip={false}
+                  hideGridLines
+                  hideXAxis
+                  hideYAxis
+                  className="h-12"
+                  config={{ value: { label: "Net", color: "var(--color-blue-500)" } }}
+                  valueFormatter={(v) => `$${formatKilo(v)}`}
+                />
+              </Stat>
+            </StatsShell>
 
-          <StatsShell>
-            <Stat
-              icon={ShoppingBagIcon}
-              label="Orders"
-              value={formatKilo(totals.orders)}
-              helper="Count for range"
-              color="text-sky-500"
-            >
-              <AreaChart
-                data={filtered.sales.orders}
-                dataKey="month"
-                legend={false}
-                tooltip={false}
-                hideGridLines
-                hideXAxis
-                hideYAxis
-                className="h-12"
-                config={{ value: { label: "Orders", color: "var(--color-sky-500)" } }}
-                valueFormatter={(v) => formatKilo(v)}
-              />
-            </Stat>
-          </StatsShell>
+            <StatsShell>
+              <Stat
+                icon={ShoppingBagIcon}
+                label="Orders"
+                value={formatKilo(totals.orders)}
+                helper="Count for range"
+                color="text-sky-500"
+              >
+                <AreaChart
+                  data={filtered.sales.orders}
+                  dataKey="month"
+                  legend={false}
+                  tooltip={false}
+                  hideGridLines
+                  hideXAxis
+                  hideYAxis
+                  className="h-12"
+                  config={{ value: { label: "Orders", color: "var(--color-sky-500)" } }}
+                  valueFormatter={(v) => formatKilo(v)}
+                />
+              </Stat>
+            </StatsShell>
 
-          <StatsShell>
-            <Stat
-              icon={ReceiptRefundIcon}
-              label="Refunds"
-              value={`$${formatKilo(totals.refunds)}`}
-              helper="Processed amount"
-              color="text-rose-500"
-            >
-              <AreaChart
-                data={filtered.sales.refunds}
-                dataKey="month"
-                legend={false}
-                tooltip={false}
-                hideGridLines
-                hideXAxis
-                hideYAxis
-                className="h-12"
-                config={{ value: { label: "Refunds", color: "var(--color-rose-500)" } }}
-                valueFormatter={(v) => `$${formatKilo(v)}`}
-              />
-            </Stat>
-          </StatsShell>
-        </section>
-      </div>
+            <StatsShell>
+              <Stat
+                icon={ReceiptRefundIcon}
+                label="Refunds"
+                value={`$${formatKilo(totals.refunds)}`}
+                helper="Processed amount"
+                color="text-rose-500"
+              >
+                <AreaChart
+                  data={filtered.sales.refunds}
+                  dataKey="month"
+                  legend={false}
+                  tooltip={false}
+                  hideGridLines
+                  hideXAxis
+                  hideYAxis
+                  className="h-12"
+                  config={{ value: { label: "Refunds", color: "var(--color-rose-500)" } }}
+                  valueFormatter={(v) => `$${formatKilo(v)}`}
+                />
+              </Stat>
+            </StatsShell>
+          </section>
+        </div>
 
-      <div className="space-y-(--space)">
-        <CardHeader
-          title="Sales summary"
-          description="Revenue, orders, refunds, and average order value summarized by period"
-        />
-        <section className="grid grid-cols-1 gap-(--space) xl:grid-cols-2">
-          <Card className="col-span-full">
-            <CardHeader title="Revenue by month" description="Gross vs net revenue" />
-            <CardContent>
-              <BarChart
-                data={filtered.months.map((m, i) => ({
-                  month: m,
-                  gross: filtered.sales.gross[i].value,
-                  net: filtered.sales.net[i].value,
-                }))}
-                dataKey="month"
-                legend
-                className="h-72 min-h-[288px]"
-                yAxisProps={{ tickFormatter: (v: number) => `$${formatKilo(v)}` }}
-                config={{
-                  gross: { label: "Gross", color: "var(--color-emerald-500)" },
-                  net: { label: "Net", color: "var(--color-blue-500)" },
-                }}
-              />
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader title="Orders and refunds" description="Monthly counts" />
-            <CardContent>
-              <BarChart
-                data={filtered.months.map((m, i) => ({
-                  month: m,
-                  orders: filtered.sales.orders[i].value,
-                  refunds: Math.round(filtered.sales.refunds[i].value / 25),
-                }))}
-                dataKey="month"
-                legend
-                className="h-56"
-                yAxisProps={{ tickFormatter: (v: number) => formatKilo(v) }}
-                config={{
-                  orders: { label: "Orders", color: "var(--color-sky-500)" },
-                  refunds: { label: "Refunds", color: "var(--color-rose-500)" },
-                }}
-              />
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader title="Average order value" description="AOV by month" />
-            <CardContent>
-              <LineChart
-                data={filtered.months.map((m, i) => ({
-                  month: m,
-                  value: Math.round(
-                    filtered.sales.net[i].value / Math.max(1, filtered.sales.orders[i].value),
-                  ),
-                }))}
-                dataKey="month"
-                legend={false}
-                className="h-56"
-                yAxisProps={{ tickFormatter: (v: number) => `$${v}` }}
-                config={{ value: { label: "AOV", color: "var(--color-amber-500)" } }}
-              />
-            </CardContent>
-          </Card>
-        </section>
-      </div>
+        <div className="space-y-4">
+          <CardHeader
+            title="Sales summary"
+            description="Revenue, orders, refunds, and average order value summarized by period"
+          />
+          <section className="grid grid-cols-1 gap-4 xl:grid-cols-2">
+            <Card className="col-span-full">
+              <CardHeader title="Revenue by month" description="Gross vs net revenue" />
+              <CardContent>
+                <BarChart
+                  data={filtered.months.map((m, i) => ({
+                    month: m,
+                    gross: filtered.sales.gross[i].value,
+                    net: filtered.sales.net[i].value,
+                  }))}
+                  dataKey="month"
+                  legend
+                  className="h-52 min-h-[208px] lg:h-80 lg:min-h-[320px]"
+                  yAxisProps={{ tickFormatter: (v: number) => `$${formatKilo(v)}` }}
+                  config={{
+                    gross: { label: "Gross", color: "var(--color-emerald-500)" },
+                    net: { label: "Net", color: "var(--color-blue-500)" },
+                  }}
+                />
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader title="Orders and refunds" description="Monthly counts" />
+              <CardContent>
+                <BarChart
+                  data={filtered.months.map((m, i) => ({
+                    month: m,
+                    orders: filtered.sales.orders[i].value,
+                    refunds: Math.round(filtered.sales.refunds[i].value / 25),
+                  }))}
+                  dataKey="month"
+                  legend
+                  className="h-52 min-h-[208px]"
+                  yAxisProps={{ tickFormatter: (v: number) => formatKilo(v) }}
+                  config={{
+                    orders: { label: "Orders", color: "var(--color-sky-500)" },
+                    refunds: { label: "Refunds", color: "var(--color-rose-500)" },
+                  }}
+                />
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader title="Average order value" description="AOV by month" />
+              <CardContent>
+                <LineChart
+                  data={filtered.months.map((m, i) => ({
+                    month: m,
+                    value: Math.round(
+                      filtered.sales.net[i].value / Math.max(1, filtered.sales.orders[i].value),
+                    ),
+                  }))}
+                  dataKey="month"
+                  legend={false}
+                  className="h-52 min-h-[208px]"
+                  yAxisProps={{ tickFormatter: (v: number) => `$${v}` }}
+                  config={{ value: { label: "AOV", color: "var(--color-amber-500)" } }}
+                />
+              </CardContent>
+            </Card>
+          </section>
+        </div>
 
-      <div className="space-y-(--space)">
-        <CardHeader
-          title="Inventory reports"
-          description="Stock levels, adjustments, and valuation across locations"
-        />
-        <section>
-          <Card className="xl:col-span-2">
-            <CardHeader title="Adjustments" description="Added vs removed by month" />
-            <CardContent>
-              <BarChart
-                data={filtered.inventory.adjustments}
-                dataKey="month"
-                legend
-                className="h-72 min-h-[288px]"
-                yAxisProps={{ tickFormatter: (v: number) => formatKilo(v) }}
-                config={{
-                  added: { label: "Added", color: "var(--color-emerald-500)" },
-                  removed: { label: "Removed", color: "var(--color-rose-500)" },
-                }}
-              />
-            </CardContent>
-          </Card>
-        </section>
-      </div>
+        <div className="space-y-4">
+          <CardHeader
+            title="Inventory reports"
+            description="Stock levels, adjustments, and valuation across locations"
+          />
+          <section>
+            <Card className="xl:col-span-2">
+              <CardHeader title="Adjustments" description="Added vs removed by month" />
+              <CardContent>
+                <BarChart
+                  data={filtered.inventory.adjustments}
+                  dataKey="month"
+                  legend
+                  className="h-52 min-h-[208px] lg:h-80 lg:min-h-[320px]"
+                  yAxisProps={{ tickFormatter: (v: number) => formatKilo(v) }}
+                  config={{
+                    added: { label: "Added", color: "var(--color-emerald-500)" },
+                    removed: { label: "Removed", color: "var(--color-rose-500)" },
+                  }}
+                />
+              </CardContent>
+            </Card>
+          </section>
+        </div>
 
-      <div className="space-y-(--space)">
-        <CardHeader
-          title="Order and fulfillment"
-          description="Order statuses, delivery times, and cancellations"
-        />
-        <section className="grid grid-cols-1 gap-(--space) xl:grid-cols-2">
-          <Card>
-            <CardHeader title="Status distribution" description="Counts by status" />
-            <CardContent>
-              <DetailLine>
-                {data.fulfillment.status.map((item) => (
-                  <DetailLineItem
-                    label={item.status}
-                    description={formatKilo(item.value)}
-                    key={item.status}
-                  />
-                ))}
-              </DetailLine>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader title="Inventory snapshot" description="Current stock distribution" />
-            <CardContent>
-              <DetailLine>
-                {data.inventory.snapshot.map((item) => (
-                  <DetailLineItem
-                    label={item.bucket}
-                    description={formatKilo(item.value)}
-                    key={item.bucket}
-                  />
-                ))}
-              </DetailLine>
-            </CardContent>
-          </Card>
-          <Card className="col-span-full">
-            <CardHeader title="Delivery time" description="Average days to deliver" />
-            <CardContent>
-              <LineChart
-                data={filtered.fulfillment.sla}
-                dataKey="month"
-                legend={false}
-                className="h-72 min-h-[288px]"
-                yAxisProps={{ tickFormatter: (v: number) => `${v}d` }}
-                config={{ value: { label: "Days", color: "var(--color-violet-500)" } }}
-              />
-            </CardContent>
-          </Card>
-        </section>
-      </div>
+        <div className="space-y-4">
+          <CardHeader
+            title="Order and fulfillment"
+            description="Order statuses, delivery times, and cancellations"
+          />
+          <section className="grid grid-cols-1 gap-4 xl:grid-cols-2">
+            <Card>
+              <CardHeader title="Status distribution" description="Counts by status" />
+              <CardContent>
+                <DetailLine>
+                  {data.fulfillment.status.map((item) => (
+                    <DetailLineItem
+                      label={item.status}
+                      description={formatKilo(item.value)}
+                      key={item.status}
+                    />
+                  ))}
+                </DetailLine>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader title="Inventory snapshot" description="Current stock distribution" />
+              <CardContent>
+                <DetailLine>
+                  {data.inventory.snapshot.map((item) => (
+                    <DetailLineItem
+                      label={item.bucket}
+                      description={formatKilo(item.value)}
+                      key={item.bucket}
+                    />
+                  ))}
+                </DetailLine>
+              </CardContent>
+            </Card>
+            <Card className="col-span-full">
+              <CardHeader title="Delivery time" description="Average days to deliver" />
+              <CardContent>
+                <LineChart
+                  data={filtered.fulfillment.sla}
+                  dataKey="month"
+                  legend={false}
+                  className="h-52 min-h-[208px] lg:h-80 lg:min-h-[320px]"
+                  yAxisProps={{ tickFormatter: (v: number) => `${v}d` }}
+                  config={{ value: { label: "Days", color: "var(--color-violet-500)" } }}
+                />
+              </CardContent>
+            </Card>
+          </section>
+        </div>
 
-      <div className="space-y-(--space)">
-        <CardHeader
-          title="Customer reports"
-          description="New vs returning customers and lifetime value"
-        />
-        <section className="grid grid-cols-1 gap-(--space) xl:grid-cols-2">
-          <Card>
-            <CardHeader title="New vs returning" description="Customers by month" />
-            <CardContent>
-              <BarChart
-                data={filtered.customers.newVsReturning}
-                dataKey="month"
-                legend
-                className="h-56"
-                yAxisProps={{ tickFormatter: (v: number) => formatKilo(v) }}
-                config={{
-                  new: { label: "New", color: "var(--color-blue-500)" },
-                  returning: { label: "Returning", color: "var(--color-amber-500)" },
-                }}
-              />
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader title="Customer lifetime value" description="Average CLV by month" />
-            <CardContent>
-              <AreaChart
-                data={filtered.customers.clv}
-                dataKey="month"
-                legend={false}
-                className="h-56"
-                yAxisProps={{ tickFormatter: (v: number) => `$${v}` }}
-                config={{ value: { label: "CLV", color: "var(--color-green-500)" } }}
-              />
-            </CardContent>
-          </Card>
-        </section>
-      </div>
-    </div>
+        <div className="space-y-4">
+          <CardHeader
+            title="Customer reports"
+            description="New vs returning customers and lifetime value"
+          />
+          <section className="grid grid-cols-1 gap-4 xl:grid-cols-2">
+            <Card>
+              <CardHeader title="New vs returning" description="Customers by month" />
+              <CardContent>
+                <BarChart
+                  data={filtered.customers.newVsReturning}
+                  dataKey="month"
+                  legend
+                  className="h-52 min-h-[208px]"
+                  yAxisProps={{ tickFormatter: (v: number) => formatKilo(v) }}
+                  config={{
+                    new: { label: "New", color: "var(--color-blue-500)" },
+                    returning: { label: "Returning", color: "var(--color-amber-500)" },
+                  }}
+                />
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader title="Customer lifetime value" description="Average CLV by month" />
+              <CardContent>
+                <AreaChart
+                  data={filtered.customers.clv}
+                  dataKey="month"
+                  legend={false}
+                  className="h-52 min-h-[208px]"
+                  yAxisProps={{ tickFormatter: (v: number) => `$${v}` }}
+                  config={{ value: { label: "CLV", color: "var(--color-green-500)" } }}
+                />
+              </CardContent>
+            </Card>
+          </section>
+        </div>
+      </>
+    </>
   )
 }

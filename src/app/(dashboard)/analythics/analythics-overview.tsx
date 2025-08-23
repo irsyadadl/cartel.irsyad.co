@@ -5,6 +5,15 @@ import { LineChart } from "@/components/ui/line-chart"
 import { BarChart } from "@/components/ui/bar-chart"
 import { AreaChart } from "@/components/ui/area-chart"
 import { formatKilo } from "@/lib/number"
+import { Heading } from "@/components/ui/heading"
+import {
+  SectionAction,
+  SectionContent,
+  SectionDescription,
+  SectionHeader,
+} from "@/components/section-header"
+import { DateRangePicker } from "@/components/ui/date-range-picker"
+import { getLocalTimeZone, today } from "@internationalized/date"
 
 const data = {
   sales: {
@@ -197,272 +206,307 @@ const data = {
 
 export function AnalyticsOverview() {
   return (
-    <div className="grid gap-8 [--space:--spacing(4)] lg:gap-12">
-      <div className="space-y-(--space)">
-        <CardHeader
-          title="Sales performance"
-          description="Track revenue, orders, average order value, and conversion rate to measure overall growth."
-        />
-        <section className="grid grid-cols-1 gap-(--space) xl:grid-cols-3">
-          <Card className="col-span-full">
-            <CardHeader title="Revenue by month" description="Net revenue in the last 12 months" />
-            <CardContent>
-              <LineChart
-                data={data.sales.revenue}
-                dataKey="month"
-                className="h-48 min-h-[192px] lg:h-(--space)4 lg:min-h-[256px]"
-                legend={false}
-                yAxisProps={{ tickFormatter: (v: number) => `$${formatKilo(v)}` }}
-                config={{ value: { label: "Revenue", color: "var(--color-blue-500)" } }}
+    <>
+      <SectionHeader>
+        <SectionContent>
+          <Heading>Analytics</Heading>
+          <SectionDescription>
+            Gain insights into your store's performance with detailed analytics on sales, customer
+            behavior, product trends, and marketing effectiveness.
+          </SectionDescription>
+        </SectionContent>
+        <SectionAction>
+          <DateRangePicker
+            contentPlacement="bottom end"
+            defaultValue={{
+              start: today(getLocalTimeZone()).subtract({
+                days: 30,
+              }),
+              end: today(getLocalTimeZone()),
+            }}
+            className="ml-auto"
+          />
+        </SectionAction>
+      </SectionHeader>
+      <div className="grid gap-8 [--space:--spacing(4)] lg:gap-12">
+        <div className="space-y-(--space)">
+          <CardHeader
+            title="Sales performance"
+            description="Track revenue, orders, average order value, and conversion rate to measure overall growth."
+          />
+          <section className="grid grid-cols-1 gap-(--space) xl:grid-cols-3">
+            <Card className="col-span-full">
+              <CardHeader
+                title="Revenue by month"
+                description="Net revenue in the last 12 months"
               />
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader title="Orders by month" description="Total orders in the last 12 months" />
-            <CardContent>
-              <LineChart
-                data={data.sales.orders}
-                dataKey="month"
-                className="h-48 min-h-[192px]"
-                legend={false}
-                yAxisProps={{ tickFormatter: (v: number) => formatKilo(v) }}
-                config={{ value: { label: "Orders", color: "var(--color-sky-500)" } }}
+              <CardContent>
+                <LineChart
+                  data={data.sales.revenue}
+                  dataKey="month"
+                  className="h-48 min-h-[192px] lg:h-(--space)4 lg:min-h-[256px]"
+                  legend={false}
+                  yAxisProps={{ tickFormatter: (v: number) => `$${formatKilo(v)}` }}
+                  config={{ value: { label: "Revenue", color: "var(--color-blue-500)" } }}
+                />
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader
+                title="Orders by month"
+                description="Total orders in the last 12 months"
               />
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader title="Average order value" description="AOV in the last 12 months" />
-            <CardContent>
-              <AreaChart
-                data={data.sales.aov}
-                dataKey="month"
-                className="h-48 min-h-[192px]"
-                legend={false}
-                yAxisProps={{ tickFormatter: (v: number) => `$${v.toFixed(0)}` }}
-                config={{ value: { label: "AOV", color: "var(--color-emerald-500)" } }}
-              />
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader title="Conversion rate" description="Purchase conversion by month" />
-            <CardContent>
-              <AreaChart
-                data={data.sales.cr}
-                dataKey="month"
-                className="h-48 min-h-[192px]"
-                legend={false}
-                yAxisProps={{ tickFormatter: (v: number) => `${v}%` }}
-                config={{ value: { label: "CR", color: "var(--color-violet-500)" } }}
-              />
-            </CardContent>
-          </Card>
-        </section>
-      </div>
+              <CardContent>
+                <LineChart
+                  data={data.sales.orders}
+                  dataKey="month"
+                  className="h-48 min-h-[192px]"
+                  legend={false}
+                  yAxisProps={{ tickFormatter: (v: number) => formatKilo(v) }}
+                  config={{ value: { label: "Orders", color: "var(--color-sky-500)" } }}
+                />
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader title="Average order value" description="AOV in the last 12 months" />
+              <CardContent>
+                <AreaChart
+                  data={data.sales.aov}
+                  dataKey="month"
+                  className="h-48 min-h-[192px]"
+                  legend={false}
+                  yAxisProps={{ tickFormatter: (v: number) => `$${v.toFixed(0)}` }}
+                  config={{ value: { label: "AOV", color: "var(--color-emerald-500)" } }}
+                />
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader title="Conversion rate" description="Purchase conversion by month" />
+              <CardContent>
+                <AreaChart
+                  data={data.sales.cr}
+                  dataKey="month"
+                  className="h-48 min-h-[192px]"
+                  legend={false}
+                  yAxisProps={{ tickFormatter: (v: number) => `${v}%` }}
+                  config={{ value: { label: "CR", color: "var(--color-violet-500)" } }}
+                />
+              </CardContent>
+            </Card>
+          </section>
+        </div>
 
-      <div className="space-y-(--space)">
-        <CardHeader
-          title="Customer behavior"
-          description="Understand how visitors interact with your store, from traffic sources to funnels and abandoned carts."
-        />
+        <div className="space-y-(--space)">
+          <CardHeader
+            title="Customer behavior"
+            description="Understand how visitors interact with your store, from traffic sources to funnels and abandoned carts."
+          />
 
-        <section className="grid grid-cols-1 gap-(--space) xl:grid-cols-3">
-          <Card>
-            <CardHeader title="Traffic sources" description="Sessions by source" />
-            <CardContent>
-              <BarChart
-                data={data.behavior.sources}
-                dataKey="source"
-                className="h-56 min-h-[224px]"
-                legend={false}
-                yAxisProps={{ tickFormatter: (v: number) => formatKilo(v) }}
-                config={{ value: { label: "Sessions", color: "var(--color-indigo-500)" } }}
-              />
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader title="Conversion funnel" description="From sessions to purchases" />
-            <CardContent>
-              <BarChart
-                data={data.behavior.funnel}
-                dataKey="stage"
-                className="h-56 min-h-[224px]"
-                legend={false}
-                yAxisProps={{ tickFormatter: (v: number) => formatKilo(v) }}
-                config={{ value: { label: "Count", color: "var(--color-amber-500)" } }}
-              />
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader title="Abandoned carts" description="Weekly abandonment rate" />
-            <CardContent>
-              <LineChart
-                data={data.behavior.abandon}
-                dataKey="week"
-                className="h-56 min-h-[224px]"
-                legend={false}
-                yAxisProps={{ tickFormatter: (v: number) => `${v}%` }}
-                config={{ value: { label: "Abandonment", color: "var(--color-rose-500)" } }}
-              />
-            </CardContent>
-          </Card>
-        </section>
-      </div>
-      <div className="space-y-(--space)">
-        <CardHeader
-          title="Product analytics"
-          description="Analyze product performance by top-selling items, views vs purchases, and customer search queries."
-        />
+          <section className="grid grid-cols-1 gap-(--space) xl:grid-cols-3">
+            <Card>
+              <CardHeader title="Traffic sources" description="Sessions by source" />
+              <CardContent>
+                <BarChart
+                  data={data.behavior.sources}
+                  dataKey="source"
+                  className="h-56 min-h-[224px]"
+                  legend={false}
+                  yAxisProps={{ tickFormatter: (v: number) => formatKilo(v) }}
+                  config={{ value: { label: "Sessions", color: "var(--color-indigo-500)" } }}
+                />
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader title="Conversion funnel" description="From sessions to purchases" />
+              <CardContent>
+                <BarChart
+                  data={data.behavior.funnel}
+                  dataKey="stage"
+                  className="h-56 min-h-[224px]"
+                  legend={false}
+                  yAxisProps={{ tickFormatter: (v: number) => formatKilo(v) }}
+                  config={{ value: { label: "Count", color: "var(--color-amber-500)" } }}
+                />
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader title="Abandoned carts" description="Weekly abandonment rate" />
+              <CardContent>
+                <LineChart
+                  data={data.behavior.abandon}
+                  dataKey="week"
+                  className="h-56 min-h-[224px]"
+                  legend={false}
+                  yAxisProps={{ tickFormatter: (v: number) => `${v}%` }}
+                  config={{ value: { label: "Abandonment", color: "var(--color-rose-500)" } }}
+                />
+              </CardContent>
+            </Card>
+          </section>
+        </div>
+        <div className="space-y-(--space)">
+          <CardHeader
+            title="Product analytics"
+            description="Analyze product performance by top-selling items, views vs purchases, and customer search queries."
+          />
 
-        <section className="grid grid-cols-1 gap-(--space) xl:grid-cols-3">
-          <Card>
-            <CardHeader title="Top selling products" description="Revenue by product" />
-            <CardContent>
-              <BarChart
-                data={data.product.top}
-                dataKey="name"
-                className="h-56 min-h-[224px]"
-                legend={false}
-                yAxisProps={{ tickFormatter: (v: number) => `$${formatKilo(v)}` }}
-                config={{ value: { label: "Revenue", color: "var(--color-teal-500)" } }}
+          <section className="grid grid-cols-1 gap-(--space) xl:grid-cols-3">
+            <Card>
+              <CardHeader title="Top selling products" description="Revenue by product" />
+              <CardContent>
+                <BarChart
+                  data={data.product.top}
+                  dataKey="name"
+                  className="h-56 min-h-[224px]"
+                  legend={false}
+                  yAxisProps={{ tickFormatter: (v: number) => `$${formatKilo(v)}` }}
+                  config={{ value: { label: "Revenue", color: "var(--color-teal-500)" } }}
+                />
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader
+                title="Views vs purchases"
+                description="Monthly product views and purchases"
               />
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader
-              title="Views vs purchases"
-              description="Monthly product views and purchases"
-            />
-            <CardContent>
-              <BarChart
-                data={data.product.viewBuy}
-                dataKey="month"
-                className="h-56 min-h-[224px]"
-                type="stacked"
-                legend
-                yAxisProps={{ tickFormatter: (v: number) => formatKilo(v) }}
-                config={{
-                  views: { label: "Views", color: "var(--color-slate-500)" },
-                  purchases: { label: "Purchases", color: "var(--color-emerald-500)" },
-                }}
+              <CardContent>
+                <BarChart
+                  data={data.product.viewBuy}
+                  dataKey="month"
+                  className="h-56 min-h-[224px]"
+                  type="stacked"
+                  legend
+                  yAxisProps={{ tickFormatter: (v: number) => formatKilo(v) }}
+                  config={{
+                    views: { label: "Views", color: "var(--color-slate-500)" },
+                    purchases: { label: "Purchases", color: "var(--color-emerald-500)" },
+                  }}
+                />
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader title="Top search queries" description="Site search volume" />
+              <CardContent>
+                <BarChart
+                  data={data.product.searches}
+                  dataKey="term"
+                  className="h-56 min-h-[224px]"
+                  legend={false}
+                  yAxisProps={{ tickFormatter: (v: number) => formatKilo(v) }}
+                  config={{ value: { label: "Searches", color: "var(--color-cyan-500)" } }}
+                />
+              </CardContent>
+            </Card>
+          </section>
+        </div>
+        <div className="space-y-(--space)">
+          <CardHeader
+            title="Engagement"
+            description="Track repeat purchases and retention cohorts"
+          />
+          <section className="grid grid-cols-1 gap-(--space) xl:grid-cols-3">
+            <Card>
+              <CardHeader
+                title="Repeat purchase rate"
+                description="Percent of orders from returning customers"
               />
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader title="Top search queries" description="Site search volume" />
-            <CardContent>
-              <BarChart
-                data={data.product.searches}
-                dataKey="term"
-                className="h-56 min-h-[224px]"
-                legend={false}
-                yAxisProps={{ tickFormatter: (v: number) => formatKilo(v) }}
-                config={{ value: { label: "Searches", color: "var(--color-cyan-500)" } }}
-              />
-            </CardContent>
-          </Card>
-        </section>
-      </div>
-      <div className="space-y-(--space)">
-        <CardHeader title="Engagement" description="Track repeat purchases and retention cohorts" />
-        <section className="grid grid-cols-1 gap-(--space) xl:grid-cols-3">
-          <Card>
-            <CardHeader
-              title="Repeat purchase rate"
-              description="Percent of orders from returning customers"
-            />
-            <CardContent>
-              <LineChart
-                data={data.engagement.repeatRate}
-                dataKey="month"
-                className="h-56 min-h-[224px]"
-                legend={false}
-                yAxisProps={{ tickFormatter: (v: number) => `${v}%` }}
-                config={{ value: { label: "Repeat rate", color: "var(--color-fuchsia-500)" } }}
-              />
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader title="Retention cohorts" description="Retention at month 1 to month 3" />
-            <CardContent>
-              <BarChart
-                data={data.engagement.retention}
-                dataKey="cohort"
-                className="h-56 min-h-[224px]"
-                barProps={{ type: "grouped" }}
-                legend
-                yAxisProps={{ tickFormatter: (v: number) => `${v}%` }}
-                config={{
-                  m1: { label: "M1", color: "var(--color-blue-500)" },
-                  m2: { label: "M2", color: "var(--color-amber-500)" },
-                  m3: { label: "M3", color: "var(--color-rose-500)" },
-                }}
-              />
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader title="Customer lifetime value" description="Average CLV by month" />
-            <CardContent>
-              <AreaChart
-                data={data.engagement.clv}
-                dataKey="month"
-                className="h-56 min-h-[224px]"
-                legend={false}
-                yAxisProps={{ tickFormatter: (v: number) => `$${v.toFixed(0)}` }}
-                config={{ value: { label: "CLV", color: "var(--color-green-500)" } }}
-              />
-            </CardContent>
-          </Card>
-        </section>
-      </div>
+              <CardContent>
+                <LineChart
+                  data={data.engagement.repeatRate}
+                  dataKey="month"
+                  className="h-56 min-h-[224px]"
+                  legend={false}
+                  yAxisProps={{ tickFormatter: (v: number) => `${v}%` }}
+                  config={{ value: { label: "Repeat rate", color: "var(--color-fuchsia-500)" } }}
+                />
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader title="Retention cohorts" description="Retention at month 1 to month 3" />
+              <CardContent>
+                <BarChart
+                  data={data.engagement.retention}
+                  dataKey="cohort"
+                  className="h-56 min-h-[224px]"
+                  barProps={{ type: "grouped" }}
+                  legend
+                  yAxisProps={{ tickFormatter: (v: number) => `${v}%` }}
+                  config={{
+                    m1: { label: "M1", color: "var(--color-blue-500)" },
+                    m2: { label: "M2", color: "var(--color-amber-500)" },
+                    m3: { label: "M3", color: "var(--color-rose-500)" },
+                  }}
+                />
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader title="Customer lifetime value" description="Average CLV by month" />
+              <CardContent>
+                <AreaChart
+                  data={data.engagement.clv}
+                  dataKey="month"
+                  className="h-56 min-h-[224px]"
+                  legend={false}
+                  yAxisProps={{ tickFormatter: (v: number) => `$${v.toFixed(0)}` }}
+                  config={{ value: { label: "CLV", color: "var(--color-green-500)" } }}
+                />
+              </CardContent>
+            </Card>
+          </section>
+        </div>
 
-      <div className="space-y-(--space)">
-        <CardHeader title="Marketing" description="Analyze attribution, discount usage, and ROI" />
-        <section className="grid grid-cols-1 gap-(--space) xl:grid-cols-3">
-          <Card>
-            <CardHeader title="Campaign attribution" description="Share of revenue by channel" />
-            <CardContent>
-              <BarChart
-                data={data.marketing.attribution}
-                dataKey="channel"
-                className="h-56 min-h-[224px]"
-                legend={false}
-                yAxisProps={{ tickFormatter: (v: number) => `${v}%` }}
-                config={{ value: { label: "Share", color: "var(--color-indigo-500)" } }}
-              />
-            </CardContent>
-          </Card>
-          <Card className="lg:col-span-2">
-            <CardHeader title="Discount usage" description="Codes used and attributed revenue" />
-            <CardContent>
-              <BarChart
-                data={data.marketing.discounts}
-                dataKey="month"
-                className="h-56 min-h-[224px]"
-                barProps={{ type: "stacked" }}
-                legend
-                yAxisProps={{ tickFormatter: (v: number) => formatKilo(v) }}
-                config={{
-                  used: { label: "Codes used", color: "var(--color-violet-500)" },
-                  revenue: { label: "Revenue", color: "var(--color-emerald-500)" },
-                }}
-              />
-            </CardContent>
-          </Card>
-          <Card className="lg:col-span-full">
-            <CardHeader title="Marketing ROI" description="Return on ad spend by month" />
-            <CardContent>
-              <LineChart
-                data={data.marketing.roi}
-                dataKey="month"
-                className="h-56 min-h-[224px]"
-                legend={false}
-                yAxisProps={{ tickFormatter: (v: number) => `${v}%` }}
-                config={{ value: { label: "ROI", color: "var(--color-amber-500)" } }}
-              />
-            </CardContent>
-          </Card>
-        </section>
+        <div className="space-y-(--space)">
+          <CardHeader
+            title="Marketing"
+            description="Analyze attribution, discount usage, and ROI"
+          />
+          <section className="grid grid-cols-1 gap-(--space) xl:grid-cols-3">
+            <Card>
+              <CardHeader title="Campaign attribution" description="Share of revenue by channel" />
+              <CardContent>
+                <BarChart
+                  data={data.marketing.attribution}
+                  dataKey="channel"
+                  className="h-56 min-h-[224px]"
+                  legend={false}
+                  yAxisProps={{ tickFormatter: (v: number) => `${v}%` }}
+                  config={{ value: { label: "Share", color: "var(--color-indigo-500)" } }}
+                />
+              </CardContent>
+            </Card>
+            <Card className="lg:col-span-2">
+              <CardHeader title="Discount usage" description="Codes used and attributed revenue" />
+              <CardContent>
+                <BarChart
+                  data={data.marketing.discounts}
+                  dataKey="month"
+                  className="h-56 min-h-[224px]"
+                  barProps={{ type: "stacked" }}
+                  legend
+                  yAxisProps={{ tickFormatter: (v: number) => formatKilo(v) }}
+                  config={{
+                    used: { label: "Codes used", color: "var(--color-violet-500)" },
+                    revenue: { label: "Revenue", color: "var(--color-emerald-500)" },
+                  }}
+                />
+              </CardContent>
+            </Card>
+            <Card className="lg:col-span-full">
+              <CardHeader title="Marketing ROI" description="Return on ad spend by month" />
+              <CardContent>
+                <LineChart
+                  data={data.marketing.roi}
+                  dataKey="month"
+                  className="h-56 min-h-[224px]"
+                  legend={false}
+                  yAxisProps={{ tickFormatter: (v: number) => `${v}%` }}
+                  config={{ value: { label: "ROI", color: "var(--color-amber-500)" } }}
+                />
+              </CardContent>
+            </Card>
+          </section>
+        </div>
       </div>
-    </div>
+    </>
   )
 }

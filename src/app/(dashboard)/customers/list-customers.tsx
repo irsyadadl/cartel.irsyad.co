@@ -1,10 +1,10 @@
 "use client"
 
 import {
+  CheckCircleIcon,
+  ClipboardDocumentIcon,
   ClipboardIcon,
-  Cog6ToothIcon,
   EllipsisVerticalIcon,
-  EnvelopeIcon,
   IdentificationIcon,
   PencilSquareIcon,
   ShieldCheckIcon,
@@ -34,6 +34,10 @@ import {
   SectionTitle,
 } from "@/components/section-header"
 import { Paginate } from "@/components/paginate"
+import { ChevronDownIcon } from "@heroicons/react/20/solid"
+import { ArrowUpTrayIcon, CloudArrowDownIcon, PlusIcon } from "@heroicons/react/16/solid"
+import { CsvIcon } from "@/components/icons/csv-icon"
+import { ExcelIcon } from "@/components/icons/excel-icon"
 
 export function ListCustomers() {
   const [selectedKeys, setSelectedKeys] = useState<Selection>(new Set())
@@ -47,8 +51,79 @@ export function ListCustomers() {
             List of registered customers with account status and role information.
           </SectionDescription>
         </SectionContent>
+      </SectionHeader>
+
+      <SectionHeader>
+        <SectionContent className="flex-row gap-x-2">
+          {[...selectedKeys].length > 0 && (
+            <Menu>
+              <Button intent="outline">
+                Bulk actions ({selectedKeys === "all" ? "All 10" : [...selectedKeys].length})
+                <ChevronDownIcon />
+              </Button>
+              <MenuContent className="min-w-48" placement="bottom start">
+                <MenuItem href="#">
+                  <ClipboardDocumentIcon />
+                  <MenuLabel>Copy all emails</MenuLabel>
+                </MenuItem>
+                <MenuSeparator />
+
+                <MenuItem>
+                  <CsvIcon />
+                  <MenuLabel>Export CSV</MenuLabel>
+                </MenuItem>
+
+                <MenuItem>
+                  <ExcelIcon />
+                  <MenuLabel>Export excel</MenuLabel>
+                </MenuItem>
+                <MenuSeparator />
+                <MenuItem href="#">
+                  <ShieldCheckIcon />
+                  <MenuLabel>Suspend</MenuLabel>
+                </MenuItem>
+
+                <MenuItem isDanger>
+                  <TrashIcon />
+                  <MenuLabel>Delete</MenuLabel>
+                </MenuItem>
+              </MenuContent>
+            </Menu>
+          )}
+
+          <Button>
+            <PlusIcon />
+            New
+          </Button>
+        </SectionContent>
         <SectionAction>
           <SearchField className="Search..." />
+          <Menu>
+            <Button intent="outline">
+              <ArrowUpTrayIcon />
+              Export...
+              <ChevronDownIcon />
+            </Button>
+            <MenuContent placement="bottom end">
+              <MenuItem>
+                <CsvIcon />
+                <MenuLabel>Export as CSV</MenuLabel>
+              </MenuItem>
+              <MenuItem>
+                <ExcelIcon />
+                <MenuLabel>Export as Excel</MenuLabel>
+              </MenuItem>
+              <MenuSeparator />
+              <MenuItem>
+                <CheckCircleIcon fill="#51A2FF" />
+                <MenuLabel>Export selected</MenuLabel>
+              </MenuItem>
+              <MenuItem>
+                <CloudArrowDownIcon />
+                <MenuLabel>Export all</MenuLabel>
+              </MenuItem>
+            </MenuContent>
+          </Menu>
         </SectionAction>
       </SectionHeader>
 
@@ -98,18 +173,10 @@ export function ListCustomers() {
                       <PencilSquareIcon />
                       <MenuLabel>Edit user</MenuLabel>
                     </MenuItem>
-                    <MenuItem href="#">
-                      <Cog6ToothIcon />
-                      <MenuLabel>Change role</MenuLabel>
-                    </MenuItem>
                     <MenuSeparator />
                     <MenuItem href="#">
                       <ShieldCheckIcon />
                       <MenuLabel>Suspend user</MenuLabel>
-                    </MenuItem>
-                    <MenuItem href="#">
-                      <EnvelopeIcon />
-                      <MenuLabel>Resend invite</MenuLabel>
                     </MenuItem>
                     <MenuItem onAction={() => navigator.clipboard.writeText(user.email)}>
                       <ClipboardIcon />

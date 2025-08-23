@@ -1,6 +1,6 @@
 import { LatestOrder } from "./(partials)/latest-order"
 import { Stats } from "./(partials)/stats"
-import { TotalRevenue } from "./(partials)/total-revenue"
+import { Overview } from "./(partials)/overview"
 
 export default function Page() {
   return (
@@ -9,7 +9,7 @@ export default function Page() {
         Good morning, <strong className="font-medium text-fg">Katy!</strong>
       </div>
       <Stats />
-      <TotalRevenue />
+      <Overview />
       <LatestOrder />
     </>
   )

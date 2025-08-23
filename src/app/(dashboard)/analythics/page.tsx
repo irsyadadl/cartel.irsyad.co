@@ -1,4 +1,3 @@
-import { Heading } from "@/components/ui/heading"
 import { AnalyticsOverview } from "./analythics-overview"
 
 export const metadata = {
@@ -6,10 +5,5 @@ export const metadata = {
 }
 
 export default function Page() {
-  return (
-    <>
-      <Heading>Analytics</Heading>
-      <AnalyticsOverview />
-    </>
-  )
+  return <AnalyticsOverview />
 }
