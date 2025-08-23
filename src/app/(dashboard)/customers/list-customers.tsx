@@ -161,7 +161,12 @@ export function ListCustomers() {
               <TableCell>{formatDate(user.joined_at)}</TableCell>
               <TableCell className="sticky right-0 z-10 bg-linear-to-l from-60% from-bg text-end">
                 <Menu>
-                  <Button size="sq-sm" className="sm:size-6" intent="plain">
+                  <Button
+                    size="sq-sm"
+                    className="sm:size-6"
+                    intent="plain"
+                    aria-label="open action"
+                  >
                     <EllipsisVerticalIcon />
                   </Button>
                   <MenuContent placement="left top" className="min-w-48">

@@ -190,7 +190,12 @@ export function ListOrders() {
 
               <TableCell className="text-end">
                 <Menu>
-                  <Button size="sq-sm" className="sm:size-6" intent="plain">
+                  <Button
+                    size="sq-sm"
+                    className="sm:size-6"
+                    intent="plain"
+                    aria-label="open action"
+                  >
                     <EllipsisVerticalIcon />
                   </Button>
 
