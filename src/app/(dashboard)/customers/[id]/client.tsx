@@ -316,18 +316,6 @@ export function Client({ customer }: { customer: Customer }) {
 }
 
 const customerDetail = {
-  customer: {
-    id: 11,
-    name: "Ms. Felipa Bode",
-    email: "maye.bradtke@example.com",
-    phone: "+1-423-493-4440",
-    location: "Smithfort, Lao People's Democratic Republic",
-    last_order: "2025-07-29 13:40:59",
-    total_orders: 13,
-    total_spent: 2286.77,
-    status: "active",
-    joined_at: "2024-06-07 18:34:27",
-  },
   purchase_history: [
     {
       id: 100130,
