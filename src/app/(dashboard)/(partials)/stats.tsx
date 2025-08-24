@@ -218,8 +218,8 @@ const revenueStats = stats[0]
 export function Stats() {
   return (
     <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-      <Card className="col-span-2 [--gutter:0]">
-        <CardHeader className="gap-4 p-6">
+      <Card className="[--gutter:0] lg:col-span-2">
+        <CardHeader className="p-4 lg:gap-4 lg:p-6">
           <CardTitle className="font-medium sm:text-5xl">{revenueStats.value}</CardTitle>
           <CardDescription className="sm:text-base">
             {revenueStats.label} <br />
@@ -238,7 +238,7 @@ export function Stats() {
             </span>
           </CardDescription>
           <CardAction>
-            <revenueStats.icon className="size-8 text-muted-fg/50" />
+            <revenueStats.icon className="size-5 text-muted-fg lg:size-8" />
           </CardAction>
         </CardHeader>
         <AreaChart
@@ -252,7 +252,7 @@ export function Stats() {
           hideXAxis
           hideYAxis
           tooltip={false}
-          className="h-52 min-h-[208px]"
+          className="h-16 min-h-[64px] lg:h-52 lg:min-h-[208px]"
           yAxisProps={{
             tickFormatter: (v: number) => `$${formatKilo(v)}`,
           }}
@@ -270,7 +270,6 @@ export function Stats() {
       <div className="flex flex-col gap-6">
         {stats.slice(1, 3).map((item, index) => (
           <Card className="relative [--gutter:0]" key={index}>
-            <item.icon className="absolute top-6 right-6 size-5 opacity-35" />
             <CardHeader className="p-4">
               <CardTitle>{item.value}</CardTitle>
               <CardDescription>
@@ -289,6 +288,9 @@ export function Stats() {
                   )}
                 </span>
               </CardDescription>
+              <CardAction>
+                <item.icon className=" size-5 text-muted-fg" />
+              </CardAction>
             </CardHeader>
             <AreaChart
               areaProps={{
