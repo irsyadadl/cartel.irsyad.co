@@ -38,7 +38,7 @@ const tags = [
   { id: "8", name: "Vintage" },
 ]
 
-export function Client({collection}: {collection: Collection}) {
+export function Client({ collection }: { collection: Collection }) {
   const [open, setOpen] = useState(false)
   const [items, setItems] = useState([])
   const [selectedKeys, setSelectedKeys] = useState<Selection>(new Set())
@@ -78,9 +78,12 @@ export function Client({collection}: {collection: Collection}) {
             label="Tags"
             defaultSelectedKeys={collection?.tags}
             placeholder="Select tags"
-            items={tags}>
+            items={tags}
+          >
             {tags.map((item) => (
-              <MultipleSelectItem textValue={item.name} id={item.id}>{item.name}</MultipleSelectItem>
+              <MultipleSelectItem key={item.id} textValue={item.name}>
+                {item.name}
+              </MultipleSelectItem>
             ))}
           </MultipleSelect>
         </div>
