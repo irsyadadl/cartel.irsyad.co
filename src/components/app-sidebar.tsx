@@ -127,12 +127,12 @@ export const menus: MenuSectionProps[] = [
 
 export function AppSidebar() {
   const pathname = usePathname()
-  const { state, isMobile, isOpenOnMobile, setIsOpenOnMobile } = useSidebar()
+  const { state, isMobile, setIsOpenOnMobile } = useSidebar()
   const isCollapsed = state === "collapsed"
 
   useEffect(() => {
-    if (isMobile && isOpenOnMobile) setIsOpenOnMobile(false)
-  }, [pathname, isMobile, isOpenOnMobile, setIsOpenOnMobile])
+    if (isMobile) setIsOpenOnMobile(false)
+  }, [pathname, isMobile, setIsOpenOnMobile])
 
   return (
     <Sidebar closeButton={false} collapsible="dock">
@@ -146,7 +146,7 @@ export function AppSidebar() {
           })}
           href="/"
         >
-          <Logo />
+          <Logo className="size-5" />
           {!isCollapsed && <SidebarLabel className="mr-auto">Cartel</SidebarLabel>}
         </Link>
       </SidebarHeader>

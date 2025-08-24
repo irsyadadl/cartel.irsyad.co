@@ -83,7 +83,7 @@ const Radio = ({ className, children, description, label, ...props }: RadioProps
               className={twMerge([
                 "relative inset-ring inset-ring-fg/10 isolate flex size-4.5 shrink-0 items-center justify-center rounded-full bg-secondary text-bg transition before:absolute before:inset-auto before:size-2 before:shrink-0 before:rounded-full before:content-[''] hover:before:bg-fg/10 sm:size-4 sm:before:size-1.7",
                 isSelected && [
-                  "bg-primary text-primary-fg before:bg-bg hover:before:bg-muted/90 dark:inset-ring-primary",
+                  "bg-primary text-primary-fg before:bg-bg hover:before:bg-muted/90",
                   "group-invalid:inset-ring-danger/70 group-invalid:bg-danger group-invalid:text-danger-fg",
                 ],
                 isFocusVisible && [

@@ -58,7 +58,7 @@ export function ListCollections() {
 
       <SectionHeader>
         <SectionContent>
-          <Link href="/collections/create" className={buttonStyles()}>
+          <Link href="/products/collections/create" className={buttonStyles()}>
             <PlusIcon />
             New
           </Link>
@@ -108,7 +108,7 @@ export function ListCollections() {
                         <IdentificationIcon />
                         <MenuLabel>View collection</MenuLabel>
                       </MenuItem>
-                      <MenuItem href={`/collections/${item.id}/edit`}>
+                      <MenuItem href={`/products/collections/${item.id}/edit`}>
                         <PencilSquareIcon />
                         <MenuLabel>Edit collection</MenuLabel>
                       </MenuItem>
@@ -161,9 +161,9 @@ export function ListCollections() {
               </CardContent>
             </div>
             <div className="flex gap-1 pt-1">
-              {item.tags.map((t: string) => (
-                <Badge key={t} intent="outline" className="rounded-sm bg-white">
-                  {t}
+              {item.tags.map((t) => (
+                <Badge key={t.id} intent="outline" className="rounded-sm bg-white">
+                  {t.name}
                 </Badge>
               ))}
             </div>
