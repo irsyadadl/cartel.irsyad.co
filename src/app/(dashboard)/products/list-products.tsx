@@ -223,7 +223,7 @@ export function ListProducts() {
               </TableCell>
               <TableCell>{item.sold_count}</TableCell>
               <TableCell>{formatDate(item.created_at)}</TableCell>
-              <TableCell className="sticky right-0 z-10 bg-linear-to-l from-60% from-bg text-end">
+              <TableCell>
                 <Menu>
                   <Button
                     size="sq-sm"

@@ -147,7 +147,7 @@ export function AppSidebar() {
               <ChartPieIcon />
               <SidebarLabel>Dashboard</SidebarLabel>
             </SidebarItem>
-            <SidebarItem href="/analythics" tooltip="Analytics">
+            <SidebarItem href="/analytics" tooltip="Analytics">
               <ChartBarIcon />
               <SidebarLabel>Analytics</SidebarLabel>
             </SidebarItem>

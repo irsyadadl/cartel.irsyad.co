@@ -90,7 +90,7 @@ export function ListCollections() {
         </SectionAction>
       </SectionHeader>
 
-      <div className="grid sm:grid-cols-2 grid-cols-1 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {collections.map((item) => (
           <Card
             className="gap-y-0 overflow-hidden bg-muted p-1 [--gutter:--spacing(0)]"
