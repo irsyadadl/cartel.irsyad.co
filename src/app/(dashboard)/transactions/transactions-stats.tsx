@@ -21,7 +21,7 @@ type Stat = {
 
 function StatCard({ title, value, hint, Icon }: Stat) {
   return (
-    <Card className="bg-white [--gutter:--spacing(4)]">
+    <Card className="bg-white [--gutter:--spacing(3)]">
       <CardHeader className="flex items-center gap-x-2">
         <Icon className="size-4 text-muted-fg" />
         <CardTitle className="text-sm">{title}</CardTitle>
@@ -45,7 +45,7 @@ export function TransactionStats() {
   ]
 
   return (
-    <div className="relative isolate grid gap-4 rounded-xl border bg-muted p-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    <div className="relative isolate grid gap-2 rounded-xl border bg-muted p-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       <GridLines width={25} mask="none" height={25} />
       {stats.map((s) => (
         <StatCard key={s.title} {...s} />

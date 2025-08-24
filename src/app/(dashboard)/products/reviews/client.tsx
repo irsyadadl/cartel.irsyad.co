@@ -146,7 +146,7 @@ export function Client() {
   return (
     <>
       <div className="relative isolate rounded-2xl border bg-secondary p-(--g) [--g:--spacing(2)]">
-        <GridLines mask="none" width={50} height={50} />
+        <GridLines width={25} mask="none" height={25} />
         <div className="grid gap-(--g) *:data-[slot=card]:bg-white sm:grid-cols-2 lg:grid-cols-4 *:data-[slot=card]:[--gutter:--spacing(4)]">
           <Card>
             <CardHeader className="gap-0">
