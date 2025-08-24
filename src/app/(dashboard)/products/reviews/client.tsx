@@ -28,6 +28,7 @@ import {
 import { formatDatetime } from "@/lib/date"
 import { Link } from "@/components/ui/link"
 import { GridLines } from "@/components/ui/grid-lines"
+import { Paginate } from "@/components/paginate"
 
 type ReviewStatus = "published" | "pending" | "flagged" | "rejected"
 
@@ -360,6 +361,7 @@ export function Client() {
           )}
         </div>
       </div>
+      <Paginate from={1} to={13} total={4001} />
     </>
   )
 }
