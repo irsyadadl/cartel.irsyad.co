@@ -3,7 +3,7 @@ import { twMerge } from "tailwind-merge"
 export function SectionHeader({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
-      className={twMerge("flex flex-col items-end justify-between gap-3 md:flex-row", className)}
+      className={twMerge("flex flex-col justify-between gap-3 md:flex-row lg:items-end", className)}
       {...props}
     />
   )

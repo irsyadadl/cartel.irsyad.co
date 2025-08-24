@@ -16,6 +16,8 @@ import {
 import { twMerge } from "tailwind-merge"
 
 import { composeTailwindRenderProps } from "@/lib/primitive"
+import { LayoutGroup, motion } from "motion/react"
+import { useId } from "react"
 
 interface TabsProps extends TabsPrimitiveProps {
   ref?: React.RefObject<HTMLDivElement>
@@ -37,19 +39,22 @@ interface TabListProps<T extends object> extends TabListPrimitiveProps<T> {
   ref?: React.RefObject<HTMLDivElement>
 }
 const TabList = <T extends object>({ className, ref, ...props }: TabListProps<T>) => {
+  const id = useId()
   return (
-    <TabListPrimitive
-      ref={ref}
-      {...props}
-      className={composeRenderProps(className, (className, { orientation }) =>
-        twMerge([
-          "flex forced-color-adjust-none",
-          orientation === "horizontal" && "flex-row gap-x-5 border-border border-b",
-          orientation === "vertical" && "flex-col items-start gap-y-4 border-l",
-          className,
-        ]),
-      )}
-    />
+    <LayoutGroup id={id}>
+      <TabListPrimitive
+        ref={ref}
+        {...props}
+        className={composeRenderProps(className, (className, { orientation }) =>
+          twMerge([
+            "flex forced-color-adjust-none",
+            orientation === "horizontal" && "flex-row gap-x-5 border-border border-b",
+            orientation === "vertical" && "flex-col items-start gap-y-4 border-l",
+            className,
+          ]),
+        )}
+      />
+    </LayoutGroup>
   )
 }
 
@@ -74,11 +79,13 @@ const Tab = ({ children, className, ref, ...props }: TabProps) => {
         <>
           {children}
           {isSelected && (
-            <span
+            <motion.span
+              transition={{ type: "spring", stiffness: 500, damping: 40 }}
+              layoutId="current-selected"
               data-slot="selected-indicator"
               className={twMerge(
                 "absolute rounded bg-fg",
-                "group-orientation-horizontal/tabs:-bottom-px group-orientation-horizontal/tabs:inset-x-0 group-orientation-horizontal/tabs:h-0.5 group-orientation-horizontal/tabs:w-full",
+                "group-orientation-horizontal/tabs:inset-x-0 group-orientation-horizontal/tabs:bottom-[-1.5px] group-orientation-horizontal/tabs:h-0.5 group-orientation-horizontal/tabs:w-full",
                 "group-orientation-vertical/tabs:left-0 group-orientation-vertical/tabs:h-[calc(100%-10%)] group-orientation-vertical/tabs:w-0.5 group-orientation-vertical/tabs:transform",
               )}
             />

@@ -170,7 +170,7 @@ export function ListCustomers() {
                     <EllipsisVerticalIcon />
                   </Button>
                   <MenuContent placement="left top" className="min-w-48">
-                    <MenuItem href="#">
+                    <MenuItem href={`/customers/${user.id}`}>
                       <IdentificationIcon />
                       <MenuLabel>View profile</MenuLabel>
                     </MenuItem>

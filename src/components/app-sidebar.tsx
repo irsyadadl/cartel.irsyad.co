@@ -1,19 +1,16 @@
 "use client"
 
 import {
-  AdjustmentsHorizontalIcon,
   ArchiveBoxIcon,
   ArrowUturnLeftIcon,
   BanknotesIcon,
   BuildingStorefrontIcon,
   ChartBarIcon,
   ChartPieIcon,
-  ChatBubbleBottomCenterTextIcon,
   ClipboardDocumentListIcon,
   Cog6ToothIcon,
   CurrencyDollarIcon,
   DocumentTextIcon,
-  GiftIcon,
   ReceiptPercentIcon,
   RectangleGroupIcon,
   ShoppingBagIcon,
@@ -88,16 +85,6 @@ export const menus: MenuSectionProps[] = [
       { label: "Inventory", href: "/products/inventory", icon: ArchiveBoxIcon },
       { label: "Collections", href: "/products/collections", icon: RectangleGroupIcon },
       { label: "Reviews", href: "/products/reviews", icon: StarIcon },
-    ],
-  },
-  {
-    section: "Customers",
-    icon: UserGroupIcon,
-    items: [
-      { label: "Customer list", href: "/customers", icon: UserGroupIcon },
-      { label: "Segments", href: "/customers/segments", icon: AdjustmentsHorizontalIcon },
-      { label: "Messages", href: "/customers/messages", icon: ChatBubbleBottomCenterTextIcon },
-      { label: "Loyalty", href: "/customers/loyalty", icon: GiftIcon },
     ],
   },
   {
@@ -211,6 +198,12 @@ export function AppSidebar() {
                 </SidebarDisclosurePanel>
               </SidebarDisclosure>
             ))}
+            <SidebarSection>
+              <SidebarItem href="/customers" tooltip="Customers">
+                <UserGroupIcon />
+                <SidebarLabel>Customers</SidebarLabel>
+              </SidebarItem>
+            </SidebarSection>
           </SidebarDisclosureGroup>
         </SidebarSectionGroup>
       </SidebarContent>

@@ -1,14 +1,14 @@
 "use client"
 
-import { ChevronDownIcon } from "@heroicons/react/24/solid"
+import { ChevronDownIcon } from "@heroicons/react/20/solid"
 import { createContext, use } from "react"
 import type {
   CellProps,
   ColumnProps,
   ColumnResizerProps,
+  TableHeaderProps as HeaderProps,
   RowProps,
   TableBodyProps,
-  TableHeaderProps as HeaderProps,
   TableProps as TablePrimitiveProps,
 } from "react-aria-components"
 import {
@@ -20,9 +20,9 @@ import {
   composeRenderProps,
   ResizableTableContainer,
   Row,
-  Table as TablePrimitive,
   TableBody as TableBodyPrimitive,
   TableHeader as TableHeaderPrimitive,
+  Table as TablePrimitive,
   useTableOptions,
 } from "react-aria-components"
 import { twJoin, twMerge } from "tailwind-merge"
@@ -281,11 +281,11 @@ const TableColumn = ({ isResizable = false, className, ...props }: TableColumnPr
       data-slot="table-column"
       {...props}
       className={composeTailwindRenderProps(className, [
-        "text-left font-medium text-gray-600",
+        "text-left font-medium text-muted-fg",
         "relative allows-sorting:cursor-default outline-hidden data-dragging:cursor-grabbing",
         "px-4 py-(--gutter-y)",
         "first:pl-(--gutter,--spacing(2)) last:pr-(--gutter,--spacing(2))",
-        !bleed && "sm:last:pr-1 sm:first:pl-1",
+        !bleed && "sm:last:pr-2 sm:first:pl-2",
         grid && "border-l first:border-l-0",
         isResizable && "overflow-hidden truncate",
       ])}
@@ -337,7 +337,7 @@ const TableHeader = <T extends object>({
           data-slot="table-column"
           className={twMerge(
             "w-0 max-w-8 px-4 first:pl-(--gutter,--spacing(2)) last:pr-(--gutter,--spacing(2))",
-            !bleed && "sm:last:pr-1 sm:first:pl-1",
+            !bleed && "sm:last:pr-2 sm:first:pl-2",
           )}
         />
       )}
@@ -346,7 +346,7 @@ const TableHeader = <T extends object>({
           data-slot="table-column"
           className={twMerge(
             "w-0 max-w-8 px-4 first:pl-(--gutter,--spacing(2)) last:pr-(--gutter,--spacing(2))",
-            !bleed && "sm:last:pr-1 sm:first:pl-1",
+            !bleed && "sm:last:pr-2 sm:first:pl-2",
           )}
         >
           {selectionMode === "multiple" && <Checkbox slot="selection" />}
@@ -391,7 +391,7 @@ const TableRow = <T extends object>({
           },
         ) =>
           twMerge(
-            "group relative cursor-default text-muted-fg outline outline-transparent",
+            "group relative cursor-default text-muted-fg outline outline-transparent last:*:border-b-0",
             isFocusVisible &&
               "bg-primary/5 outline-primary ring-3 ring-ring/20 hover:bg-primary/10",
             isDragging && "cursor-grabbing bg-primary/10 text-fg outline-primary",
@@ -408,7 +408,7 @@ const TableRow = <T extends object>({
       )}
     >
       {allowsDragging && (
-        <TableCell className="max-w-4 sm:last:pr-1 sm:first:pl-1">
+        <TableCell className="max-w-4 sm:last:pr-2 sm:first:pl-2">
           <Button
             slot="drag"
             className="grid place-content-center rounded-xs px-[calc(var(--gutter)/2)] outline-hidden focus-visible:ring focus-visible:ring-ring"
@@ -438,7 +438,7 @@ const TableRow = <T extends object>({
         </TableCell>
       )}
       {selectionBehavior === "toggle" && (
-        <TableCell className={twJoin(!bleed && "max-w-4 sm:last:pr-1 sm:first:pl-1")}>
+        <TableCell className={twJoin(!bleed && "max-w-4 sm:last:pr-2 sm:first:pl-2")}>
           <Checkbox slot="selection" />
         </TableCell>
       )}
@@ -460,10 +460,10 @@ const TableCell = ({ className, ref, ...props }: TableCellProps) => {
       className={composeTailwindRenderProps(
         className,
         twJoin(
-          "group px-4 py-(--gutter-y) align-middle text-fg outline-hidden first:pl-(--gutter,--spacing(2)) last:pr-(--gutter,--spacing(2)) group-has-data-focus-visible-within:text-fg",
+          "group px-4 py-(--gutter-y) align-middle outline-hidden first:pl-(--gutter,--spacing(2)) last:pr-(--gutter,--spacing(2)) group-has-data-focus-visible-within:text-fg",
           !striped && "border-b",
           grid && "border-l first:border-l-0",
-          !bleed && "sm:last:pr-1 sm:first:pl-1",
+          !bleed && "sm:last:pr-2 sm:first:pl-2",
           allowResize && "overflow-hidden truncate",
         ),
       )}
