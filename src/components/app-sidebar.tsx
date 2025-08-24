@@ -263,7 +263,7 @@ export function AppSidebar() {
               <MenuLabel>Users & Permissions</MenuLabel>
             </MenuItem>
             <MenuSeparator />
-            <MenuItem href="#logout">
+            <MenuItem href="/login">
               <ArrowRightStartOnRectangleIcon />
               <MenuLabel>Log out</MenuLabel>
             </MenuItem>

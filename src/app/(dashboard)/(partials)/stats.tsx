@@ -1,7 +1,7 @@
 "use client"
 
 import { ArrowTrendingUpIcon, UsersIcon } from "@heroicons/react/24/solid"
-import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardAction, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { twJoin } from "tailwind-merge"
 import { ArrowTrendingDownIcon } from "@heroicons/react/16/solid"
 import { AreaChart } from "@/components/ui/area-chart"
@@ -35,20 +35,156 @@ const totals = metrics.reduce(
   { revenue: 0, newCustomers: 0, newOrders: 0 },
 )
 
-const newCustomers = dataGenerated(2025, 12).map(({ date, newCustomers }) => ({
-  date,
-  value: newCustomers,
-}))
-
-const revenue = dataGenerated(2025, 12).map(({ date, revenue }) => ({
-  date,
-  value: revenue,
-}))
-
-const newOrders = dataGenerated(2025, 12).map(({ date, newOrders }) => ({
-  date,
-  value: newOrders,
-}))
+const newCustomers = [
+  {
+    date: "2025-01",
+    value: 1088,
+  },
+  {
+    date: "2025-02",
+    value: 410,
+  },
+  {
+    date: "2025-03",
+    value: 937,
+  },
+  {
+    date: "2025-04",
+    value: 342,
+  },
+  {
+    date: "2025-05",
+    value: 383,
+  },
+  {
+    date: "2025-06",
+    value: 561,
+  },
+  {
+    date: "2025-07",
+    value: 408,
+  },
+  {
+    date: "2025-08",
+    value: 379,
+  },
+  {
+    date: "2025-09",
+    value: 802,
+  },
+  {
+    date: "2025-10",
+    value: 629,
+  },
+  {
+    date: "2025-11",
+    value: 514,
+  },
+  {
+    date: "2025-12",
+    value: 484,
+  },
+]
+const newOrders = [
+  {
+    date: "2025-01",
+    value: 1697,
+  },
+  {
+    date: "2025-02",
+    value: 1855,
+  },
+  {
+    date: "2025-03",
+    value: 1920,
+  },
+  {
+    date: "2025-04",
+    value: 1827,
+  },
+  {
+    date: "2025-05",
+    value: 1464,
+  },
+  {
+    date: "2025-06",
+    value: 1008,
+  },
+  {
+    date: "2025-07",
+    value: 1736,
+  },
+  {
+    date: "2025-08",
+    value: 971,
+  },
+  {
+    date: "2025-09",
+    value: 1889,
+  },
+  {
+    date: "2025-10",
+    value: 1535,
+  },
+  {
+    date: "2025-11",
+    value: 623,
+  },
+  {
+    date: "2025-12",
+    value: 1478,
+  },
+]
+const revenue = [
+  {
+    date: "2025-01",
+    value: 83362,
+  },
+  {
+    date: "2025-02",
+    value: 81656,
+  },
+  {
+    date: "2025-03",
+    value: 77174,
+  },
+  {
+    date: "2025-04",
+    value: 61386,
+  },
+  {
+    date: "2025-05",
+    value: 87073,
+  },
+  {
+    date: "2025-06",
+    value: 70014,
+  },
+  {
+    date: "2025-07",
+    value: 78878,
+  },
+  {
+    date: "2025-08",
+    value: 98709,
+  },
+  {
+    date: "2025-09",
+    value: 65801,
+  },
+  {
+    date: "2025-10",
+    value: 92206,
+  },
+  {
+    date: "2025-11",
+    value: 93230,
+  },
+  {
+    date: "2025-12",
+    value: 79749,
+  },
+]
 
 const stats = [
   {
@@ -77,56 +213,109 @@ const stats = [
   },
 ]
 
+const revenueStats = stats[0]
+
 export function Stats() {
   return (
     <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-      {stats.map((item) => (
-        <Card className="relative pb-0 [--gutter:--spacing(4)]" key={item.label}>
-          <item.icon className="absolute top-6 right-6 size-5 opacity-35" />
-          <CardHeader>
-            <CardTitle>{item.value}</CardTitle>
-            <CardDescription>
-              {item.label} <br />
-              <span
-                className={twJoin(
-                  "font-medium text-xs",
-                  item.change.startsWith("-") ? "text-orange-500" : "text-muted-fg",
-                )}
-              >
-                {item.change} {item.change.startsWith("-") ? "decrease" : "increase"}
-                {item.change.startsWith("-") ? (
-                  <ArrowTrendingDownIcon className="ml-2 inline size-4" />
-                ) : (
-                  <ArrowTrendingUpIcon className="ml-2 inline size-4" />
-                )}
-              </span>
-            </CardDescription>
-          </CardHeader>
-          <AreaChart
-            areaProps={{
-              activeDot: false,
-              type: "natural",
-            }}
-            data={item.data}
-            dataKey="date"
-            hideGridLines
-            hideXAxis
-            hideYAxis
-            tooltip={false}
-            className="h-12 min-h-[48px]"
-            yAxisProps={{
-              tickFormatter: (v: number) => `$${formatKilo(v)}`,
-            }}
-            legend={false}
-            config={{
-              value: {
-                label: item.label,
-                color: item.change.startsWith("-") ? "var(--color-orange-500)" : item.color,
-              },
-            }}
-          />
-        </Card>
-      ))}
+      <Card className="col-span-2 [--gutter:0]">
+        <CardHeader className="gap-4 p-6">
+          <CardTitle className="font-medium sm:text-5xl">{revenueStats.value}</CardTitle>
+          <CardDescription className="sm:text-base">
+            {revenueStats.label} <br />
+            <span
+              className={twJoin(
+                "text-xs sm:text-base",
+                revenueStats.change.startsWith("-") ? "text-orange-500" : "text-muted-fg",
+              )}
+            >
+              {revenueStats.change} {revenueStats.change.startsWith("-") ? "decrease" : "increase"}
+              {revenueStats.change.startsWith("-") ? (
+                <ArrowTrendingDownIcon className="ml-2 inline size-4" />
+              ) : (
+                <ArrowTrendingUpIcon className="ml-2 inline size-4" />
+              )}
+            </span>
+          </CardDescription>
+          <CardAction>
+            <revenueStats.icon className="size-8 text-muted-fg/50" />
+          </CardAction>
+        </CardHeader>
+        <AreaChart
+          areaProps={{
+            activeDot: false,
+            type: "natural",
+          }}
+          data={revenueStats.data}
+          dataKey="date"
+          hideGridLines
+          hideXAxis
+          hideYAxis
+          tooltip={false}
+          className="h-52 min-h-[208px]"
+          yAxisProps={{
+            tickFormatter: (v: number) => `$${formatKilo(v)}`,
+          }}
+          legend={false}
+          config={{
+            value: {
+              label: revenueStats.label,
+              color: revenueStats.change.startsWith("-")
+                ? "var(--color-orange-500)"
+                : revenueStats.color,
+            },
+          }}
+        />
+      </Card>
+      <div className="flex flex-col gap-6">
+        {stats.slice(1, 3).map((item, index) => (
+          <Card className="relative [--gutter:0]" key={index}>
+            <item.icon className="absolute top-6 right-6 size-5 opacity-35" />
+            <CardHeader className="p-4">
+              <CardTitle>{item.value}</CardTitle>
+              <CardDescription>
+                {item.label} <br />
+                <span
+                  className={twJoin(
+                    "font-medium text-xs",
+                    item.change.startsWith("-") ? "text-orange-500" : "text-muted-fg",
+                  )}
+                >
+                  {item.change} {item.change.startsWith("-") ? "decrease" : "increase"}
+                  {item.change.startsWith("-") ? (
+                    <ArrowTrendingDownIcon className="ml-2 inline size-4" />
+                  ) : (
+                    <ArrowTrendingUpIcon className="ml-2 inline size-4" />
+                  )}
+                </span>
+              </CardDescription>
+            </CardHeader>
+            <AreaChart
+              areaProps={{
+                activeDot: false,
+                type: "natural",
+              }}
+              data={item.data}
+              dataKey="date"
+              hideGridLines
+              hideXAxis
+              hideYAxis
+              tooltip={false}
+              className="h-16 min-h-[64px]"
+              yAxisProps={{
+                tickFormatter: (v: number) => formatKilo(v),
+              }}
+              legend={false}
+              config={{
+                value: {
+                  label: item.label,
+                  color: item.change.startsWith("-") ? "var(--color-orange-500)" : item.color,
+                },
+              }}
+            />
+          </Card>
+        ))}
+      </div>
     </div>
   )
 }
