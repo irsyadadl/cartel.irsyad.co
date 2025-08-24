@@ -236,7 +236,7 @@ const SidebarHeader = ({ className, ref, ...props }: React.ComponentProps<"div">
       className={twMerge([
         "mb-2 flex flex-col **:data-[slot=sidebar-label-mask]:hidden",
         state === "collapsed"
-          ? "mt-2 p-5 group-data-[intent=float]:mt-2 md:mx-auto md:size-9 md:items-center md:justify-center md:rounded-lg md:p-0 md:hover:bg-secondary"
+          ? "mt-2 p-5 group-data-[intent=float]:mt-2 md:mx-auto md:size-9 md:items-center md:justify-center md:rounded-lg md:p-0 md:hover:bg-gray-700"
           : "px-6 py-3 sm:py-4.5",
         className,
       ])}

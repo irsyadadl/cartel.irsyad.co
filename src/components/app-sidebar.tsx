@@ -9,8 +9,6 @@ import {
   ChartBarIcon,
   ChartPieIcon,
   ChatBubbleBottomCenterTextIcon,
-  ChevronDoubleLeftIcon,
-  ChevronDoubleRightIcon,
   ClipboardDocumentListIcon,
   Cog6ToothIcon,
   CurrencyDollarIcon,
@@ -29,7 +27,7 @@ import {
   BellIcon,
   DocumentDuplicateIcon,
 } from "@heroicons/react/24/outline"
-import { twJoin } from "tailwind-merge"
+import { twJoin, twMerge } from "tailwind-merge"
 import { Avatar } from "@/components/ui/avatar"
 import { buttonStyles } from "@/components/ui/button"
 import {
@@ -56,7 +54,6 @@ import {
   SidebarRail,
   SidebarSection,
   SidebarSectionGroup,
-  SidebarTrigger,
   useSidebar,
 } from "@/components/ui/sidebar"
 import { usePathname } from "next/navigation"
@@ -64,6 +61,9 @@ import { CubeIcon } from "@heroicons/react/16/solid"
 import { useEffect } from "react"
 import { Logo } from "@/components/logo"
 import { Link } from "@/components/ui/link"
+import { Tooltip, TooltipContent } from "@/components/ui/tooltip"
+import { Pressable } from "react-aria-components"
+import { ChevronUpDownIcon } from "@heroicons/react/20/solid"
 
 type IconType = (props: React.SVGProps<SVGSVGElement>) => React.ReactNode
 
@@ -127,7 +127,7 @@ export const menus: MenuSectionProps[] = [
 
 export function AppSidebar() {
   const pathname = usePathname()
-  const { state, isMobile, setIsOpenOnMobile } = useSidebar()
+  const { state, isMobile, setIsOpenOnMobile, toggleSidebar } = useSidebar()
   const isCollapsed = state === "collapsed"
 
   useEffect(() => {
@@ -140,9 +140,12 @@ export function AppSidebar() {
         <Link
           className={buttonStyles({
             intent: "plain",
-            className: isCollapsed
-              ? "size-8"
-              : "group justify-between gap-x-3 px-0 [--btn-overlay:transparent] sm:px-0 sm:py-0",
+            className: twJoin(
+              "",
+              isCollapsed
+                ? "size-8 pressed:bg-gray-700 hover:bg-gray-700"
+                : "group justify-between gap-x-3 px-0 [--btn-overlay:transparent] sm:px-0 sm:py-0",
+            ),
           })}
           href="/"
         >
@@ -206,16 +209,32 @@ export function AppSidebar() {
           </SidebarDisclosureGroup>
         </SidebarSectionGroup>
       </SidebarContent>
-      <SidebarFooter className="flex flex-row justify-between gap-4 group-data-[state=collapsed]:flex-col">
+      <SidebarFooter className="flex flex-row">
         <Menu>
-          <MenuTrigger className="group" aria-label="Profile">
+          <MenuTrigger
+            className={twJoin(
+              !isCollapsed &&
+                "group relative flex w-full items-center gap-x-3 rounded-lg pressed:bg-gray-700 p-1 hover:bg-gray-700",
+            )}
+            aria-label="Profile"
+          >
             <Avatar
+              isSquare={!isCollapsed}
               className={twJoin([
                 "group-data-[state=collapsed]:size-6 group-data-[state=collapsed]:*:size-6",
                 "size-8 *:size-8",
               ])}
               src="https://irsyad.co/images/blocks/avatar/woman.webp?v=1"
             />
+            {!isCollapsed && (
+              <>
+                <div>
+                  <span className="block font-medium text-sm/4 text-white">Katy Perry</span>
+                  <span className="block text-gray-400 text-sm">@perry</span>
+                </div>
+                <ChevronUpDownIcon className="-translate-y-1/2 absolute top-1/2 right-2 size-4 shrink-0 text-gray-400 group-hover:text-white group-pressed:text-white" />
+              </>
+            )}
           </MenuTrigger>
 
           <MenuContent
@@ -252,18 +271,32 @@ export function AppSidebar() {
             </MenuItem>
           </MenuContent>
         </Menu>
-        <SidebarTrigger className="pressed:bg-gray-700 text-white hover:bg-gray-700" isCircle>
-          <ChevronDoubleLeftIcon
-            data-slot="chevron"
-            className="block size-4 group-data-[state=collapsed]:hidden"
-          />
-          <ChevronDoubleRightIcon
-            data-slot="chevron"
-            className="hidden size-4 group-data-[state=collapsed]:block"
-          />
-        </SidebarTrigger>
       </SidebarFooter>
-      <SidebarRail />
+      <SidebarRail>
+        <Tooltip delay={0}>
+          <Pressable>
+            <button
+              type="button"
+              data-slot="sidebar-rail"
+              aria-label="Toggle Sidebar"
+              tabIndex={-1}
+              onClick={toggleSidebar}
+              title="Toggle Sidebar"
+              className={twMerge(
+                "in-data-[side=left]:-translate-x-2 -translate-y-1/2 fixed top-1/2 in-data-[side=right]:right-(--sidebar-width) in-data-[side=left]:left-(--sidebar-width) h-20 w-8 in-data-[side=right]:translate-x-2 cursor-pointer transition-[left,right,translate] duration-300 ease-in-out in-data-[side=right]:group-data-[collapsible=dock]:right-(--sidebar-width-dock) in-data-[side=right]:group-data-[collapsible=hidden]:right-0 in-data-[side=left]:group-data-[collapsible=dock]:left-(--sidebar-width-dock) in-data-[side=left]:group-data-[collapsible=hidden]:left-0 group-data-[state=collapsed]:translate-x-0 max-md:hidden",
+              )}
+            >
+              <div
+                className="in-data-[side=right]:-translate-x-2 group-data-[state=collapsed]:in-data-[side=left]:in-[[data-slot=sidebar-rail]:hover]:before:-rotate-45 in-data-[side=left]:in-[[data-slot=sidebar-rail]:hover]:after:-rotate-45 in-data-[side=right]:in-[[data-slot=sidebar-rail]:hover]:-translate-x-1 group-data-[state=collapsed]:in-data-[side=right]:in-[[data-slot=sidebar-rail]:hover]:-translate-x-3 group-data-[state=collapsed]:group-data-[collapsible=dock]:in-data-[side=right]:in-[[data-slot=sidebar-rail]:hover]:-translate-x-1 in-data-[side=right]:in-[[data-slot=sidebar-rail]:hover]:before:-rotate-45 group-data-[state=collapsed]:in-data-[side=right]:in-[[data-slot=sidebar-rail]:hover]:after:-rotate-45 pointer-events-none in-data-[side=right]:ml-auto h-6 w-4 in-data-[side=left]:in-[[data-slot=sidebar-rail]:hover]:translate-x-1 in-data-[side=left]:translate-x-2 in-[[data-slot=sidebar-rail]:hover]:opacity-100 opacity-50 transition-all ease-in-out before:absolute before:top-[calc(50%-7px)] in-data-[side=left]:before:left-[calc(50%-1px)] in-data-[side=right]:before:left-[calc(50%+1)] before:h-[9px] before:w-0.5 in-data-[side=left]:in-[[data-slot=sidebar-rail]:hover]:before:rotate-45 before:rounded-full before:bg-muted-fg before:transition-all after:absolute after:bottom-[calc(50%-7px)] in-data-[side=left]:after:left-[calc(50%-1px)] in-data-[side=right]:after:left-[calc(50%+1)] after:h-[9px] after:w-0.5 in-data-[side=right]:in-[[data-slot=sidebar-rail]:hover]:after:rotate-45 after:rounded-full after:bg-muted-fg after:transition-all group-data-[state=collapsed]:group-data-[collapsible=dock]:in-data-[side=left]:in-[[data-slot=sidebar-rail]:hover]:translate-x-1 group-data-[state=collapsed]:in-data-[side=left]:in-[[data-slot=sidebar-rail]:hover]:translate-x-3 group-data-[state=collapsed]:translate-x-0 group-data-[state=collapsed]:in-data-[side=left]:in-[[data-slot=sidebar-rail]:hover]:after:rotate-45 group-data-[state=collapsed]:in-data-[side=right]:in-[[data-slot=sidebar-rail]:hover]:before:rotate-45"
+                aria-hidden="true"
+              />
+            </button>
+          </Pressable>
+          <TooltipContent inverse placement="right" className="[&_span]:hidden">
+            {state === "collapsed" ? "Expand" : "Collapse"}
+          </TooltipContent>
+        </Tooltip>
+      </SidebarRail>
     </Sidebar>
   )
 }

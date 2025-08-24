@@ -1,13 +1,21 @@
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
 import { AppSidebar } from "@/components/app-sidebar"
 import { AppSidebarNav } from "@/components/app-sidebar-nav"
+import { cookies } from "next/headers"
 
-export default function Layout({
+export default async function Layout({
   modal,
   children,
 }: Readonly<{ modal: React.ReactNode; children: React.ReactNode }>) {
+  const cookieStore = await cookies()
+  const sidebarState = cookieStore.get("sidebar_state")
+
+  let defaultOpen = true
+  if (sidebarState) {
+    defaultOpen = sidebarState.value === "true"
+  }
   return (
-    <SidebarProvider>
+    <SidebarProvider defaultOpen={defaultOpen}>
       <AppSidebar />
       <SidebarInset className="[--inset-x:4.2%] [--inset-y:calc(var(--inset-x)*1.5)] [--layout-gutter:--spacing(4)] lg:rounded-l-lg sm:[--layout-gutter:--spacing(12)]">
         <AppSidebarNav />

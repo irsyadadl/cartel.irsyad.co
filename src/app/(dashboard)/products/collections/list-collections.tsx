@@ -33,7 +33,6 @@ import {
   SectionTitle,
   SectionDescription,
 } from "@/components/section-header"
-import { formatDate } from "@/lib/date"
 import {
   Card,
   CardAction,
@@ -42,7 +41,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { DetailLine, DetailLineItem } from "@/components/ui/details-line"
+import {
+  DetailLine,
+  DetailLineDescription,
+  DetailLineItem,
+  DetailLineLabel,
+} from "@/components/ui/details-line"
 
 export function ListCollections() {
   return (
@@ -147,7 +151,12 @@ export function ListCollections() {
               </CardHeader>
               <CardContent className="pt-3">
                 <DetailLine>
-                  <DetailLineItem label="Feature" description={item.is_featured ? "Yes" : "No"} />
+                  <DetailLineItem>
+                    <DetailLineLabel>Feature</DetailLineLabel>
+                    <DetailLineDescription>
+                      <Badge intent="secondary">{item.is_featured ? "Yes" : "No"}</Badge>
+                    </DetailLineDescription>
+                  </DetailLineItem>
                   <DetailLineItem label="Products" description={`${item.product_count} items`} />
                   <DetailLineItem label="Type" description={item.type} />
                   <DetailLineItem label="Visibility" description={item.visibility} />
@@ -155,8 +164,6 @@ export function ListCollections() {
                     label="Sort order"
                     description={item.sort_order.replaceAll("_", " ")}
                   />
-                  <DetailLineItem label="Created at" description={formatDate(item.created_at)} />
-                  <DetailLineItem label="Updated at" description={formatDate(item.updated_at)} />
                 </DetailLine>
               </CardContent>
             </div>
