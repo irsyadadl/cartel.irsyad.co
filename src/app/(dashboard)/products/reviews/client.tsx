@@ -27,6 +27,7 @@ import {
 } from "@/components/ui/select"
 import { formatDatetime } from "@/lib/date"
 import { Link } from "@/components/ui/link"
+import { GridLines } from "@/components/ui/grid-lines"
 
 type ReviewStatus = "published" | "pending" | "flagged" | "rejected"
 
@@ -143,63 +144,66 @@ export function Client() {
 
   return (
     <>
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <Card>
+      <div className="relative isolate rounded-2xl border bg-secondary p-(--g) [--g:--spacing(2)]">
+        <GridLines mask="none" width={50} height={50} />
+        <div className="grid gap-(--g) *:data-[slot=card]:bg-white sm:grid-cols-2 lg:grid-cols-4 *:data-[slot=card]:[--gutter:--spacing(4)]">
+          <Card>
+            <CardHeader className="gap-0">
+              <CardTitle className="text-sm/6">Total reviews</CardTitle>
+              <CardDescription>All time</CardDescription>
+            </CardHeader>
+            <CardContent className="font-semibold text-3xl">{metrics.total}</CardContent>
+          </Card>
+          <Card>
+            <CardHeader className="gap-0">
+              <CardTitle className="text-sm/6">Average rating</CardTitle>
+              <CardDescription>Across products</CardDescription>
+            </CardHeader>
+            <CardContent className="flex items-baseline gap-2">
+              <div className="font-semibold text-3xl">{metrics.avg.toFixed(1)}</div>
+              <Star value={metrics.avg} />
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader className="gap-0">
+              <CardTitle className="text-sm/6">Published</CardTitle>
+              <CardDescription>Visible to customers</CardDescription>
+            </CardHeader>
+            <CardContent className="font-semibold text-3xl">{metrics.published}</CardContent>
+          </Card>
+          <Card>
+            <CardHeader className="gap-0">
+              <CardTitle className="text-sm/6">Flagged</CardTitle>
+              <CardDescription>Needs attention</CardDescription>
+            </CardHeader>
+            <CardContent className="font-semibold text-3xl">{metrics.flagged}</CardContent>
+          </Card>
+        </div>
+
+        <Card className="mt-(--g) bg-white [--gutter:--spacing(4)]">
           <CardHeader>
-            <CardTitle>Total reviews</CardTitle>
-            <CardDescription>All time</CardDescription>
+            <CardTitle>Rating distribution</CardTitle>
+            <CardDescription>Breakdown of customer ratings (all time)</CardDescription>
           </CardHeader>
-          <CardContent className="font-semibold text-3xl">{metrics.total}</CardContent>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle>Average rating</CardTitle>
-            <CardDescription>Across products</CardDescription>
-          </CardHeader>
-          <CardContent className="flex items-baseline gap-2">
-            <div className="font-semibold text-3xl">{metrics.avg.toFixed(1)}</div>
-            <Star value={metrics.avg} />
+          <CardContent>
+            <div className="grid gap-3">
+              {metrics.dist.map((d) => (
+                <div key={d.star} className="flex items-center gap-3">
+                  <div className="flex items-center gap-x-2">
+                    <span className="font-semibold text-sm/6 tabular-nums">{d.star}</span>{" "}
+                    <Star value={d.star} />
+                  </div>
+                  <div className="flex-1">
+                    <ProgressBar value={d.count} minValue={0} maxValue={metrics.total}>
+                      {(values) => <ProgressBarTrack {...values} className="mt-0" />}
+                    </ProgressBar>
+                  </div>
+                </div>
+              ))}
+            </div>
           </CardContent>
         </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle>Published</CardTitle>
-            <CardDescription>Visible to customers</CardDescription>
-          </CardHeader>
-          <CardContent className="font-semibold text-3xl">{metrics.published}</CardContent>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle>Flagged</CardTitle>
-            <CardDescription>Needs attention</CardDescription>
-          </CardHeader>
-          <CardContent className="font-semibold text-3xl">{metrics.flagged}</CardContent>
-        </Card>
       </div>
-
-      <Card>
-        <CardHeader>
-          <CardTitle>Rating distribution</CardTitle>
-          <CardDescription>Breakdown of customer ratings (all time)</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="grid gap-3">
-            {metrics.dist.map((d) => (
-              <div key={d.star} className="flex items-center gap-3">
-                <div className="flex items-center gap-x-2">
-                  <span className="font-semibold text-sm/6 tabular-nums">{d.star}</span>{" "}
-                  <Star value={d.star} />
-                </div>
-                <div className="flex-1">
-                  <ProgressBar value={d.count} minValue={0} maxValue={metrics.total}>
-                    {(values) => <ProgressBarTrack {...values} className="mt-0" />}
-                  </ProgressBar>
-                </div>
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
 
       <div>
         <CardHeader className="gap-4">
