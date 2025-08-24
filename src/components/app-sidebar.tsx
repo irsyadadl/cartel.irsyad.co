@@ -184,12 +184,17 @@ export function AppSidebar() {
           <SidebarDisclosureGroup
             defaultExpandedKeys={menus
               .map((menu) => menu.section)
-              .filter((section) => pathname.startsWith(`/${section.toLowerCase()}`))}
+              .filter((section) => pathname.startsWith(`/${section.toLowerCase()}`))
+              .concat(
+                menus.some((menu) => pathname.startsWith(`/${menu.section.toLowerCase()}`))
+                  ? []
+                  : ["Products"],
+              )}
             className="gap-y-0.5"
             allowsMultipleExpanded={false}
           >
             {menus.map((item) => (
-              <SidebarDisclosure defaultExpanded id={item.section} key={item.section}>
+              <SidebarDisclosure id={item.section} key={item.section}>
                 <SidebarDisclosureTrigger>
                   {item.icon && <item.icon className="size-4" />}
                   <MenuLabel>{item.section}</MenuLabel>
