@@ -12,7 +12,7 @@ import {
   Tag as TagPrimitive,
 } from "react-aria-components"
 import { twMerge } from "tailwind-merge"
-import { composeTailwindRenderProps } from "@/lib/primitive"
+import { cx } from "@/lib/primitive"
 import { Description, Label } from "./field"
 import { XMarkIcon } from "@heroicons/react/24/solid"
 
@@ -38,12 +38,7 @@ const TagGroup = ({ children, ref, className, ...props }: TagGroupProps) => {
 }
 
 const TagList = <T extends object>({ className, ...props }: TagListProps<T>) => {
-  return (
-    <TagListPrimitive
-      {...props}
-      className={composeTailwindRenderProps(className, "flex flex-wrap gap-1")}
-    />
-  )
+  return <TagListPrimitive {...props} className={cx(className, "flex flex-wrap gap-1")} />
 }
 
 interface TagProps extends TagPrimitiveProps {}

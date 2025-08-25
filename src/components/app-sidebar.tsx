@@ -91,13 +91,13 @@ export const menus: MenuSectionProps[] = [
     section: "Shipping",
     icon: TruckIcon,
     items: [
-      { label: "Shipments", href: "/shipping/fulfillment/shipments", icon: TruckIcon },
+      { label: "Shipments", href: "/shipping/shipments", icon: TruckIcon },
       {
         label: "Shipping zones",
-        href: "/shipping/fulfillment/zones",
+        href: "/shipping/zones",
         icon: BuildingStorefrontIcon,
       },
-      { label: "Returns", href: "/shipping/fulfillment/returns", icon: ArrowUturnLeftIcon },
+      { label: "Returns", href: "/shipping/returns", icon: ArrowUturnLeftIcon },
     ],
   },
   {

@@ -1,11 +1,15 @@
 "use client"
+import { AnimatePresence } from "motion/react"
 
 import {
+  ArchiveBoxIcon,
+  CheckCircleIcon,
   ClipboardDocumentIcon,
   ClipboardIcon,
   EllipsisVerticalIcon,
   IdentificationIcon,
   PencilSquareIcon,
+  RectangleGroupIcon,
   TrashIcon,
 } from "@heroicons/react/24/solid"
 import products from "@/data/products.json"
@@ -26,7 +30,6 @@ import { SearchField } from "@/components/ui/search-field"
 import { useState } from "react"
 import { SectionAction, SectionContent, SectionHeader } from "@/components/section-header"
 import { Badge } from "@/components/ui/badge"
-import { ArchiveBoxIcon, CheckCircleIcon, RectangleGroupIcon } from "@heroicons/react/24/solid"
 import {
   ArrowUpTrayIcon,
   CloudArrowDownIcon,
@@ -34,7 +37,6 @@ import {
   EyeSlashIcon,
   PlusIcon,
   StarIcon,
-  TagIcon,
 } from "@heroicons/react/16/solid"
 import { Paginate } from "@/components/paginate"
 import { formatNumber } from "@/lib/number"
@@ -44,12 +46,15 @@ import { ExcelIcon } from "@/components/icons/excel-icon"
 import { CsvIcon } from "@/components/icons/csv-icon"
 import { Link } from "@/components/ui/link"
 import { AlertDialog } from "@/components/alert-dialog"
+import { ChevronDownIcon, PauseCircleIcon } from "@heroicons/react/20/solid"
 import {
-  ArrowDownTrayIcon,
-  ChevronDownIcon,
-  PauseCircleIcon,
-  RectangleStackIcon,
-} from "@heroicons/react/20/solid"
+  Toolbar,
+  ToolbarButton,
+  ToolbarSection,
+  ToolbarSeparator,
+  ToolbarText,
+} from "@/components/ui/toolbar"
+import { RollingNumber } from "@/components/ui/rolling-number"
 
 const config = {
   publish: {
@@ -74,18 +79,69 @@ const config = {
 export function ListProducts() {
   const [selectedKeys, setSelectedKeys] = useState<Selection>(new Set())
   const [action, setAction] = useState<"publish" | "delete" | "unpublish" | null>(null)
-
   return (
     <>
       <Stats />
 
       <SectionHeader>
         <SectionContent className="flex-row gap-x-2">
+          <AnimatePresence initial={false}>
+            {[...selectedKeys].length > 0 && (
+              <Toolbar className="hidden sm:block" key="bulk-toolbar">
+                <ToolbarSection>
+                  <ToolbarText className="flex items-center">
+                    Bulk actions{" "}
+                    {selectedKeys === "all" ? (
+                      "All 10 items"
+                    ) : (
+                      <>
+                        (<RollingNumber value={[...selectedKeys].length} height={24} />
+                        <span className="ml-1">items</span>)
+                      </>
+                    )}
+                  </ToolbarText>
+                </ToolbarSection>
+                <ToolbarSection className="mt-2">
+                  <ToolbarButton>
+                    <CheckCircleIcon fill="#51A2FF" />
+                    <MenuLabel>Publish</MenuLabel>
+                  </ToolbarButton>
+                  <ToolbarButton>
+                    <PauseCircleIcon fill="#FFD230" />
+                    Unpublish
+                  </ToolbarButton>
+
+                  <ToolbarSeparator />
+
+                  <Menu>
+                    <ToolbarButton>
+                      <ArrowUpTrayIcon />
+                      Export...
+                      <ChevronDownIcon />
+                    </ToolbarButton>
+                    <MenuContent placement="top">
+                      <MenuItem>
+                        <CsvIcon />
+                        <MenuLabel>Export as CSV</MenuLabel>
+                      </MenuItem>
+                      <MenuItem>
+                        <ExcelIcon />
+                        <MenuLabel>Export as Excel</MenuLabel>
+                      </MenuItem>
+                    </MenuContent>
+                  </Menu>
+                  <ToolbarButton intent="danger">
+                    <TrashIcon />
+                    Delete
+                  </ToolbarButton>
+                </ToolbarSection>
+              </Toolbar>
+            )}
+          </AnimatePresence>
           {[...selectedKeys].length > 0 && (
             <Menu>
-              <Button intent="outline">
-                Bulk actions (
-                {selectedKeys === "all" ? "All 10 products" : [...selectedKeys].length})
+              <Button intent="outline" className="inline-flex sm:hidden">
+                Bulk actions ({selectedKeys === "all" ? "10" : [...selectedKeys].length})
                 <ChevronDownIcon />
               </Button>
               <MenuContent className="min-w-48" placement="bottom start">
@@ -101,20 +157,14 @@ export function ListProducts() {
                 <MenuSeparator />
 
                 <MenuItem>
-                  <TagIcon />
-                  <MenuLabel>Add tags</MenuLabel>
+                  <CsvIcon />
+                  <MenuLabel>Export as CSV</MenuLabel>
                 </MenuItem>
                 <MenuItem>
-                  <RectangleStackIcon />
-                  <MenuLabel>Assign to category</MenuLabel>
+                  <ExcelIcon />
+                  <MenuLabel>Export as Excel</MenuLabel>
                 </MenuItem>
 
-                <MenuSeparator />
-
-                <MenuItem>
-                  <ArrowDownTrayIcon />
-                  <MenuLabel>Export CSV</MenuLabel>
-                </MenuItem>
                 <MenuItem isDanger>
                   <TrashIcon />
                   <MenuLabel>Delete</MenuLabel>
@@ -122,7 +172,6 @@ export function ListProducts() {
               </MenuContent>
             </Menu>
           )}
-
           <Link href="/products/create" className={buttonStyles()}>
             <PlusIcon />
             New

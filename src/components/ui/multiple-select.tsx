@@ -11,7 +11,7 @@ import {
 } from "react"
 import type { ComboBoxProps, GroupProps, Key, ListBoxProps, Selection } from "react-aria-components"
 import { Button, ComboBox, Group, ListBox } from "react-aria-components"
-import { composeTailwindRenderProps } from "@/lib/primitive"
+import { cx } from "@/lib/primitive"
 import { DropdownItem, DropdownLabel, DropdownSection } from "./dropdown"
 import { Description, FieldGroup, type FieldProps, Input, Label } from "./field"
 import { PopoverContent } from "./popover"
@@ -112,7 +112,7 @@ const MultipleSelect = <T extends object>({
     <Group
       isDisabled={props.isDisabled}
       isInvalid={props.isInvalid}
-      className={composeTailwindRenderProps(
+      className={cx(
         className,
         "group flex h-fit min-w-[16rem] flex-col gap-y-1 *:data-[slot=label]:font-medium",
       )}
@@ -183,7 +183,7 @@ const MultipleSelect = <T extends object>({
                 triggerRef={triggerRef}
               >
                 <ListBox
-                  className={composeTailwindRenderProps(
+                  className={cx(
                     className,
                     "grid max-h-96 w-full grid-cols-[auto_1fr] flex-col gap-y-1 p-1 outline-hidden *:[[role='group']+[role=group]]:mt-4 *:[[role='group']+[role=separator]]:mt-1",
                   )}

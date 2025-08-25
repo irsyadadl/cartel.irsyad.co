@@ -3,7 +3,7 @@
 import { MagnifyingGlassIcon, XMarkIcon } from "@heroicons/react/24/solid"
 import type { SearchFieldProps as SearchFieldPrimitiveProps } from "react-aria-components"
 import { Button, SearchField as SearchFieldPrimitive } from "react-aria-components"
-import { composeTailwindRenderProps } from "@/lib/primitive"
+import { cx } from "@/lib/primitive"
 import { Description, FieldError, FieldGroup, type FieldProps, Input, Label } from "./field"
 import { Loader } from "./loader"
 
@@ -25,7 +25,7 @@ const SearchField = ({
     <SearchFieldPrimitive
       aria-label={placeholder ?? props["aria-label"] ?? "Search..."}
       {...props}
-      className={composeTailwindRenderProps(
+      className={cx(
         className,
         "group/search-field relative flex flex-col gap-y-1 *:data-[slot=label]:font-medium",
       )}

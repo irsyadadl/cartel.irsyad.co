@@ -10,7 +10,7 @@ import {
 } from "react-aria-components"
 import { twMerge } from "tailwind-merge"
 import { tv } from "tailwind-variants"
-import { composeTailwindRenderProps } from "@/lib/primitive"
+import { cx } from "@/lib/primitive"
 
 type ToggleSize = "xs" | "sm" | "md" | "lg" | "sq-xs" | "sq-sm" | "sq-md" | "sq-lg"
 
@@ -42,7 +42,7 @@ const ToggleGroup = ({
     <ToggleGroupContext.Provider value={{ size, selectionMode, orientation }}>
       <ToggleButtonGroup
         selectionMode={selectionMode}
-        className={composeTailwindRenderProps(className, [
+        className={cx(className, [
           "[--toggle-fg:var(--color-fg)]",
           "[--toggle-selected-bg:var(--color-primary)] [--toggle-selected-fg:var(--color-primary-fg)]",
           "[--toggle-focused-bg:var(--color-secondary)] [--toggle-focused-fg:var(--color-secondary-fg)]",

@@ -11,7 +11,7 @@ import {
   composeRenderProps,
 } from "react-aria-components"
 import { twMerge } from "tailwind-merge"
-import { composeTailwindRenderProps } from "@/lib/primitive"
+import { cx } from "@/lib/primitive"
 import { Description, FieldError, type FieldProps, Label } from "./field"
 
 interface CheckboxGroupProps extends CheckboxGroupPrimitiveProps, Omit<FieldProps, "placeholder"> {}
@@ -20,7 +20,7 @@ const CheckboxGroup = ({ className, children, ...props }: CheckboxGroupProps) =>
   return (
     <CheckboxGroupPrimitive
       {...props}
-      className={composeTailwindRenderProps(
+      className={cx(
         className,
         "space-y-3 has-[[slot=description]]:space-y-6 has-[[slot=description]]:**:data-[slot=label]:font-medium **:[[slot=description]]:block",
       )}
@@ -41,10 +41,7 @@ interface CheckboxProps extends CheckboxPrimitiveProps, Pick<FieldProps, "label"
 
 const Checkbox = ({ className, children, description, label, ...props }: CheckboxProps) => {
   return (
-    <CheckboxPrimitive
-      {...props}
-      className={composeTailwindRenderProps(className, "group block disabled:opacity-50")}
-    >
+    <CheckboxPrimitive {...props} className={cx(className, "group block disabled:opacity-50")}>
       {composeRenderProps(
         children,
         (children, { isSelected, isIndeterminate, isFocusVisible, isInvalid }) => {

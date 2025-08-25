@@ -1,7 +1,7 @@
 "use client"
 
 import { Link as LinkPrimitive, type LinkProps as LinkPrimitiveProps } from "react-aria-components"
-import { composeTailwindRenderProps } from "@/lib/primitive"
+import { cx } from "@/lib/primitive"
 
 interface LinkProps extends LinkPrimitiveProps {
   ref?: React.RefObject<HTMLAnchorElement>
@@ -11,7 +11,7 @@ const Link = ({ className, ref, ...props }: LinkProps) => {
   return (
     <LinkPrimitive
       ref={ref}
-      className={composeTailwindRenderProps(className, [
+      className={cx(className, [
         "font-medium text-(--text)",
         "outline-0 outline-offset-2 transition-[color,_opacity] focus-visible:outline-2 focus-visible:outline-ring forced-colors:outline-[Highlight]",
         "disabled:cursor-default disabled:text-muted-fg forced-colors:disabled:text-[GrayText]",

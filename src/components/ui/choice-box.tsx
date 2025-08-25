@@ -4,7 +4,7 @@ import { composeRenderProps, GridList, GridListItem, Text } from "react-aria-com
 import { twMerge } from "tailwind-merge"
 import type { VariantProps } from "tailwind-variants"
 import { tv } from "tailwind-variants"
-import { composeTailwindRenderProps } from "@/lib/primitive"
+import { cx } from "@/lib/primitive"
 import { Checkbox } from "./checkbox"
 
 const choiceBoxStyles = tv({
@@ -62,7 +62,7 @@ const ChoiceBox = <T extends object>({
       <GridList
         layout={columns === 1 ? "stack" : "grid"}
         selectionMode={selectionMode}
-        className={composeTailwindRenderProps(
+        className={cx(
           className,
           choiceBoxStyles({
             columns,

@@ -8,7 +8,7 @@ import {
 } from "react-aria-components"
 import { twMerge } from "tailwind-merge"
 import { Label } from "@/components/ui/field"
-import { composeTailwindRenderProps } from "@/lib/primitive"
+import { cx } from "@/lib/primitive"
 
 interface ProgressBarProps extends ProgressBarPrimitiveProps {
   label?: string
@@ -17,11 +17,7 @@ interface ProgressBarProps extends ProgressBarPrimitiveProps {
 
 const ProgressBar = ({ label, ref, className, ...props }: ProgressBarProps) => {
   return (
-    <ProgressBarPrimitive
-      ref={ref}
-      className={composeTailwindRenderProps(className, "w-full")}
-      {...props}
-    >
+    <ProgressBarPrimitive ref={ref} className={cx(className, "w-full")} {...props}>
       {(values) => {
         if (!props.children) {
           return (

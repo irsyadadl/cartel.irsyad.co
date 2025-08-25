@@ -50,6 +50,15 @@ import {
 import { NumberField } from "@/components/ui/number-field"
 import { DatePicker } from "@/components/ui/date-picker"
 import { Textarea } from "@/components/ui/textarea"
+import { AnimatePresence } from "motion/react"
+import {
+  Toolbar,
+  ToolbarButton,
+  ToolbarSection,
+  ToolbarSeparator,
+  ToolbarText,
+} from "@/components/ui/toolbar"
+import { RollingNumber } from "@/components/ui/rolling-number"
 
 export function ListInventory() {
   const [selectedKeys, setSelectedKeys] = useState<Selection>(new Set())
@@ -92,10 +101,63 @@ export function ListInventory() {
     <>
       <SectionHeader>
         <SectionContent className="flex-row gap-x-2">
+          <AnimatePresence initial={false}>
+            {[...selectedKeys].length > 0 && (
+              <Toolbar className="hidden sm:block" key="bulk-toolbar">
+                <ToolbarSection>
+                  <ToolbarText className="flex items-center">
+                    Bulk actions{" "}
+                    {selectedKeys === "all" ? (
+                      "All 10 items"
+                    ) : (
+                      <>
+                        (<RollingNumber value={[...selectedKeys].length} height={24} />
+                        <span className="ml-1">items</span>)
+                      </>
+                    )}
+                  </ToolbarText>
+                </ToolbarSection>
+                <ToolbarSection className="mt-2">
+                  <ToolbarButton>
+                    <WrenchScrewdriverIcon />
+                    Adjust stock
+                  </ToolbarButton>
+                  <ToolbarButton>
+                    <ArrowsRightLeftIcon />
+                    Transfer stock
+                  </ToolbarButton>
+
+                  <ToolbarSeparator />
+                  <Menu>
+                    <ToolbarButton>
+                      <ArrowUpTrayIcon />
+                      Export...
+                      <ChevronDownIcon />
+                    </ToolbarButton>
+                    <MenuContent placement="top">
+                      <MenuItem>
+                        <CsvIcon />
+                        <MenuLabel>Export as CSV</MenuLabel>
+                      </MenuItem>
+                      <MenuItem>
+                        <ExcelIcon />
+                        <MenuLabel>Export as Excel</MenuLabel>
+                      </MenuItem>
+                    </MenuContent>
+                  </Menu>
+                  <ToolbarSeparator />
+                  <ToolbarButton intent="danger">
+                    <TrashIcon />
+                    Delete
+                  </ToolbarButton>
+                </ToolbarSection>
+              </Toolbar>
+            )}
+          </AnimatePresence>
           {[...selectedKeys].length > 0 && (
             <Menu>
-              <Button intent="outline">
-                Bulk actions ({selectedKeys === "all" ? "All items" : [...selectedKeys].length})
+              <Button intent="outline" className="sm:hidden">
+                Bulk actions ({selectedKeys === "all" ? "10" : [...selectedKeys].length})
                 <ChevronDownIcon />
               </Button>
               <MenuContent placement="bottom start">

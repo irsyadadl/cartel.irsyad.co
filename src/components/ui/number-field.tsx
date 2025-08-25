@@ -9,7 +9,7 @@ import {
 import { twJoin } from "tailwind-merge"
 import { tv } from "tailwind-variants"
 import { useMediaQuery } from "@/hooks/use-media-query"
-import { composeTailwindRenderProps } from "@/lib/primitive"
+import { cx } from "@/lib/primitive"
 import { Description, FieldError, FieldGroup, Input, Label } from "./field"
 
 const fieldBorderStyles = tv({
@@ -43,10 +43,7 @@ const NumberField = ({
   return (
     <NumberFieldPrimitive
       {...props}
-      className={composeTailwindRenderProps(
-        className,
-        "group flex flex-col gap-y-1 *:data-[slot=label]:font-medium",
-      )}
+      className={cx(className, "group flex flex-col gap-y-1 *:data-[slot=label]:font-medium")}
     >
       {label && <Label>{label}</Label>}
       <FieldGroup
@@ -121,7 +118,7 @@ const StepperButton = ({
     )
   return (
     <Button
-      className={composeTailwindRenderProps(
+      className={cx(
         className,
         "relative z-10 h-10 cursor-default pressed:text-primary-fg text-muted-fg group-disabled:bg-secondary/70 sm:pressed:bg-primary forced-colors:group-disabled:text-[GrayText]",
       )}

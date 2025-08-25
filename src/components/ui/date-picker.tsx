@@ -10,7 +10,7 @@ import {
 } from "react-aria-components"
 import { twJoin } from "tailwind-merge"
 import { useMediaQuery } from "@/hooks/use-media-query"
-import { composeTailwindRenderProps } from "@/lib/primitive"
+import { cx } from "@/lib/primitive"
 import { Button } from "./button"
 import { Calendar } from "./calendar"
 import { DateInput } from "./date-field"
@@ -88,10 +88,7 @@ export function DatePicker<T extends DateValue>({
   return (
     <DatePickerPrimitive
       {...props}
-      className={composeTailwindRenderProps(
-        className,
-        "group flex flex-col gap-y-1 *:data-[slot=label]:font-medium",
-      )}
+      className={cx(className, "group flex flex-col gap-y-1 *:data-[slot=label]:font-medium")}
     >
       {label && <Label>{label}</Label>}
       <FieldGroup className="min-w-40 *:[button]:last:mr-1.5 sm:*:[button]:last:mr-0.5">

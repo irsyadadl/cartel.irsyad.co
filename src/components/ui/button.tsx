@@ -5,7 +5,7 @@ import {
   type ButtonProps as ButtonPrimitiveProps,
 } from "react-aria-components"
 import { tv, type VariantProps } from "tailwind-variants"
-import { composeTailwindRenderProps } from "@/lib/primitive"
+import { cx } from "@/lib/primitive"
 
 const buttonStyles = tv({
   base: [
@@ -22,7 +22,7 @@ const buttonStyles = tv({
       primary:
         "[--btn-bg:var(--color-gray-900)] [--btn-fg:var(--color-white)] [--btn-icon-active:white]/80 [--btn-icon:white]/60 [--btn-overlay:var(--color-gray-800)]",
       secondary:
-        "[--btn-bg:var(--color-secondary)] [--btn-fg:var(--color-secondary-fg)] [--btn-icon:var(--color-muted-fg)] [--btn-outline:var(--color-secondary-fg)] [--btn-overlay:var(--color-muted-fg)]/25 [--btn-ring:var(--color-muted-fg)]/20",
+        "[--btn-bg:var(--color-gray-100)] [--btn-fg:var(--color-gray-900)] [--btn-icon:var(--color-muted-fg)] [--btn-outline:var(--color-secondary-fg)] [--btn-overlay:var(--color-gray-200)] [--btn-ring:var(--color-gray-300)]",
       warning:
         "[--btn-bg:var(--color-warning)] [--btn-fg:var(--color-warning-fg)] [--btn-icon:var(--color-warning-fg)]/60 [--btn-overlay:var(--color-warning)]/85",
       danger:
@@ -40,8 +40,8 @@ const buttonStyles = tv({
       ],
       sm: [
         "gap-x-1.5 px-3 py-1.5 sm:px-2.5 sm:py-1.5 sm:text-sm/5",
-        "*:data-[slot=icon]:size-4.5 sm:*:data-[slot=icon]:size-4",
-        "*:data-[slot=loader]:size-4.5 sm:*:data-[slot=loader]:size-4",
+        "*:data-[slot=icon]:size-4 sm:*:data-[slot=icon]:size-3.5",
+        "*:data-[slot=loader]:size-4 sm:*:data-[slot=loader]:size-3.5",
       ],
       md: [
         "gap-x-2 px-3.5 py-2 sm:px-3 sm:py-1.5 sm:text-sm/6",
@@ -91,7 +91,7 @@ const Button = ({ className, intent, size, isCircle, ref, ...props }: ButtonProp
     <ButtonPrimitive
       ref={ref}
       {...props}
-      className={composeTailwindRenderProps(
+      className={cx(
         className,
         buttonStyles({
           intent,

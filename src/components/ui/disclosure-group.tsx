@@ -17,12 +17,12 @@ import {
   Heading,
 } from "react-aria-components"
 import { twJoin, twMerge } from "tailwind-merge"
-import { composeTailwindRenderProps } from "@/lib/primitive"
+import { cx } from "@/lib/primitive"
 
 const DisclosureGroup = ({ className, ...props }: DisclosureGroupProps) => {
   return (
     <PrimitiveDisclosureGroup
-      className={composeTailwindRenderProps(className, [
+      className={cx(className, [
         "[--disclosure-collapsed-border:var(--color-border)]",
         "[--disclosure-collapsed-bg:var(--color-bg)]",
         "[--disclosure-collapsed-fg:var(--color-muted-fg)]",
@@ -63,7 +63,7 @@ const DisclosureTrigger = ({ ref, className, ...props }: DisclosureTriggerProps)
         {...props}
         ref={ref}
         slot="trigger"
-        className={composeTailwindRenderProps(className, [
+        className={cx(className, [
           "outline-hidden [--width:--spacing(2.5)]",
           "relative isolate flex w-full cursor-pointer items-center justify-between px-3 py-2 text-left font-medium text-sm/6",
           state.isExpanded
@@ -104,7 +104,7 @@ const DisclosurePanel = ({ className, style, ...props }: DisclosurePanelProps) =
         height: !isSafari ? (isExpanded ? contentRef?.current?.scrollHeight : 0) : undefined,
         ...style,
       }}
-      className={composeTailwindRenderProps(
+      className={cx(
         className,
 
         !isSafari && "overflow-hidden transition-[height] duration-200 ease-in-out",

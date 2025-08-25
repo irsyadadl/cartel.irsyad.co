@@ -6,7 +6,7 @@ import {
   type TimeValue,
   type ValidationResult,
 } from "react-aria-components"
-import { composeTailwindRenderProps } from "@/lib/primitive"
+import { cx } from "@/lib/primitive"
 import { DateInput } from "./date-field"
 import { Description, FieldError, FieldGroup, Label } from "./field"
 
@@ -30,7 +30,7 @@ const TimeField = <T extends TimeValue>({
   return (
     <TimeFieldPrimitive
       {...props}
-      className={composeTailwindRenderProps(
+      className={cx(
         className,
         "group/time-field flex flex-col gap-y-1 *:data-[slot=label]:font-medium",
       )}

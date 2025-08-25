@@ -28,7 +28,7 @@ import {
   useFilter,
 } from "react-aria-components"
 import { twJoin, twMerge } from "tailwind-merge"
-import { composeTailwindRenderProps } from "@/lib/primitive"
+import { cx } from "@/lib/primitive"
 import { DropdownKeyboard } from "./dropdown"
 import { Loader } from "./loader"
 import { MenuDescription, MenuItem, MenuLabel, type MenuSectionProps, MenuSeparator } from "./menu"
@@ -154,7 +154,7 @@ const CommandMenuSearch = ({ className, placeholder, ...props }: CommandMenuSear
     <SearchField
       aria-label="Quick search"
       autoFocus
-      className={composeTailwindRenderProps(className, "flex w-full items-center px-2.5 py-1")}
+      className={cx(className, "flex w-full items-center px-2.5 py-1")}
       {...props}
     >
       {isPending ? (
@@ -185,7 +185,7 @@ const CommandMenuList = <T extends object>({ className, ...props }: MenuProps<T>
   return (
     <CollectionRendererContext.Provider value={renderer}>
       <MenuPrimitive
-        className={composeTailwindRenderProps(
+        className={cx(
           className,
           "grid max-h-full flex-1 grid-cols-[auto_1fr] content-start overflow-y-auto border-t p-2 sm:max-h-110 *:[[role=group]]:mb-6 *:[[role=group]]:last:mb-0",
         )}
@@ -226,7 +226,7 @@ const CommandMenuItem = ({ className, ...props }: React.ComponentProps<typeof Me
     <MenuItem
       {...props}
       textValue={textValue}
-      className={composeTailwindRenderProps(className, "items-center gap-y-0.5")}
+      className={cx(className, "items-center gap-y-0.5")}
     />
   )
 }

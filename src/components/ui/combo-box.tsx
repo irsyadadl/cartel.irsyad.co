@@ -13,7 +13,7 @@ import {
   ListBox,
   useSlottedContext,
 } from "react-aria-components"
-import { composeTailwindRenderProps } from "@/lib/primitive"
+import { cx } from "@/lib/primitive"
 import { Button } from "./button"
 import { DropdownDescription, DropdownItem, DropdownLabel, DropdownSection } from "./dropdown"
 import { Description, FieldError, FieldGroup, type FieldProps, Input, Label } from "./field"
@@ -37,7 +37,7 @@ const ComboBox = <T extends object>({
     <ComboboxPrimitive
       data-slot="combo-box"
       {...props}
-      className={composeTailwindRenderProps(
+      className={cx(
         className,
         "group flex w-full flex-col gap-y-1 *:data-[slot=label]:font-medium",
       )}
@@ -65,7 +65,7 @@ const ComboBoxContent = <T extends object>({
 }: ComboBoxListProps<T>) => {
   return (
     <PopoverContent
-      className={composeTailwindRenderProps(
+      className={cx(
         popover?.className,
         "min-w-(--trigger-width) scroll-py-1 overflow-y-auto overscroll-contain",
       )}
@@ -74,7 +74,7 @@ const ComboBoxContent = <T extends object>({
       <ListBox
         layout="stack"
         orientation="vertical"
-        className={composeTailwindRenderProps(
+        className={cx(
           className,
           "grid max-h-96 w-full grid-cols-[auto_1fr] flex-col gap-y-1 p-1 outline-hidden *:[[role='group']+[role=group]]:mt-4 *:[[role='group']+[role=separator]]:mt-1",
         )}

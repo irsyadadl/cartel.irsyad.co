@@ -2,7 +2,7 @@
 
 import { TextArea, TextField, type TextFieldProps } from "react-aria-components"
 import { twJoin } from "tailwind-merge"
-import { composeTailwindRenderProps } from "@/lib/primitive"
+import { cx } from "@/lib/primitive"
 import { Description, FieldError, type FieldProps, Label } from "./field"
 
 interface TextareaProps extends Omit<TextFieldProps, "className">, FieldProps {
@@ -20,15 +20,12 @@ const Textarea = ({
   return (
     <TextField
       {...props}
-      className={composeTailwindRenderProps(
-        className,
-        "group flex flex-col gap-y-1 *:data-[slot=label]:font-medium",
-      )}
+      className={cx(className, "group flex flex-col gap-y-1 *:data-[slot=label]:font-medium")}
     >
       {label && <Label>{label}</Label>}
       <TextArea
         placeholder={placeholder}
-        className={composeTailwindRenderProps(
+        className={cx(
           className,
           twJoin([
             "field-sizing-content max-h-96 min-h-16 w-full min-w-0 rounded-lg border border-input px-2.5 py-2 text-base placeholder-muted-fg shadow-xs outline-hidden transition duration-200 sm:text-sm/6",

@@ -8,7 +8,7 @@ import type {
 } from "react-aria-components"
 import { Button, ListBox, Select as SelectPrimitive, SelectValue } from "react-aria-components"
 import { twJoin } from "tailwind-merge"
-import { composeTailwindRenderProps } from "@/lib/primitive"
+import { cx } from "@/lib/primitive"
 import {
   DropdownDescription,
   DropdownItem,
@@ -36,7 +36,7 @@ const Select = <T extends object>({
     <SelectPrimitive
       data-slot="select"
       {...props}
-      className={composeTailwindRenderProps(
+      className={cx(
         className,
         "group/select flex w-full flex-col gap-y-1 *:data-[slot=label]:font-medium",
       )}
@@ -67,7 +67,7 @@ const SelectContent = <T extends object>({
 }: SelectListProps<T>) => {
   return (
     <PopoverContent
-      className={composeTailwindRenderProps(
+      className={cx(
         popover?.className,
         "min-w-(--trigger-width) scroll-py-1 overflow-y-auto overscroll-contain",
       )}
@@ -76,7 +76,7 @@ const SelectContent = <T extends object>({
       <ListBox
         layout="stack"
         orientation="vertical"
-        className={composeTailwindRenderProps(
+        className={cx(
           className,
           "grid max-h-96 w-full grid-cols-[auto_1fr] flex-col gap-y-1 p-1 outline-hidden *:[[role='group']+[role=group]]:mt-4 *:[[role='group']+[role=separator]]:mt-1",
         )}
@@ -95,7 +95,7 @@ interface SelectTriggerProps extends React.ComponentProps<typeof Button> {
 const SelectTrigger = ({ children, className, ...props }: SelectTriggerProps) => {
   return (
     <Button
-      className={composeTailwindRenderProps(className, [
+      className={cx(className, [
         "inset-ring inset-ring-input flex w-full min-w-0 cursor-default items-center gap-x-2 rounded-lg px-3.5 py-2 text-start text-fg shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)] outline-hidden transition duration-200 sm:py-1.5 sm:pr-2 sm:pl-3 sm:text-sm/6 sm:*:text-sm/6 dark:shadow-none",
         "group-disabled/select:opacity-50 forced-colors:group-disabled/select:inset-ring-[GrayText] forced-colors:group-disabled/select/select:text-[GrayText]",
         "focus:inset-ring-ring/70 focus:ring-3 focus:ring-ring/20",

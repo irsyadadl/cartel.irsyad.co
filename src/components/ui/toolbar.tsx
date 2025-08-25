@@ -1,112 +1,65 @@
-"use client"
-
-import { createContext, use, useContext } from "react"
-
-import type {
-  GroupProps,
-  SeparatorProps,
-  ToolbarProps as ToolbarPrimitiveProps,
-} from "react-aria-components"
-import { composeRenderProps, Group, Toolbar as ToolbarPrimitive } from "react-aria-components"
+import type { SeparatorProps, ToolbarProps } from "react-aria-components"
+import { Toolbar as PrimitiveToolbar } from "react-aria-components"
+import { cx } from "@/lib/primitive"
+import { Separator } from "@/components/ui/separator"
 import { twMerge } from "tailwind-merge"
-import { composeTailwindRenderProps } from "@/lib/primitive"
-import { Separator } from "./separator"
-import { Toggle, type ToggleProps } from "./toggle"
+import { Button, type ButtonProps } from "@/components/ui/button"
+import { motion, type MotionProps } from "motion/react"
 
-const ToolbarContext = createContext<ToolbarProps>({
-  orientation: "horizontal",
-  isCircle: false,
-})
+const MotionToolbar = motion(PrimitiveToolbar)
 
-interface ToolbarProps extends ToolbarPrimitiveProps {
-  isCircle?: boolean
-}
-
-const Toolbar = ({ orientation = "horizontal", isCircle, className, ...props }: ToolbarProps) => {
-  return (
-    <ToolbarContext value={{ orientation, isCircle }}>
-      <ToolbarPrimitive
-        orientation={orientation}
-        {...props}
-        className={composeRenderProps(className, (className, { orientation }) =>
-          twMerge(
-            "group inset-ring inset-ring-border inline-flex flex-row gap-1.5 bg-overlay p-1.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
-            isCircle ? "rounded-full" : "rounded-lg",
-            orientation === "horizontal"
-              ? "flex-row items-center [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-              : "flex-col items-start",
-            className,
-          ),
-        )}
-      />
-    </ToolbarContext>
-  )
-}
-
-const ToolbarGroupContext = createContext<{ isDisabled?: boolean; isCircle?: boolean }>({})
-
-interface ToolbarGroupProps extends GroupProps {}
-const ToolbarGroup = ({ isDisabled, className, ...props }: ToolbarGroupProps) => {
-  return (
-    <ToolbarGroupContext value={{ isDisabled }}>
-      <Group
-        className={composeTailwindRenderProps(
-          className,
-          "flex gap-1.5 group-orientation-vertical:flex-col group-orientation-vertical:items-start group-orientation-horizontal:items-center",
-        )}
-        {...props}
-      >
-        {props.children}
-      </Group>
-    </ToolbarGroupContext>
-  )
-}
-
-interface ToggleItemProps extends ToggleProps {}
-
-const ToolbarItem = ({
-  isDisabled,
-  isCircle,
-  size = "sm",
-  intent = "outline",
-  ref,
+export function Toolbar({
   className,
+  orientation = "vertical",
   ...props
-}: ToggleItemProps) => {
-  const context = use(ToolbarGroupContext)
-  const { isCircle: contextCircle } = use(ToolbarContext)
-  const effectiveIsDisabled = isDisabled || context.isDisabled
-  const effectiveIsCircle = isCircle || contextCircle
+}: ToolbarProps & MotionProps) {
   return (
-    <Toggle
-      intent={intent}
-      size={size}
-      ref={ref}
-      data-slot="toolbar-item"
-      className={composeTailwindRenderProps(
-        className,
-        effectiveIsCircle ? "rounded-full" : "rounded-[calc(var(--radius-lg)-1px)]",
-      )}
-      isDisabled={effectiveIsDisabled}
+    <MotionToolbar
+      initial={{ y: 24, opacity: 0, filter: "blur(8px)" }}
+      animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
+      exit={{
+        y: 24,
+        filter: "blur(14px)",
+        opacity: 0,
+        transition: {
+          y: { duration: 0.35, ease: [0.16, 1, 0.3, 1] },
+          filter: { duration: 0.35, ease: "easeOut" },
+          opacity: { delay: 0.25, duration: 0.2, ease: "easeOut" },
+        },
+      }}
+      orientation={orientation}
+      className={cx(className, [
+        "-translate-1/2 fixed bottom-0 left-1/2 z-40 w-fit transform-gpu rounded-lg border border-gray-400/50 bg-white p-2.5 text-gray-800 shadow-sm ring ring-gray-400/70 ring-offset-4 ring-offset-gray-100 backdrop-blur",
+        "**:[button]:whitespace-nowrap",
+      ])}
       {...props}
     />
   )
 }
-type ToolbarSeparatorProps = SeparatorProps
-const ToolbarSeparator = ({ className, ...props }: ToolbarSeparatorProps) => {
-  const { orientation } = useContext(ToolbarContext)
-  const reverseOrientation = orientation === "vertical" ? "horizontal" : "vertical"
+
+export function ToolbarButton({ intent, ...props }: ButtonProps) {
+  return <Button size="sm" intent={intent ?? "outline"} {...props} />
+}
+
+export function ToolbarSection({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+  return <div className={twMerge("flex items-center gap-x-1.5", className)} {...props} />
+}
+
+export function ToolbarText({ className, ...props }: React.ComponentProps<"span">) {
+  return (
+    <span
+      className={twMerge("block whitespace-nowrap text-gray-700 text-sm/6", className)}
+      {...props}
+    />
+  )
+}
+
+export function ToolbarSeparator({ className, ...props }: Omit<SeparatorProps, "orientation">) {
   return (
     <Separator
-      orientation={reverseOrientation}
-      className={twMerge(
-        reverseOrientation === "vertical" ? "mx-0.5 h-6" : "my-0.5 w-8",
-        className,
-      )}
+      orientation="vertical"
+      className={twMerge("mx-0.5 h-4 bg-gray-300", className)}
       {...props}
     />
   )
 }
-
-export type { ToolbarGroupProps, ToolbarProps, ToggleItemProps, ToolbarSeparatorProps }
-export { Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarItem }

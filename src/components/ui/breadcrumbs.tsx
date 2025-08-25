@@ -5,7 +5,7 @@ import { createContext, use } from "react"
 import type { BreadcrumbProps, BreadcrumbsProps, LinkProps } from "react-aria-components"
 import { Breadcrumb, Breadcrumbs as BreadcrumbsPrimitive } from "react-aria-components"
 import { twMerge } from "tailwind-merge"
-import { composeTailwindRenderProps } from "@/lib/primitive"
+import { cx } from "@/lib/primitive"
 import { Link } from "./link"
 
 type BreadcrumbsContextProps = { separator?: "chevron" | "slash" | boolean }
@@ -40,7 +40,7 @@ const BreadcrumbsItem = ({
 
   return (
     <Breadcrumb
-      className={composeTailwindRenderProps(className, "flex items-center gap-2 text-sm")}
+      className={cx(className, "flex items-center gap-2 text-sm")}
       data-slot="breadcrumb"
       {...props}
     >

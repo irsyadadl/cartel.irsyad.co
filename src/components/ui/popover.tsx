@@ -9,7 +9,7 @@ import {
   OverlayArrow,
   Popover as PopoverPrimitive,
 } from "react-aria-components"
-import { composeTailwindRenderProps } from "@/lib/primitive"
+import { cx } from "@/lib/primitive"
 import {
   DialogBody,
   DialogClose,
@@ -47,7 +47,7 @@ const PopoverContent = ({
     <PopoverPrimitive
       ref={ref}
       offset={offset}
-      className={composeTailwindRenderProps(className, [
+      className={cx(className, [
         "group/popover min-w-(--trigger-width) max-w-xs overflow-auto rounded-xl border border-fg/10 bg-overlay text-overlay-fg shadow-xs outline-hidden transition-transform [--gutter:--spacing(6)] sm:text-sm dark:backdrop-saturate-200 **:[[role=dialog]]:[--gutter:--spacing(4)]",
         "entering:fade-in entering:animate-in",
         "exiting:fade-out exiting:animate-out",

@@ -55,8 +55,8 @@ const sheetContentStyles = tv({
         "entering:slide-in-from-right exiting:slide-out-to-right inset-y-0 right-0 h-auto w-3/4 overflow-y-auto border-l sm:max-w-sm",
     },
     isFloat: {
-      false: "border-fg/20 dark:border-border",
-      true: "ring-fg/5 dark:ring-border",
+      false: "border-fg/20",
+      true: "ring-fg/5",
     },
   },
   compoundVariants: generateCompoundVariants(["top", "bottom", "left", "right"]),

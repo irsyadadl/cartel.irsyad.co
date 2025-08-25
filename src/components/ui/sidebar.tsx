@@ -26,7 +26,7 @@ import {
 import { twJoin, twMerge } from "tailwind-merge"
 import { SheetContent } from "@/components/ui/sheet"
 import { useMediaQuery } from "@/hooks/use-media-query"
-import { composeTailwindRenderProps } from "@/lib/primitive"
+import { cx } from "@/lib/primitive"
 import { Button } from "./button"
 import { Link } from "./link"
 import { Tooltip, TooltipContent } from "./tooltip"
@@ -418,7 +418,7 @@ const SidebarLink = ({ className, ref, ...props }: SidebarLinkProps) => {
   return (
     <Link
       ref={ref}
-      className={composeTailwindRenderProps(
+      className={cx(
         className,
         twJoin(
           "col-span-full items-center focus:outline-hidden",
@@ -455,7 +455,7 @@ const SidebarDisclosureGroup = ({
     <DisclosureGroup
       data-slot="sidebar-disclosure-group"
       allowsMultipleExpanded={allowsMultipleExpanded}
-      className={composeTailwindRenderProps(className, "col-span-full flex flex-col gap-y-6")}
+      className={cx(className, "col-span-full flex flex-col gap-y-6")}
       {...props}
     />
   )
@@ -469,7 +469,7 @@ const SidebarDisclosure = ({ className, ref, ...props }: SidebarDisclosureProps)
     <Disclosure
       ref={ref}
       data-slot="sidebar-disclosure"
-      className={composeTailwindRenderProps(className, "col-span-full")}
+      className={cx(className, "col-span-full")}
       {...props}
     />
   )
@@ -540,7 +540,7 @@ const SidebarDisclosurePanel = ({ className, style, ...props }: DisclosurePanelP
         height: !isSafari ? (isExpanded ? contentRef?.current?.scrollHeight : 0) : undefined,
         ...style,
       }}
-      className={composeTailwindRenderProps(
+      className={cx(
         className,
         !isSafari && "overflow-hidden transition-[height] duration-200 ease-in-out",
       )}
@@ -580,7 +580,7 @@ const SidebarTrigger = ({
       data-slot="sidebar-trigger"
       intent={props.intent || "plain"}
       size={props.size || "sq-sm"}
-      className={composeTailwindRenderProps(className, "shrink-0")}
+      className={cx(className, "shrink-0")}
       onPress={(event) => {
         onPress?.(event)
         toggleSidebar()

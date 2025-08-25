@@ -14,7 +14,7 @@ import {
 } from "react-aria-components"
 import { twJoin, twMerge } from "tailwind-merge"
 import { tv } from "tailwind-variants"
-import { composeTailwindRenderProps } from "@/lib/primitive"
+import { cx } from "@/lib/primitive"
 import { Description, Label } from "./field"
 import { Tooltip, TooltipContent } from "./tooltip"
 
@@ -127,7 +127,7 @@ const SliderTrack = ({ className, ...props }: SliderTrackProps) => {
   return (
     <SliderTrackPrimitive
       {...props}
-      className={composeTailwindRenderProps(
+      className={cx(
         className,
         twJoin([
           "[--slider:color-mix(in_oklab,var(--color-muted)_90%,black_10%)] dark:[--slider:color-mix(in_oklab,var(--color-muted)_90%,white_10%)]",

@@ -15,7 +15,7 @@ import {
 } from "react-aria-components"
 import { twMerge } from "tailwind-merge"
 
-import { composeTailwindRenderProps } from "@/lib/primitive"
+import { cx } from "@/lib/primitive"
 import { LayoutGroup, motion } from "motion/react"
 import { useId } from "react"
 
@@ -25,7 +25,7 @@ interface TabsProps extends TabsPrimitiveProps {
 const Tabs = ({ className, ref, ...props }: TabsProps) => {
   return (
     <TabsPrimitive
-      className={composeTailwindRenderProps(
+      className={cx(
         className,
         "group/tabs flex orientation-vertical:w-[800px] orientation-vertical:flex-row orientation-horizontal:flex-col gap-4 forced-color-adjust-none",
       )}
@@ -66,7 +66,7 @@ const Tab = ({ children, className, ref, ...props }: TabProps) => {
     <TabPrimitive
       ref={ref}
       {...props}
-      className={composeTailwindRenderProps(className, [
+      className={cx(className, [
         "relative flex cursor-default items-center whitespace-nowrap rounded-full font-medium text-fg text-sm outline-hidden transition hover:text-fg *:data-[slot=icon]:mr-2 *:data-[slot=icon]:size-4",
         "group-orientation-vertical/tabs:w-full group-orientation-vertical/tabs:py-0 group-orientation-vertical/tabs:pr-2 group-orientation-vertical/tabs:pl-4",
         "group-orientation-horizontal/tabs:pb-3",
@@ -104,10 +104,7 @@ const TabPanel = ({ className, ref, ...props }: TabPanelProps) => {
     <TabPanelPrimitive
       {...props}
       ref={ref}
-      className={composeTailwindRenderProps(
-        className,
-        "flex-1 text-fg text-sm focus-visible:outline-hidden",
-      )}
+      className={cx(className, "flex-1 text-fg text-sm focus-visible:outline-hidden")}
     />
   )
 }

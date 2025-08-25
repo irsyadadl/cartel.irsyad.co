@@ -60,6 +60,9 @@ import { ArrowUpTrayIcon, CloudArrowDownIcon } from "@heroicons/react/16/solid"
 import { CsvIcon } from "@/components/icons/csv-icon"
 import { ExcelIcon } from "@/components/icons/excel-icon"
 import { SectionAction, SectionContent, SectionHeader } from "@/components/section-header"
+import { Toolbar, ToolbarButton, ToolbarSection, ToolbarText } from "@/components/ui/toolbar"
+import { RollingNumber } from "@/components/ui/rolling-number"
+import { AnimatePresence } from "motion/react"
 
 type Shipment = {
   id: string
@@ -377,29 +380,39 @@ export function Client() {
         </TabList>
         <TabPanel id="all">
           <div>
-            {[...selectedKeys].length > 0 && (
-              <Menu>
-                <Button intent="outline">
-                  Bulk actions (
-                  {selectedKeys === "all" ? "All 10 products" : [...selectedKeys].length})
-                  <ChevronDownIcon />
-                </Button>
-                <MenuContent className="min-w-48" placement="bottom start">
-                  <MenuItem>
-                    <PrinterIcon className="size-4" />
-                    Print labels
-                  </MenuItem>
-                  <MenuItem>
-                    <TruckIcon className="size-4" />
-                    Schedule pickup
-                  </MenuItem>
-                  <MenuItem>
-                    <EnvelopeIcon className="size-4" />
-                    Notify customers
-                  </MenuItem>
-                </MenuContent>
-              </Menu>
-            )}
+            <AnimatePresence initial={false}>
+              {[...selectedKeys].length > 0 && (
+                <Toolbar className="hidden sm:block" key="bulk-toolbar">
+                  <ToolbarSection>
+                    <ToolbarText className="flex items-center">
+                      Bulk actions{" "}
+                      {selectedKeys === "all" ? (
+                        "All 10 items"
+                      ) : (
+                        <>
+                          (<RollingNumber value={[...selectedKeys].length} height={24} />
+                          <span className="ml-1">items</span>)
+                        </>
+                      )}
+                    </ToolbarText>
+                  </ToolbarSection>
+                  <ToolbarSection className="mt-2">
+                    <ToolbarButton>
+                      <PrinterIcon className="size-4" />
+                      Print labels
+                    </ToolbarButton>
+                    <ToolbarButton>
+                      <TruckIcon className="size-4" />
+                      Schedule pickup
+                    </ToolbarButton>
+                    <ToolbarButton>
+                      <EnvelopeIcon className="size-4" />
+                      Notify customers
+                    </ToolbarButton>
+                  </ToolbarSection>
+                </Toolbar>
+              )}
+            </AnimatePresence>
 
             <Table
               className="mb-6"

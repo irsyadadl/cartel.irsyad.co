@@ -17,7 +17,7 @@ import {
 } from "react-aria-components"
 import { tv } from "tailwind-variants"
 
-import { composeTailwindRenderProps } from "@/lib/primitive"
+import { cx } from "@/lib/primitive"
 
 interface FieldProps {
   label?: string
@@ -52,13 +52,7 @@ interface FieldErrorProps extends FieldErrorPrimitiveProps {
   ref?: React.RefObject<HTMLElement>
 }
 const FieldError = ({ className, ref, ...props }: FieldErrorProps) => {
-  return (
-    <FieldErrorPrimitive
-      ref={ref}
-      {...props}
-      className={composeTailwindRenderProps(className, fieldError())}
-    />
-  )
+  return <FieldErrorPrimitive ref={ref} {...props} className={cx(className, fieldError())} />
 }
 
 interface FieldGroupProps extends GroupProps {
@@ -69,7 +63,7 @@ const FieldGroup = ({ className, ref, ...props }: FieldGroupProps) => {
     <Group
       {...props}
       ref={ref}
-      className={composeTailwindRenderProps(className, [
+      className={cx(className, [
         "[--gutter-inset:--spacing(6)] [--gutter-x:--spacing(2.5)]",
         "group relative inset-ring inset-ring-input flex items-center overflow-hidden rounded-[calc(var(--radius-lg)-1px)] bg-bg shadow-xs transition duration-200 ease-out",
         "[&>[role=progressbar]:first-child]:ml-(--gutter-x) [&>[role=progressbar]:last-child]:mr-(--gutter-x)",
@@ -97,7 +91,7 @@ interface InputProps extends InputPrimitiveProps {
 const Input = ({ className, ref, ...props }: InputProps) => {
   return (
     <InputPrimitive
-      className={composeTailwindRenderProps(
+      className={cx(
         className,
         "relative block w-full px-3.5 py-2 text-fg placeholder-muted-fg outline-hidden sm:px-3 sm:py-1.5 sm:text-sm/6 [&::-ms-reveal]:hidden [&::-webkit-search-cancel-button]:hidden",
       )}

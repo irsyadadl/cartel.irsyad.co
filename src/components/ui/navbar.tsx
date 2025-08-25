@@ -6,7 +6,7 @@ import type { LinkProps } from "react-aria-components"
 import { Link } from "react-aria-components"
 import { twJoin, twMerge } from "tailwind-merge"
 import { useMediaQuery } from "@/hooks/use-media-query"
-import { composeTailwindRenderProps } from "@/lib/primitive"
+import { cx } from "@/lib/primitive"
 import { Button, type ButtonProps } from "./button"
 import { Separator } from "./separator"
 import { Sheet, SheetBody, SheetContent } from "./sheet"
@@ -196,7 +196,7 @@ const NavbarItem = ({ className, isCurrent, ...props }: NavbarItemProps) => {
     <Link
       data-slot="navbar-item"
       aria-current={isCurrent ? "page" : undefined}
-      className={composeTailwindRenderProps(className, [
+      className={cx(className, [
         "href" in props ? "cursor-pointer" : "cursor-default",
         "group/sidebar-item pressed:bg-secondary pressed:text-secondary-fg hover:bg-secondary hover:text-secondary-fg",
         "aria-[current=page]:text-fg aria-[current=page]*:data-[slot=icon]:text-fg",
@@ -295,7 +295,7 @@ const NavbarTrigger = ({ className, onPress, ref, ...props }: NavbarTriggerProps
       intent="plain"
       aria-label={props["aria-label"] || "Toggle Navbar"}
       size="sq-sm"
-      className={composeTailwindRenderProps(className, "-ml-2 min-lg:hidden")}
+      className={cx(className, "-ml-2 min-lg:hidden")}
       onPress={(event) => {
         onPress?.(event)
         toggleNavbar()

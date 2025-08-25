@@ -21,7 +21,7 @@ import {
 } from "react-aria-components"
 import { twMerge } from "tailwind-merge"
 import { tv, type VariantProps } from "tailwind-variants"
-import { composeTailwindRenderProps } from "@/lib/primitive"
+import { cx } from "@/lib/primitive"
 import {
   DropdownDescription,
   DropdownKeyboard,
@@ -47,7 +47,7 @@ const MenuTrigger = ({ className, ref, ...props }: MenuTriggerProps) => (
   <Button
     ref={ref}
     data-slot="menu-trigger"
-    className={composeTailwindRenderProps(
+    className={cx(
       className,
       "relative inline text-left outline-hidden focus-visible:ring-1 focus-visible:ring-primary",
     )}
@@ -82,16 +82,13 @@ const MenuContent = <T extends object>({
 }: MenuContentProps<T>) => {
   return (
     <PopoverContent
-      className={composeTailwindRenderProps(
-        popover?.className,
-        "min-w-32 overflow-hidden bg-gray-950",
-      )}
+      className={cx(popover?.className, "min-w-32 overflow-hidden bg-gray-950")}
       placement={placement}
       {...popover}
     >
       <MenuPrimitive
         data-slot="menu-content"
-        className={composeTailwindRenderProps(
+        className={cx(
           className,
           "grid max-h-[inherit] grid-cols-[auto_1fr] overflow-y-auto overscroll-contain p-1 outline-hidden [clip-path:inset(0_0_0_0_round_calc(var(--radius-lg)-2px))] *:[[role='group']+[role=group]]:mt-1 *:[[role='group']+[role=separator]]:mt-1",
         )}
